@@ -1,5 +1,5 @@
 <?php
-include 'conn.php'; // Replace with your actual connection file
+include 'includes/conn.php'; // Replace with your actual connection file
 
 $conn = con(); // Use the con() function to connect
 
