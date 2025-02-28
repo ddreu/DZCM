@@ -1,4 +1,3 @@
-
 <div class="sidebar">
     <div class="sidebar-brand">
         <a href="dashboard.php" class="logo">
@@ -14,17 +13,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="users.php" class="nav-link">
+                <a href="services.php" class="nav-link">
                     <i class="fas fa-users"></i>
-                    <span>User Management</span>
+                    <span>Services</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="reports.php" class="nav-link">
                     <i class="fas fa-chart-bar"></i>
-                    <span>Reports</span>
+                    <span></span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="settings.php" class="nav-link">
                     <i class="fas fa-cog"></i>
@@ -34,7 +33,7 @@
         </ul>
     </nav>
     <div class="sidebar-footer">
-        <a href="logout.php" class="logout-link">
+        <a href="includes/handler.php?action=logout" class="logout-link">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
