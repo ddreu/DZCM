@@ -25,6 +25,16 @@ try {
             echo $result;
             break;
 
+        case 'edit_service':
+            $result = $process->editService();
+            echo $result;
+            break;
+
+        case 'delete_service':
+            $result = $process->deleteService();
+            echo $result;
+            break;
+
         case 'get_service_features':
             $serviceId = $_GET['service_id'] ?? null;
             $result = $process->getServiceFeatures($serviceId);

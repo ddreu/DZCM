@@ -132,6 +132,113 @@ class Process
         }
     }
 
+    function editService()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+            exit;
+        }
+
+        $service_id = $_POST['service_id'] ?? null;
+        if (!$service_id) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Service ID is required'
+            ]);
+            exit;
+        }
+
+        $service_name = $_POST['service_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/services/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        if ($image) {
+            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ?, image = ? WHERE service_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssi", $service_name, $description, $image, $service_id);
+        } else {
+            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ? WHERE service_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssi", $service_name, $description, $service_id);
+        }
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Service updated successfully'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Failed to update service'
+            ]);
+        }
+    }
+
+
+    function deleteService()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        if (!isset($_POST['service_id'])) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Service ID is required'
+            ]);
+        }
+
+        $service_id = $_POST['service_id'];
+
+        $stmt = mysqli_prepare($this->conn, "SELECT image FROM services WHERE service_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $service_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $service = mysqli_fetch_assoc($result);
+
+        if ($service && !empty($service['image'])) {
+            $imagePath = "uploads/services/" . $service['image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM services WHERE service_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $service_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Service deleted successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to delete service'
+            ]);
+        }
+    }
+
+
     function getServiceFeatures($serviceId)
     {
         if (!$serviceId) {

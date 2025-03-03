@@ -1,29 +1,84 @@
 $(document).ready(function() {
 
-    $('#addServiceForm').submit(function(e) {
+    $('#addServiceForm').submit(function (e) {
         e.preventDefault();
-        const formData = new FormData(this);
+        const formData = new FormData(this); 
+    
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to add this service?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, add it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'includes/handler.php?action=add_service',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        const result = JSON.parse(response);
+                        if (result.status === 'success') {
+                            Swal.fire("Success!", "Service added successfully.", "success").then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire("Error!", result.message, "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error!", "An error occurred while adding the service.", "error");
+                    }
+                });
+            }
+        });
+});
 
-        $.ajax({
-            url: 'includes/handler.php?action=add_service',
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                const result = JSON.parse(response);
-                if (result.status === 'success') {
-                    alert('Service added successfully');
-                    location.reload();
-                } else {
-                    alert('Error: ' + result.message);
-                }
-            },
-            error: function() {
-                alert('An error occurred while adding the service');
+    $('#editServiceForm').submit(function (e) {
+        e.preventDefault(); 
+    
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to update this service?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, update it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData(document.getElementById('editServiceForm'));
+                formData.append('service_id', $('#editServiceId').val());
+    
+                $.ajax({
+                    url: 'includes/handler.php?action=edit_service',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        const result = JSON.parse(response);
+                        if (result.status === 'success') {
+                            Swal.fire("Updated!", "Service updated successfully.", "success").then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire("Error!", result.message, "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error!", "An error occurred while updating the service.", "error");
+                    }
+                });
             }
         });
     });
+    
+    
 
     $('#addFeatureForm').submit(function(e) {
         e.preventDefault();
@@ -49,8 +104,11 @@ $(document).ready(function() {
             }
         });
     });
+ 
 });
 
+/* DROPDOWN */
+ 
 document.addEventListener("DOMContentLoaded", function () {
     let contextMenu = document.getElementById("contextMenu");
 
@@ -73,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagePreview.style.display = "none";
             }
         });
+
 
         row.addEventListener("contextmenu", function (event) {
             event.preventDefault();
@@ -122,20 +181,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    let deleteServiceBtn = document.querySelector(".delete-service");
-    if (deleteServiceBtn) {
-        deleteServiceBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            let serviceId = this.getAttribute("data-service-id");
-            let modal = document.getElementById("deleteServiceModal");
-            if (modal) {
-                let modalTarget = modal.querySelector("[data-service-id]");
-                if (modalTarget) {
-                    modalTarget.setAttribute("data-service-id", serviceId);
-                }
-                new bootstrap.Modal(modal).show();
-            }
+
+    /* DELETE SERVICE */
+        let deleteServiceBtns = document.querySelectorAll(".delete-service");
+    
+        deleteServiceBtns.forEach((btn) => {
+            btn.addEventListener("click", function (event) {
+                event.preventDefault();
+                let serviceId = this.getAttribute("data-service-id");
+    
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch("includes/handler.php?action=delete_service", {
+                            method: "POST",
+                            body: new URLSearchParams({ service_id: serviceId }),
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            Swal.fire({
+                                title: data.status === "success" ? "Deleted!" : "Error!",
+                                text: data.message,
+                                icon: data.status === "success" ? "success" : "error"
+                            }).then(() => {
+                                if (data.status === "success") {
+                                    location.reload();
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            Swal.fire("Error!", "Something went wrong!", "error");
+                        });
+                    }
+                });
+            });
         });
-    }
-});
+    });
+    
+
 
