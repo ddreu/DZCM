@@ -8,22 +8,22 @@
         <ul>
             <li class="nav-item">
                 <a href="index.php?page=dashboard" class="nav-link">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-tachometer"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
+            <!-- <li class="nav-item">
+                <a href="../index.php" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Homepage</span>
+                </a> 
+            </li> -->
             <li class="nav-item">
                 <a href="index.php?page=services" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>Services</span>
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                <a href="reports.php" class="nav-link">
-                    <i class="fas fa-chart-bar"></i>
-                    <span></span>
-                </a>
-            </li> -->
             <li class="nav-item">
                 <a href="index.php?page=company-profile" class="nav-link">
                     <i class="far fa-building"></i>

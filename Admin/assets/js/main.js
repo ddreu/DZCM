@@ -54,7 +54,6 @@ $(document).ready(function() {
 document.addEventListener("DOMContentLoaded", function () {
     let contextMenu = document.getElementById("contextMenu");
 
-    // Attach click event to all service rows
     document.querySelectorAll(".service-row").forEach(row => {
         row.addEventListener("click", function () {
             let serviceId = this.getAttribute("data-service-id");
