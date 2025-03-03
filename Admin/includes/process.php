@@ -61,7 +61,7 @@ class Process
                 echo json_encode([
                     'status' => 'success',
                     'message' => 'Login successful',
-                    'redirect' => 'dashboard.php'
+                    'redirect' => 'index.php'
                 ]);
                 return true;
             } else {
@@ -89,35 +89,36 @@ class Process
     }
 
 
-    function addService() {
+    function addService()
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return json_encode([
                 'status' => 'error',
                 'message' => 'Invalid request method'
             ]);
         }
-    
+
         $service_name = $_POST['service_name'] ?? '';
         $description = $_POST['description'] ?? '';
         $image = null;
-    
+
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/services/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-            
+
             $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
             $uploadPath = $uploadDir . $fileName;
-            
+
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
                 $image = $fileName;
             }
         }
-    
+
         $stmt = mysqli_prepare($this->conn, "INSERT INTO services (service_name, description, image) VALUES (?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "sss", $service_name, $description, $image);
-        
+
         if (mysqli_stmt_execute($stmt)) {
             return json_encode([
                 'status' => 'success',
@@ -130,58 +131,60 @@ class Process
             ]);
         }
     }
-    
-    function getServiceFeatures($serviceId) {
+
+    function getServiceFeatures($serviceId)
+    {
         if (!$serviceId) {
             return json_encode([
                 'status' => 'error',
                 'message' => 'Invalid service ID'
             ]);
         }
-    
+
         $stmt = mysqli_prepare($this->conn, "SELECT * FROM service_feature WHERE service_id = ?");
         mysqli_stmt_bind_param($stmt, "i", $serviceId);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-    
+
         $features = [];
         while ($row = mysqli_fetch_assoc($result)) {
             $features[] = $row;
         }
-    
+
         return json_encode($features);
     }
-    
-    function addServiceFeature() {
+
+    function addServiceFeature()
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return json_encode([
                 'status' => 'error',
                 'message' => 'Invalid request method'
             ]);
         }
-    
+
         $service_id = $_POST['service_id'] ?? '';
         $name = $_POST['name'] ?? '';
         $description = $_POST['description'] ?? '';
         $image = null;
-    
+
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/features/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-            
+
             $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
             $uploadPath = $uploadDir . $fileName;
-            
+
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
                 $image = $fileName;
             }
         }
-    
+
         $stmt = mysqli_prepare($this->conn, "INSERT INTO service_feature (service_id, name, description, image) VALUES (?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "isss", $service_id, $name, $description, $image);
-        
+
         if (mysqli_stmt_execute($stmt)) {
             return json_encode([
                 'status' => 'success',

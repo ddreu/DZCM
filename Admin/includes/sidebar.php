@@ -7,13 +7,13 @@
     <nav class="sidebar-menu">
         <ul>
             <li class="nav-item">
-                <a href="dashboard.php" class="nav-link">
+                <a href="index.php?page=dashboard" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="services.php" class="nav-link">
+                <a href="index.php?page=services" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>Services</span>
                 </a>
@@ -25,9 +25,9 @@
                 </a>
             </li> -->
             <li class="nav-item">
-                <a href="settings.php" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                <a href="index.php?page=company-profile" class="nav-link">
+                    <i class="far fa-building"></i>
+                    <span>Company Profile</span>
                 </a>
             </li>
         </ul>

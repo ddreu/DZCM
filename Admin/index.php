@@ -1,154 +1,47 @@
+<?php
+session_start();
+require_once 'includes/conn.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/login.css">
+    <title>Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="image-section">
-            <img src="assets/img/DZCM.png" alt="Logo" class="logo">
-        </div>
-        <div class="login-section">
-            <div class="home-button">
-                <a href="../index.php"><i class="fas fa-arrow-left"></i> Home</a>
-            </div>
-            <h1>Welcome</h1>
-            <p>Log in to your account to continue</p>
-            <form id="loginForm" method="post">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="username" placeholder="Username" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" name="password" placeholder="••••••••••••••" required>
-                </div>
-                <div class="forgot-password">
-                    <a href="#">Forgot your password?</a>
-                </div>
-                <button id="login" type="submit" class="login-button">Log In</button>
-            </form>
+    <div class="dashboard-container">
+        <?php include 'includes/sidebar.php'; ?>
 
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
+
+        <main class="main-content">
+            <?php
+
+            $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+            $allowed_pages = ['dashboard', 'services', 'settings', 'company-profile'];
+
+            if (in_array($page, $allowed_pages) && file_exists("pages/$page.php")) {
+                include("pages/$page.php");
+            } else {
+                echo "<h2>Page not found!</h2>";
+            }
+
+            ?>
+        </main>
     </div>
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(this);
-            const loginButton = document.getElementById('login');
-
-            loginButton.disabled = true;
-            loginButton.textContent = 'Logging in...';
-
-            fetch('includes/handler.php?action=login', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    console.log('Raw response:', response);
-
-                    if (!response.ok) {
-                        console.error('Response status:', response.status);
-                        console.error('Response statusText:', response.statusText);
-
-                        return response.text().then(errorText => {
-                            console.error('Response text:', errorText);
-                            throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
-                        });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        window.location.href = data.redirect;
-                    } else {
-                        alert(data.message);
-                        loginButton.disabled = false;
-                        loginButton.textContent = 'Log In';
-                    }
-                })
-                .catch(error => {
-                    console.error('Full Fetch Error:', error);
-
-                    if (error instanceof TypeError) {
-                        alert('Network error or invalid JSON response. Please check your connection.');
-                    } else {
-                        alert('Login failed. Please try again or contact support.');
-                    }
-
-                    loginButton.disabled = false;
-                    loginButton.textContent = 'Log In';
-                });
-        });
-        /*document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(this);
-            const loginButton = document.getElementById('login');
-
-            // Disable button and show loading state
-            loginButton.disabled = true;
-            loginButton.textContent = 'Logging in...';
-
-            fetch({
-                    url: 'includes/process.php?action=login',
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        window.location.href = data.redirect;
-                    } else {
-                        alert(data.message);
-                        loginButton.disabled = false;
-                        loginButton.textContent = 'Log In';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An unexpected error occurred. Please try again.');
-                    loginButton.disabled = false;
-                    loginButton.textContent = 'Log In';
-                });
-        });*/
-
-        /*$('#loginForm').submit(function(e){
-        		e.preventDefault()
-        		$('#loginForm button[id="login"]').attr('disabled',true).html('Logging In...');
-        		if($(this).find('.alert-danger').length > 0 )
-        			$(this).find('.alert-danger').remove();		
-        		$.ajax({
-        			url:'includes/process.php?action=login',
-        			method:'POST',
-        			data:$(this).serialize(),
-        			error:err=>{
-        				console.log(err)
-        			},
-        			success:function(resp){
-        				if(resp == 1){
-        					$('#login-form').prepend('<div class="alert alert-success">Log in success</div>')
-        					location.reload('index.php?page=dashboard');
-        				}else{
-        					$('#login-form').prepend('<div class="alert alert-danger">Incorrect Credentials</div>')
-        					$('#login-form button[id="login"]').removeAttr('disabled').html('Login In')
-        				}
-        			}
-        		})
-        	})*/
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
