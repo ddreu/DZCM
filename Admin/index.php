@@ -16,7 +16,7 @@
         </div>
         <div class="login-section">
             <div class="home-button">
-                <a href="../index.html"><i class="fas fa-arrow-left"></i> Home</a>
+                <a href="../index.php"><i class="fas fa-arrow-left"></i> Home</a>
             </div>
             <h1>Welcome</h1>
             <p>Log in to your account to continue</p>

@@ -87,7 +87,7 @@ $result = mysqli_query(con(), $query);
                                     </button>
                                 </td>
                                 <td>
-                                        
+
                                     <button class="btn btn-edit"
                                         data-service-id="<?php echo $service['service_id']; ?>">
                                         <i class="fas fa-edit"></i>
