@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2025 at 05:56 AM
+-- Generation Time: Mar 04, 2025 at 01:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `dezcom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `client_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `client_name` varchar(115) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `image` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`client_id`, `service_id`, `client_name`, `description`, `image`) VALUES
+(5, 4, 'andrew', 'sta rosa', NULL),
+(6, 5, 'drew', 'sta rosa', NULL);
 
 -- --------------------------------------------------------
 
@@ -50,6 +72,14 @@ CREATE TABLE `services` (
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`service_id`, `service_name`, `description`, `image`) VALUES
+(4, 'Pharmacy POS', 'Sales Inventory for Medical Supplies', '67c6a50e57cab_phar.jpg'),
+(5, 'Resto Bar POS', 'Point of Sales for food services', '67c6a682133b1_dingalan.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -61,8 +91,19 @@ CREATE TABLE `service_features` (
   `service_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL
+  `image` varchar(113) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `service_features`
+--
+
+INSERT INTO `service_features` (`service_feature_id`, `service_id`, `name`, `description`, `image`) VALUES
+(16, 4, 'Item Expiration Alert', 'Blinking Alert on Menus', NULL),
+(17, 4, 'Customizable Discounts', 'Such as Senior, Item Discount, Peso Discount, Selective Items', NULL),
+(18, 4, 'Flexible Reports', 'Can Generate daily, weekly, monthly and accounting reports', NULL),
+(19, 5, 'Table Management', 'GUI for table vacancy', NULL),
+(20, 5, 'Print Out in Kitchen, Bar, and Cashier', 'When Cashier or Waiter ordered items it automatically prints on designated printer locations', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,6 +128,13 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `profile_image`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`client_id`),
+  ADD KEY `clients_ibfk_1` (`service_id`);
 
 --
 -- Indexes for table `company_info`
@@ -119,6 +167,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `company_info`
 --
 ALTER TABLE `company_info`
@@ -128,13 +182,13 @@ ALTER TABLE `company_info`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `service_features`
 --
 ALTER TABLE `service_features`
-  MODIFY `service_feature_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `service_feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -145,6 +199,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `clients`
+--
+ALTER TABLE `clients`
+  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `service_features`
