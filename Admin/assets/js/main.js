@@ -1,5 +1,5 @@
 
-/* SERVICES */
+/*  */
 
 
 /* SUBMITS  (ADD, EDIT) */
@@ -202,7 +202,47 @@ $(document).ready(function() {
                 });
             }
         });
-});
+    });
+
+    $('#editClientForm').submit(function (e) {
+        e.preventDefault(); 
+    
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to update this client?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, update it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = new FormData(document.getElementById('editClientForm'));
+                formData.append('client_id', $('#editClientId').val());
+    
+                $.ajax({
+                    url: 'includes/handler.php?action=edit_client',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        const result = JSON.parse(response);
+                        if (result.status === 'success') {
+                            Swal.fire("Updated!", "Feature updated successfully.", "success").then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire("Error!", result.message, "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error!", "An error occurred while updating the feature.", "error");
+                    }
+                });
+            }
+        });
+    });
  
 });
 
@@ -327,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 
-    /* DROPDOWN SERVICE-FEATURE TABLE */
+    /* DROPDOWN SERVICE FEATURES TABLE */
  
 document.addEventListener("DOMContentLoaded", function () {
     let contextMenu = document.getElementById("contextMenu");
@@ -451,6 +491,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });   
     });
 
+    /* DROPDOWN CLIENTS TABLE */
 
     document.addEventListener("DOMContentLoaded", function () {
         let contextMenu = document.getElementById("contextMenu");
@@ -483,11 +524,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 let clientId = this.getAttribute("data-client-id");
     
-               /* let addFeatureBtn = document.querySelector(".add-feature"); */
                 let editClientBtn = document.querySelector(".edit-client");
                 let deleteClientBtn = document.querySelector(".delete-client");
     
-               /* if (addFeatureBtn) addFeatureBtn.setAttribute("data-service-feature-id", serviceId); */
                 if (editClientBtn) editClientBtn.setAttribute("data-client-id", clientId);
                 if (deleteClientBtn) deleteClientBtn.setAttribute("data-client-id", clientId);
     
@@ -516,7 +555,6 @@ document.addEventListener("DOMContentLoaded", function () {
             editServiceFeatureBtn.addEventListener("click", function (event) {
                 event.preventDefault();
                 let clientId = this.getAttribute("data-client-id");
-                //let serviceFeatureId = this.getAttribute("data-service-feature-id");
     
     
                 let targetRow = document.querySelector(`.clients-row[data-client-id="${clientId}"]`);
@@ -530,6 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
          /* DELETE CLIENT */
+
          let deleteClientBtns = document.querySelectorAll(".delete-client");
     
          deleteClientBtns.forEach((btn) => {

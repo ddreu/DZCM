@@ -469,6 +469,7 @@ class Process
             exit;
         }
 
+        $service_id = $_POST['service_id'] ?? '';
         $client_name = $_POST['client_name'] ?? '';
         $description = $_POST['description'] ?? '';
         $image = null;
@@ -488,11 +489,11 @@ class Process
         }
 
         if ($image) {
-            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ?, image = ? WHERE client_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssi", $client_name, $description, $image, $client_id);
+            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ?, service_id = ? ,image = ? WHERE client_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssisi", $client_name, $description, $service_id, $image, $client_id);
         } else {
-            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ? WHERE client_id = ?");
-            mysqli_stmt_bind_param($stmt, "ssi", $client_name, $description, $client_id);
+            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ?, service_id = ? WHERE client_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssii", $client_name, $description, $service_id, $client_id);
         }
 
         if (mysqli_stmt_execute($stmt)) {
