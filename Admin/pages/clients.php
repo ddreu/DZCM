@@ -9,7 +9,7 @@ $totalServices = mysqli_fetch_assoc($totalQuery)['count'];
 $totalPages = ceil($totalServices / $recordsPerPage);
 
 $query = "
-    SELECT c.client_id, c.client_name, c.description, c.image, s.service_id
+    SELECT c.client_id, c.service_id, c.client_name, c.description, c.image, s.service_name
     FROM clients as c
     LEFT JOIN services as s ON c.service_id = s.service_id
     LIMIT $offset, $recordsPerPage  
@@ -38,6 +38,7 @@ $result = mysqli_query(con(), $query);
                 <th>ID</th>
                 <th>Client Name</th>
                 <th>Description</th>
+                <th>Service</th>
                 <th>Image</th>
                 <!--<th>Features</th> -->
                 <!--    <th>Actions</th> -->
@@ -45,7 +46,7 @@ $result = mysqli_query(con(), $query);
         </thead>
         <tbody>
             <?php while ($clients = mysqli_fetch_assoc($result)): ?>
-                <tr class="service-row" data-client-id="<?php echo $clients['client_id']; ?>"
+                <tr class="clients-row" data-client-id="<?php echo $clients['client_id']; ?>"
                     data-service-id="<?php echo $clients['service_id']; ?>"
                     data-client-name="<?php echo htmlspecialchars($clients['client_name']); ?>"
                     data-description="<?php echo htmlspecialchars($clients['description']); ?>"
@@ -54,6 +55,7 @@ $result = mysqli_query(con(), $query);
                     <td><?php echo htmlspecialchars($clients['client_id']); ?></td>
                     <td><?php echo htmlspecialchars($clients['client_name']); ?></td>
                     <td><?php echo htmlspecialchars($clients['description']); ?></td>
+                    <td><?php echo htmlspecialchars($clients['service_name']); ?></td>
                     <td>
                         <?php if ($clients['image']): ?>
                             <img src="includes/uploads/clients/<?php echo htmlspecialchars($clients['image']); ?>"
@@ -115,6 +117,26 @@ $result = mysqli_query(con(), $query);
                     <div class="mb-3">
                         <label for="editClientDescription" class="form-label">Description</label>
                         <textarea id="editClientDescription" name="description" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="client-Service" class="form-label">Service</label>
+                        <select class="form-select" id="editClientServiceId" name="service_id" required>
+                            <option value="">Select a Service</option>
+                            <?php
+                            $query = "SELECT service_id, service_name FROM services";
+                            $result = mysqli_query(con(), $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                foreach ($result as $row) {
+                                    $selected = (isset($meta['service_id']) && $meta['service_id'] == $row['service_id']) ? 'selected' : '';
+                                    echo "<option value='{$row['service_id']}' $selected>{$row['service_name']}</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No Services Found</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="mb-3">
