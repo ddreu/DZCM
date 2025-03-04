@@ -25,23 +25,23 @@
                 <h5>Total Features</h5>
                 <h2 id="totalFeatures">
                     <?php
-                    $sqlServices = "SELECT COUNT(*) AS total_services FROM service_features";
-                    $resultServices = con()->query($sqlServices);
-                    $totalServices = $resultServices->fetch_assoc()['total_services'];
-                    echo $totalServices;
+                    $sqlServiceFeatures = "SELECT COUNT(*) AS total_service_features FROM service_features";
+                    $resultServiceFeatures = con()->query($sqlServiceFeatures);
+                    $totalServiceFeatures = $resultServiceFeatures->fetch_assoc()['total_service_features'];
+                    echo $totalServiceFeatures;
                     ?>
                 </h2>
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="card overview-card">
-                <h5>Total Projects</h5>
+                <h5>Total Clients</h5>
                 <h2 id="totalProjects">
                     <?php
-                    $sqlServices = "SELECT COUNT(*) AS total_services FROM services";
-                    $resultServices = con()->query($sqlServices);
-                    $totalProjects = $resultServices->fetch_assoc()['total_services'];
-                    echo $totalProjects;
+                    $sqlClients = "SELECT COUNT(*) AS total_clients FROM clients";
+                    $resultClients = con()->query($sqlClients);
+                    $totalClients = $resultClients->fetch_assoc()['total_clients'];
+                    echo $totalClients;
                     ?>
                 </h2>
             </div>
