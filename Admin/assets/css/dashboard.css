@@ -114,7 +114,7 @@ body {
     width: 130px;
 }
 
-.service-row {
+.service-row, .service-feature-row {
     cursor: pointer;
 }
 
@@ -297,6 +297,11 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 

@@ -12,16 +12,16 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                <a href="../index.php" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span>Homepage</span>
-                </a> 
-            </li> -->
             <li class="nav-item">
                 <a href="index.php?page=services" class="nav-link">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-cog"></i>
                     <span>Services</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.php?page=clients" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Clients</span>
                 </a>
             </li>
             <li class="nav-item">

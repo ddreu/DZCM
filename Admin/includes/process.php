@@ -276,7 +276,7 @@ class Process
         $image = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'uploads/features/';
+            $uploadDir = 'uploads/service-features/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
@@ -289,7 +289,7 @@ class Process
             }
         }
 
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO service_feature (service_id, name, description, image) VALUES (?, ?, ?, ?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO service_features (service_id, name, description, image) VALUES (?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "isss", $service_id, $name, $description, $image);
 
         if (mysqli_stmt_execute($stmt)) {
@@ -301,6 +301,256 @@ class Process
             return json_encode([
                 'status' => 'error',
                 'message' => 'Failed to add feature'
+            ]);
+        }
+    }
+    function editServiceFeature()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+            exit;
+        }
+
+        $service_feature_id = $_POST['service_feature_id'] ?? null;
+        if (!$service_feature_id) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Service Feature ID is required'
+            ]);
+            exit;
+        }
+
+        $service_feature_name = $_POST['service_feature_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/service-features/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        if ($image) {
+            $stmt = mysqli_prepare($this->conn, "UPDATE service_features SET name = ?, description = ?, image = ? WHERE service_feature_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssi", $service_feature_name, $description, $image, $service_feature_id);
+        } else {
+            $stmt = mysqli_prepare($this->conn, "UPDATE service_features SET name = ?, description = ? WHERE service_feature_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssi", $service_feature_name, $description, $service_feature_id);
+        }
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Service Feature updated successfully'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Failed to update Service Feature'
+            ]);
+        }
+    }
+    function deleteServiceFeature()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        if (!isset($_POST['service_feature_id'])) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Service ID is required'
+            ]);
+        }
+
+        $service_feature_id = $_POST['service_feature_id'];
+
+        $stmt = mysqli_prepare($this->conn, "SELECT image FROM service_features WHERE service_feature_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $service_feature_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $service_feature = mysqli_fetch_assoc($result);
+
+        if ($service_feature && !empty($service['image'])) {
+            $imagePath = "uploads/service-features/" . $service_feature['image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM service_features WHERE service_feature_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $service_feature_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Service deleted successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to delete service'
+            ]);
+        }
+    }
+    function addClient()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $service_id = $_POST['service_id'] ?? '';
+        $client_name = $_POST['client_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/clients/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO clients (service_id, client_name, description, image) VALUES (?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "isss", $service_id, $client_name, $description, $image);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Client added successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to add Client'
+            ]);
+        }
+    }
+    function editClient()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+            exit;
+        }
+
+        $client_id = $_POST['client_id'] ?? null;
+        if (!$client_id) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Client ID is required'
+            ]);
+            exit;
+        }
+
+        $client_name = $_POST['client_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/clients/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        if ($image) {
+            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ?, image = ? WHERE client_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssi", $client_name, $description, $image, $client_id);
+        } else {
+            $stmt = mysqli_prepare($this->conn, "UPDATE clients SET client_name = ?, description = ? WHERE client_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssi", $client_name, $description, $client_id);
+        }
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Client updated successfully'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Failed to update Client'
+            ]);
+        }
+    }
+
+    function deleteClient()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        if (!isset($_POST['client_id'])) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Client ID is required'
+            ]);
+        }
+
+        $client_id = $_POST['client_id'];
+
+        $stmt = mysqli_prepare($this->conn, "SELECT image FROM clients WHERE client_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $client_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $clients = mysqli_fetch_assoc($result);
+
+        if ($clients && !empty($service['image'])) {
+            $imagePath = "uploads/clients/" . $clients['image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM clients WHERE client_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $client_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Client deleted successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to delete Client'
             ]);
         }
     }

@@ -36,7 +36,14 @@
         <div class="col-md-4 col-sm-6">
             <div class="card overview-card">
                 <h5>Total Projects</h5>
-                <h2 id="totalProjects">0</h2>
+                <h2 id="totalProjects">
+                    <?php
+                    $sqlServices = "SELECT COUNT(*) AS total_services FROM services";
+                    $resultServices = con()->query($sqlServices);
+                    $totalProjects = $resultServices->fetch_assoc()['total_services'];
+                    echo $totalProjects;
+                    ?>
+                </h2>
             </div>
         </div>
     </div>

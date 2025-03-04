@@ -46,6 +46,31 @@ try {
             echo $result;
             break;
 
+        case 'edit_service_feature':
+            $result = $process->editServiceFeature();
+            echo $result;
+            break;
+
+        case 'delete_service_feature':
+            $result = $process->deleteServiceFeature();
+            echo $result;
+            break;
+
+        case 'add_client':
+            $result = $process->addClient();
+            echo $result;
+            break;
+
+        case 'edit_client':
+            $result = $process->editClient();
+            echo $result;
+            break;
+
+        case 'delete_client':
+            $result = $process->deleteClient();
+            echo $result;
+            break;
+
         default:
             echo json_encode([
                 'status' => 'error',
