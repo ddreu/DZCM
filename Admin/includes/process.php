@@ -57,6 +57,7 @@ class Process
             if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['login_success'] = true;
 
                 echo json_encode([
                     'status' => 'success',

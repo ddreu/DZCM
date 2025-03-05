@@ -1,5 +1,37 @@
 
-/*  */
+/* LOGOUT */
+
+document.getElementById('logout-link').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out of your account.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            Swal.fire({
+                title: "Logging out...",
+                text: "Please wait a moment.",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                didOpen: () => {
+                    Swal.showLoading(); 
+                }
+            });
+
+            setTimeout(() => {
+                window.location.href = 'includes/handler.php?action=logout';
+            }, 700);
+        }
+    });
+});
 
 
 /* SUBMITS  (ADD, EDIT) */

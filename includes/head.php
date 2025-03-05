@@ -2,7 +2,7 @@
 <html lang="zxx">
 
 <head>
-    <title>MicroSource Inc.</title>
+    <title>DZCM IT Services</title>
     <!-- description -->
     <meta name="description" content="MicroSource Inc. is a software development and business process outsourcing company offering a wide range of software, hardware and IT consulting services. Call us at 982 12 68 or +63 998 583 3381.">
     <!-- keywords -->

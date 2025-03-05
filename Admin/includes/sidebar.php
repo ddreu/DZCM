@@ -33,7 +33,7 @@
         </ul>
     </nav>
     <div class="sidebar-footer">
-        <a href="includes/handler.php?action=logout" class="logout-link">
+        <a id="logout-link" href="#" class="logout-link">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
