@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_id'])) {
         <script>
             Swal.fire({
                 toast: true,
-                position: "top-end",
+                position: "top",
                 icon: "success",
                 title: "Welcome!",
                 showConfirmButton: false,

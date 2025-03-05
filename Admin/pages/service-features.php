@@ -18,6 +18,8 @@ $query = "
     LIMIT $offset, $recordsPerPage
 ";
 $result = mysqli_query(con(), $query);
+$services = mysqli_fetch_assoc($result);
+$service_name = $services['service_name'];
 ?>
 
 <header class="dashboard-header">
@@ -26,14 +28,12 @@ $result = mysqli_query(con(), $query);
     </div>
 </header>
 <div class="container">
-    <div class="d-flex justify-content-end mb-3">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Service Name: <?php echo $services['service_name']; ?></h2>
         <button id="addFeatureBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFeatureModal">
             <i class="fas fa-plus"></i> Add New Service Feature
         </button>
     </div>
-    <!-- <div class="d-flex justify-content-start mb-3">
-        <h2>Service Name: <?php echo $service['service_name']; ?></h2>
-    </div> -->
 </div>
 
 
@@ -51,20 +51,9 @@ $result = mysqli_query(con(), $query);
             </tr>
         </thead>
         <tbody>
-            <?php
 
-            $r = 0;
-
-            ?>
             <?php while ($service = mysqli_fetch_assoc($result)):
-                if ($r == 0) { ?>
-
-                    <h2>Service Name: <?php echo $service['service_name']; ?></h2>
-                <?php
-                }
-
-                $r = $r + 1;
-                ?>
+            ?>
                 <tr class="service-feature-row" data-service-id="<?php echo $service['service_id']; ?>"
                     data-service-feature-id="<?php echo $service['service_feature_id']; ?>"
                     data-feature-name="<?php echo htmlspecialchars($service['name']); ?>"

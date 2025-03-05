@@ -64,11 +64,10 @@ $result = mysqli_query(con(), $query);
                         <?php endif; ?>
                     </td>
                     <td>
-                        <button class="btn btn-info"
+                        <a href="index.php?page=service-features&service_id=<?php echo $service['service_id']; ?>" class="btn btn-info"
                             data-service-id="<?php echo $service['service_id']; ?>">
-                            <a href="index.php?page=service-features&service_id=<?php echo $service['service_id']; ?>">
-                                <?php echo $service['feature_count']; ?> Features </a>
-                        </button>
+                            <?php echo $service['feature_count']; ?> Features
+                        </a>
                     </td>
                     <!-- <td>
                         <button class="btn btn-info"

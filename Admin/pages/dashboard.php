@@ -52,9 +52,10 @@
 <div class="row mt-4">
     <div class="col-md-8">
         <div class="card p-3 shadow">
-            <h5>Recent Activity</h5>
+            <h5>Company Profile</h5>
             <ul id="recentActivity" class="list-group list-group-flush">
-                <li class="list-group-item">No recent activity.</li>
+                <li class="list-group-item">Email: dzcm@gmail.com</li>
+                <li class="list-group-item">Phone: 09123456789</li>
             </ul>
         </div>
     </div>
