@@ -669,8 +669,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             };
         
-            function updateCompanyInfo(fieldId, fieldValue, button) {
-                fetch('includes/handler.php?action=editCompanyInfo', {
+            function updateCompanyInfo(fieldId, fieldValue) {
+                fetch('includes/handler.php?action=company_info', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `field=${fieldId}&value=${encodeURIComponent(fieldValue)}`
@@ -682,12 +682,42 @@ document.addEventListener("DOMContentLoaded", function () {
                         activeField.button.textContent = "Edit";
                         activeField.button.classList.replace("btn-success", "btn-primary");
                         activeField = null;
+            
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Company information updated!',
+                            toast: true,  
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000 
+                        });
                     } else {
-                        alert("Error updating data: " + data.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: data.message,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'An unexpected error occurred!',
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                });
             }
+            
         
             document.addEventListener("click", function (event) {
                 if (activeField && !activeField.field.contains(event.target) && !activeField.button.contains(event.target)) {

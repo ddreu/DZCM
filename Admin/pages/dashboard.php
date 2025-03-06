@@ -52,11 +52,11 @@
 
 <div class="row mt-4">
     <?php
-    $sql = "SELECT contact_email, phone, address FROM company_info WHERE company_id = 1";
+    $sql = "SELECT email, phone, address, company_id FROM company_info WHERE company_id = 1";
     $result = con()->query($sql);
     $company = $result->fetch_assoc();
 
-    $email = $company['contact_email'] ?? 'N/A';
+    $email = $company['email'] ?? 'N/A';
     $phone = $company['phone'] ?? 'N/A';
     $address = $company['address'] ?? 'N/A';
     ?>
@@ -65,21 +65,22 @@
         <div class="card p-3 shadow">
             <h5><strong>Company Profile</strong></h5>
             <form id="companyForm">
+                <input type="hidden" name="company_id" value="<?= $company['company_id']; ?>">
                 <div class="mb-3 d-flex align-items-center">
                     <label for="email" class="form-label me-2">Email:</label>
-                    <input type="email" class="form-control me-2" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
+                    <input type="email" class="form-control me-2" name="email" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
                     <button type="button" class="btn btn-primary btn-sm" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
                 </div>
 
                 <div class="mb-3 d-flex align-items-center">
                     <label for="phone" class="form-label me-2">Phone:</label>
-                    <input type="text" class="form-control me-2" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
+                    <input type="text" class="form-control me-2" name="phone" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
                     <button type="button" class="btn btn-primary btn-sm" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
                 </div>
 
                 <div class="mb-3 d-flex align-items-center">
                     <label for="address" class="form-label me-2">Address:</label>
-                    <input type="text" class="form-control me-2" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
+                    <input type="text" class="form-control me-2" name="address" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
                     <button type="button" class="btn btn-primary btn-sm" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
                 </div>
             </form>

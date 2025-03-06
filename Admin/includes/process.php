@@ -567,56 +567,38 @@ class Process
             exit;
         }
 
-        $company_id = $_POST['company_id'] ?? null;
-        $name = $_POST['name'] ?? '';
-        $description = $_POST['description'] ?? '';
-        $contact_email = $_POST['contact_email'] ?? '';
-        $phone = $_POST['phone'] ?? '';
-        $address = $_POST['address'] ?? '';
-        $logo = null;
-
-        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'uploads/company/';
-            if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
-
-            $fileName = uniqid() . '_' . basename($_FILES['logo']['name']);
-            $uploadPath = $uploadDir . $fileName;
-
-            if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadPath)) {
-                $logo = $fileName;
-            }
+        if (!isset($_POST['field']) || !isset($_POST['value'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Missing field or value'
+            ]);
+            exit;
         }
 
-        $stmt = mysqli_prepare($this->conn, "SELECT company_id FROM company_info LIMIT 1");
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
-        $companyExists = mysqli_stmt_num_rows($stmt) > 0;
-        mysqli_stmt_close($stmt);
+        $field = $_POST['field'];
+        $value = $_POST['value'];
 
-        if ($companyExists) {
-            if ($logo) {
-                $stmt = mysqli_prepare($this->conn, "UPDATE company_info SET name = ?, description = ?, contact_email = ?, phone = ?, address = ?, logo = ? WHERE company_id = ?");
-                mysqli_stmt_bind_param($stmt, "ssssssi", $name, $description, $contact_email, $phone, $address, $logo, $company_id);
-            } else {
-                $stmt = mysqli_prepare($this->conn, "UPDATE company_info SET name = ?, description = ?, contact_email = ?, phone = ?, address = ? WHERE company_id = ?");
-                mysqli_stmt_bind_param($stmt, "sssssi", $name, $description, $contact_email, $phone, $address, $company_id);
-            }
-        } else {
-            $stmt = mysqli_prepare($this->conn, "INSERT INTO company_info (name, description, contact_email, phone, address, logo) VALUES (?, ?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "ssssss", $name, $description, $contact_email, $phone, $address, $logo);
+        $allowedFields = ['email', 'phone', 'address'];
+        if (!in_array($field, $allowedFields)) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid field'
+            ]);
+            exit;
         }
+
+        $stmt = mysqli_prepare($this->conn, "UPDATE company_info SET $field = ? WHERE company_id = 1");
+        mysqli_stmt_bind_param($stmt, "s", $value);
 
         if (mysqli_stmt_execute($stmt)) {
             echo json_encode([
                 'status' => 'success',
-                'message' => 'Company information saved successfully'
+                'message' => 'Company information updated successfully'
             ]);
         } else {
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Failed to save company information'
+                'message' => 'Failed to update company information'
             ]);
         }
 
