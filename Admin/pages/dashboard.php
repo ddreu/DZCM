@@ -49,16 +49,45 @@
     </div>
 </div>
 
+
 <div class="row mt-4">
+    <?php
+    $sql = "SELECT contact_email, phone, address FROM company_info WHERE company_id = 1";
+    $result = con()->query($sql);
+    $company = $result->fetch_assoc();
+
+    $email = $company['contact_email'] ?? 'N/A';
+    $phone = $company['phone'] ?? 'N/A';
+    $address = $company['address'] ?? 'N/A';
+    ?>
+
     <div class="col-md-8">
         <div class="card p-3 shadow">
-            <h5>Company Profile</h5>
-            <ul id="recentActivity" class="list-group list-group-flush">
-                <li class="list-group-item">Email: dzcm@gmail.com</li>
-                <li class="list-group-item">Phone: 09123456789</li>
-            </ul>
+            <h5><strong>Company Profile</strong></h5>
+            <form id="companyForm">
+                <div class="mb-3 d-flex align-items-center">
+                    <label for="email" class="form-label me-2">Email:</label>
+                    <input type="email" class="form-control me-2" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
+                    <button type="button" class="btn btn-primary btn-sm" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
+                </div>
+
+                <div class="mb-3 d-flex align-items-center">
+                    <label for="phone" class="form-label me-2">Phone:</label>
+                    <input type="text" class="form-control me-2" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
+                    <button type="button" class="btn btn-primary btn-sm" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
+                </div>
+
+                <div class="mb-3 d-flex align-items-center">
+                    <label for="address" class="form-label me-2">Address:</label>
+                    <input type="text" class="form-control me-2" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
+                    <button type="button" class="btn btn-primary btn-sm" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
+                </div>
+            </form>
         </div>
     </div>
+
+
+
 
     <div class="col-md-4">
         <div class="card p-3 shadow quick-actions">

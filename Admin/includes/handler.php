@@ -71,6 +71,11 @@ try {
             echo $result;
             break;
 
+        case 'company_info':
+            $result = $process->companyInfo();
+            echo $result;
+            break;
+
         default:
             echo json_encode([
                 'status' => 'error',

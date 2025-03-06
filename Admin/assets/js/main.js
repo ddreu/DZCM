@@ -645,7 +645,64 @@ document.addEventListener("DOMContentLoaded", function () {
             });   
         });
 
-
+        /* DASHBOARD */
+        document.addEventListener("DOMContentLoaded", function () {
+            let activeField = null; 
+        
+            window.toggleEdit = function (fieldId, buttonId) {
+                const field = document.getElementById(fieldId);
+                const button = document.getElementById(buttonId);
+        
+                if (!field || !button) {
+                    console.error("Element not found:", fieldId, buttonId);
+                    return;
+                }
+        
+                if (field.disabled) {
+                    field.disabled = false;
+                    button.textContent = "Save";
+                    button.classList.replace("btn-primary", "btn-success");
+        
+                    activeField = { field, button };
+                } else {
+                    updateCompanyInfo(fieldId, field.value, button);
+                }
+            };
+        
+            function updateCompanyInfo(fieldId, fieldValue, button) {
+                fetch('includes/handler.php?action=editCompanyInfo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `field=${fieldId}&value=${encodeURIComponent(fieldValue)}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        activeField.field.disabled = true;
+                        activeField.button.textContent = "Edit";
+                        activeField.button.classList.replace("btn-success", "btn-primary");
+                        activeField = null;
+                    } else {
+                        alert("Error updating data: " + data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        
+            document.addEventListener("click", function (event) {
+                if (activeField && !activeField.field.contains(event.target) && !activeField.button.contains(event.target)) {
+                    activeField.field.disabled = true;
+                    activeField.button.textContent = "Edit";
+                    activeField.button.classList.replace("btn-success", "btn-primary");
+                    activeField = null;
+                }
+            });
+        });
+        
+        
+        
+        
+    
 
 
 
