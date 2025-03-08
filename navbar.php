@@ -30,13 +30,13 @@ $conn->close();
 
 <div class="navbar-container">
     <div class="logo">
-        <a href="index.php"><img src="dzcm/images/<?php echo $row ? $row['logo'] : $logo; ?>" alt="DZCM Logo"></a>
+        <a href="#"><img src="dzcm/images/<?php echo $row ? $row['logo'] : $logo; ?>" alt="DZCM Logo"></a>
     </div>
     
    
     <ul class="nav-links">
-        <li><a href="about.php">About</a></li>
-        <li><a href="product-services.php">Products and Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Products and Services</a></li>
         <li><a href="#">Portfolio</a></li>
         <li><a href="#">Careers</a></li>
         <li><a href="#">Contact</a></li>

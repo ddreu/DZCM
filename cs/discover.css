@@ -1,0 +1,21 @@
+.discover-more {
+    background-color: #d0021b;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center;
+    display: inline-block;
+    position: relative; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px; /* Adjusted from 40px to 20px */
+    margin-bottom: 0;
+}
+
+.discover-more:hover {
+    background-color: darkred;
+}

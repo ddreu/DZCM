@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>DZCM | Admin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
             <?php
 
             $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-            $allowed_pages = ['dashboard', 'services', 'settings', 'company-profile', 'service-features', 'clients'];
+            $allowed_pages = ['dashboard', 'services', 'settings', 'company-profile', 'service-features', 'clients', 'email'];
 
             if (in_array($page, $allowed_pages) && file_exists("pages/$page.php")) {
                 include("pages/$page.php");

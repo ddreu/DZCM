@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="cs/footer.css"> 
 </head>
 <div>
-  <?php include 'main/imgslider.php'; ?> 
+
 <?php include 'main/services.php'; ?>
  <?php include 'main/featured.php'; ?> 
 </div>
@@ -23,10 +23,7 @@
 <div>
 </div>
 
-<div >
-  
-    <?php include 'main/profile.php'; ?>
-</div>
+
 
 
 <?php include 'includes/footer.php'; ?>

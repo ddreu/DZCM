@@ -63,7 +63,7 @@
 
     <div class="col-md-8">
         <div class="card p-3 shadow">
-            <h5><strong>Company Profile</strong></h5>
+            <h5 class="mb-3"><strong>Company Profile</strong></h5>
             <form id="companyForm">
                 <input type="hidden" name="company_id" value="<?= $company['company_id']; ?>">
                 <div class="mb-3 d-flex align-items-center">
@@ -89,17 +89,35 @@
 
 
 
-
+    <?php
+    /*$sql = "SELECT * FROM emails ORDER BY email_id DESC LIMIT 4";
+    $result = con()->query($sql);
+    $emails = $result->fetch_all(MYSQLI_ASSOC);*/
+    ?>
     <div class="col-md-4">
         <div class="card p-3 shadow quick-actions">
-            <h5>Quick Actions</h5>
-            <button class="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+            <h5>Recent Emails</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Email sent to client1@gmail.com
+                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
+                </li>
+                <li class="list-group-item">Email sent to client2@gmail.com
+                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
+                </li>
+                <li class="list-group-item">Email sent to client3@gmail.com
+                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
+                </li>
+                <li class="list-group-item">Email sent to client4@gmail.com
+                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
+                </li>
+            </ul>
+            <!--<button class="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                 <i class="fas fa-plus"></i> Add New Service
             </button>
             <button class="btn btn-success w-100 mb-2" data-bs-toggle="modal" data-bs-target="#serviceFeaturesModal">
                 <i class="fas fa-list"></i> Company Profile
             </button>
-            <!-- <button class="btn btn-success w-100">
+             <button class="btn btn-success w-100">
                 <i class="fas fa-briefcase"></i> View Portfolio
             </button> -->
         </div>

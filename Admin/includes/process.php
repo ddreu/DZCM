@@ -578,7 +578,7 @@ class Process
         $field = $_POST['field'];
         $value = $_POST['value'];
 
-        $allowedFields = ['email', 'phone', 'address'];
+        $allowedFields = ['email', 'phone', 'address', 'logo'];
         if (!in_array($field, $allowedFields)) {
             echo json_encode([
                 'status' => 'error',
@@ -587,7 +587,38 @@ class Process
             exit;
         }
 
-        $stmt = mysqli_prepare($this->conn, "UPDATE company_info SET $field = ? WHERE company_id = 1");
+        if ($field === 'logo' && isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/company/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['logo']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadPath)) {
+                $value = $fileName;
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Failed to upload logo'
+                ]);
+                exit;
+            }
+        }
+
+        $checkStmt = mysqli_prepare($this->conn, "SELECT COUNT(*) FROM company_info WHERE company_id = 1");
+        mysqli_stmt_execute($checkStmt);
+        mysqli_stmt_bind_result($checkStmt, $count);
+        mysqli_stmt_fetch($checkStmt);
+        mysqli_stmt_close($checkStmt);
+
+        if ($count > 0) {
+            $stmt = mysqli_prepare($this->conn, "UPDATE company_info SET $field = ? WHERE company_id = 1");
+        } else {
+            $stmt = mysqli_prepare($this->conn, "INSERT INTO company_info (company_id, $field) VALUES (1, ?)");
+        }
+
         mysqli_stmt_bind_param($stmt, "s", $value);
 
         if (mysqli_stmt_execute($stmt)) {
