@@ -77,8 +77,8 @@
           started = true;
           counters.forEach(counter => {
             const target = +counter.getAttribute('data-target');
-            const duration = 2000; // Animation duration in milliseconds
-            const increment = target / (duration / 16); // 60 FPS
+            const duration = 2000;
+            const increment = target / (duration / 16);
             let current = 0;
 
             const updateCounter = () => {

@@ -62,7 +62,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.3);
+        /* background: rgba(0, 0, 0, 0.3); */
         z-index: 1;
     }
 
@@ -72,14 +72,28 @@
         top: 50%;
         transform: translateY(-50%);
         padding: 15px 20px;
-        background-color: rgba(0, 0, 0, 0.6);
+        background: none;
         color: white;
         border: none;
         cursor: pointer;
         font-size: 24px;
         transition: all 0.3s ease;
         z-index: 3;
+        outline: none;
+
     }
+
+    .prev:focus,
+    .next:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background: none !important;
+    }
+
 
     .prev {
         left: 20px;
@@ -91,10 +105,10 @@
         border-radius: 3px;
     }
 
-    .prev:hover,
+    /*  .prev:hover,
     .next:hover {
         background-color: rgba(0, 0, 0, 0.8);
-    }
+    }*/
 
     /* Dots navigation */
     .dots-container {
@@ -142,17 +156,32 @@
 <div class="slideshow-container">
     <div class="mySlides">
         <div class="slide-overlay"></div>
-        <img src="assets/img/c1.jpg" class="slide-image" alt="Slide 1">
-        <div class="caption">Dezcom</div>
-        <div class="subcaption">Innovation Through Technology</div>
+        <img src="assets/img/c8.png" class="slide-image" alt="Slide 1">
+        <div class="caption">Pioneering Innovation</div>
+        <div class="subcaption">Turning Bold Ideas into Digital Excellence</div>
     </div>
 
     <div class="mySlides">
         <div class="slide-overlay"></div>
-        <img src="assets/img/c2.jpg" class="slide-image" alt="Slide 2">
-        <div class="caption">Solutions</div>
-        <div class="subcaption">Building Tomorrow's Technology Today</div>
+        <img src="assets/img/c9.png" class="slide-image" alt="Slide 2">
+        <div class="caption">Intelligent Tech Solutions</div>
+        <div class="subcaption">Empowering Progress with Next-Gen Software</div>
     </div>
+
+    <div class="mySlides">
+        <div class="slide-overlay"></div>
+        <img src="assets/img/c4.png" class="slide-image" alt="Slide 3">
+        <div class="caption">Future-Ready Solutions</div>
+        <div class="subcaption">Shaping the Digital World, One Innovation at a Time</div>
+    </div>
+
+    <div class="mySlides">
+        <div class="slide-overlay"></div>
+        <img src="assets/img/c7.png" class="slide-image" alt="Slide 4">
+        <div class="caption">Technology that Evolves</div>
+        <div class="subcaption">Innovating Today, Leading Tomorrow</div>
+    </div>
+
 
     <button class="prev" aria-label="Previous slide">&#10094;</button>
     <button class="next" aria-label="Next slide">&#10095;</button>
