@@ -1,0 +1,32 @@
+# Ignore vendor files (Composer)
+vendor/
+
+# Ignore environment files
+.env
+.env.local
+.env.production
+.env.test
+
+# Ignore IDE settings (like VSCode, PHPStorm)
+.vscode/
+.idea/
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore PHPStorm settings
+.phpstorm.meta.php
+
+# Ignore cache files
+.cache/
+node_modules/
+
+# Ignore compiled files
+*.o
+*.so
+*.exe
+*.dll
