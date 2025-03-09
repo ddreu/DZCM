@@ -35,11 +35,11 @@ try {
             echo $result;
             break;
 
-        case 'get_service_features':
+        /*  case 'get_service_features':
             $serviceId = $_GET['service_id'] ?? null;
             $result = $process->getServiceFeatures($serviceId);
             echo $result;
-            break;
+            break; */
 
         case 'add_service_feature':
             $result = $process->addServiceFeature();

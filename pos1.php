@@ -20,11 +20,22 @@ if (isset($_GET['id'])) {
     exit();
 }
 
+// After fetching the service details
+$sql_features = "SELECT name, description, image FROM service_features WHERE service_id = $service_id";
+$result_features = $conn->query($sql_features);
+$features = [];
+if ($result_features->num_rows > 0) {
+    while ($row = $result_features->fetch_assoc()) {
+        $features[] = $row; // Store each feature in an array
+    }
+}
+
 $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +61,7 @@ $conn->close();
             width: 1000px;
             max-width: 100%;
             height: 550px;
-            gap: 30px;
+            gap: 20px;
             overflow: hidden;
         }
 
@@ -105,28 +116,153 @@ $conn->close();
             font-size: 18px;
             color: #333;
         }
+
+        .advantages-container {
+            margin-top: 20px;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature {
+            width: calc(33.33% - 20px);
+            /* Adjust width as needed */
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .feature h3 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .feature p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .carousel-container {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .features {
+            margin-top: 4rem;
+        }
+
+        .features p {
+            font-size: 1rem;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <button class="close-btn" onclick="closeForm()">&times;</button>
 
-        <!-- Service Image -->
-        <div class="image-container">
-            <img src="dzcm/images/<?php echo htmlspecialchars($service['image']); ?>" alt="Service Image">
+        <!-- Carousel for Service Image -->
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="admin/includes/uploads/services/<?php echo htmlspecialchars($service['image']); ?>" alt="Service Image">
+                </div>
+                <?php if (!empty($features)):
+                ?>
+                    <?php foreach ($features as $feature): ?>
+                        <?php if (!empty($feature['image'])):
+                        ?>
+                            <div class="carousel-item">
+                                <img src="admin/includes/uploads/service-feature/<?php echo htmlspecialchars($feature['image']); ?>" alt="<?php echo htmlspecialchars($feature['name']); ?>">
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
         </div>
 
         <!-- Service Info -->
         <div class="text-container">
             <h2><?php echo htmlspecialchars($service['service_name']); ?></h2>
             <p><?php echo nl2br(htmlspecialchars($service['description'])); ?></p>
+
+            <!-- Features List -->
+            <div class="features">
+                <h3>Features:</h3>
+                <ul class="advantages-list">
+                    <?php foreach ($features as $feature): ?>
+                        <li>
+                            <h4><?php echo htmlspecialchars($feature['name']); ?></h4>
+                            <p><?php echo nl2br(htmlspecialchars($feature['description'])); ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
     </div>
 
     <script>
+        let currentIndex = 0;
+
+        function nextSlide() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const carousel = document.querySelector('.carousel');
+            const offset = -currentIndex * 100; // Adjust based on item width
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+
         function closeForm() {
-            window.location.href = 'index.php'; 
+            window.location.href = 'index.php';
         }
     </script>
 </body>
+
 </html>

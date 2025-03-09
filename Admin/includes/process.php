@@ -567,27 +567,8 @@ class Process
             exit;
         }
 
-        if (!isset($_POST['field']) || !isset($_POST['value'])) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Missing field or value'
-            ]);
-            exit;
-        }
-
-        $field = $_POST['field'];
-        $value = $_POST['value'];
-
-        $allowedFields = ['email', 'phone', 'address', 'logo'];
-        if (!in_array($field, $allowedFields)) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Invalid field'
-            ]);
-            exit;
-        }
-
-        if ($field === 'logo' && isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+        // If logo upload, skip field and value check
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/company/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
@@ -598,6 +579,7 @@ class Process
 
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadPath)) {
                 $value = $fileName;
+                $field = 'logo'; // Set field as logo
             } else {
                 echo json_encode([
                     'status' => 'error',
@@ -605,8 +587,30 @@ class Process
                 ]);
                 exit;
             }
+        } else {
+            // Normal update (email, phone, address)
+            if (!isset($_POST['field']) || !isset($_POST['value'])) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Missing field or value'
+                ]);
+                exit;
+            }
+
+            $field = $_POST['field'];
+            $value = $_POST['value'];
+
+            $allowedFields = ['email', 'phone', 'address'];
+            if (!in_array($field, $allowedFields)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Invalid field'
+                ]);
+                exit;
+            }
         }
 
+        // Check if company info exists
         $checkStmt = mysqli_prepare($this->conn, "SELECT COUNT(*) FROM company_info WHERE company_id = 1");
         mysqli_stmt_execute($checkStmt);
         mysqli_stmt_bind_result($checkStmt, $count);

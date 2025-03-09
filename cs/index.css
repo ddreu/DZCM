@@ -1,3 +1,11 @@
+:root {
+    --primary-color: #d0021b;
+    --secondary-color: #515457;
+    --tertiary-color: #dc3545;
+    --text-color: #333333;
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -371,4 +379,230 @@ margin-bottom: 0;
 
 .discover-more:hover {
     background-color: darkred;
+}
+
+/* success in numbers */
+
+.success-numbers {
+    position: relative;
+    background-image: url('path/to/your/business-background.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 60px 0;
+    color: white;
+    text-align: left;
+    margin: 100px 0;
+}
+
+.success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 102, 153, 0.95), rgba(0, 82, 136, 0.85));
+}
+
+.success-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.success-content h2 {
+    font-size: 2rem;
+    margin-bottom: 60px;
+    font-weight: 600;
+    text-align: left;
+    color: white;
+}
+
+.numbers-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 120px;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.number-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+}
+
+.number-box i {
+    font-size: 2.5rem;
+    color: white;
+    margin: 0;
+}
+
+.number-box .counter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #dc3545;
+    margin: 0;
+    display: inline;
+}
+
+.number-box .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.number-box p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.number-box:not(:last-child) {
+    position: relative;
+}
+
+.number-box:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .success-content h2 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .numbers-container {
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .number-box {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .number-box:not(:last-child)::after {
+        display: none;
+    }
+
+    .number-box .text-content {
+        align-items: center;
+    }
+
+    .number-box .counter {
+        font-size: 2.5rem;
+    }
+
+    .number-box p {
+        font-size: 0.8rem;
+    }
+}
+
+/* SERVICES WE PROVIDE SECTION */
+
+.services-section {
+    padding: 80px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-title {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 60px;
+    font-weight: normal;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.service-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    background: white;
+    position: relative;
+}
+
+.service-box::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #007bff;
+}
+
+.service-icon {
+    font-size: 70px !important;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.service-box h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.service-box p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: normal;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .services-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .services-title {
+        font-size: 2rem;
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    .service-box {
+        padding: 0;
+    }
+
+    .service-icon {
+        font-size: 36px !important;
+    }
+
+    .service-box h3 {
+        font-size: 1.3rem;
+    }
 }

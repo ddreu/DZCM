@@ -16,14 +16,14 @@ $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo '
-            <div class="services-box" data-category="'.$row["service_name"].'">
+            <div class="services-box" data-category="' . $row["service_name"] . '">
                 <div class="image-container">
-                    <img src="dzcm/images/'.$row["image"].'" alt="'.$row["service_name"].'">
+                    <img src="admin/includes/uploads/services/' . $row["image"] . '" alt="' . $row["service_name"] . '">
                     <button class="discover-btn">Discover More</button>
                 </div>
                 <div class="services-content">
-                    <h3>'.$row["service_name"].'</h3>
-                    <p>'.$row["description"].'</p>
+                    <h3>' . $row["service_name"] . '</h3>
+                    <p>' . $row["description"] . '</p>
                 </div>
             </div>';
         }

@@ -66,26 +66,40 @@
             <h5 class="mb-3"><strong>Company Profile</strong></h5>
             <form id="companyForm">
                 <input type="hidden" name="company_id" value="<?= $company['company_id']; ?>">
-                <div class="mb-3 d-flex align-items-center">
-                    <label for="email" class="form-label me-2">Email:</label>
-                    <input type="email" class="form-control me-2" name="email" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
-                    <button type="button" class="btn btn-primary btn-sm" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
+
+                <div class="mb-3 row align-items-center">
+                    <label for="email" class="col-md-2 col-form-label text-md-start">Email:</label>
+                    <div class="col-md-8">
+                        <input type="email" class="form-control" name="email" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm w-100" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
+                    </div>
                 </div>
 
-                <div class="mb-3 d-flex align-items-center">
-                    <label for="phone" class="form-label me-2">Phone:</label>
-                    <input type="text" class="form-control me-2" name="phone" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
-                    <button type="button" class="btn btn-primary btn-sm" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
+                <div class="mb-3 row align-items-center">
+                    <label for="phone" class="col-md-2 col-form-label text-md-start">Phone:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="phone" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm w-100" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
+                    </div>
                 </div>
 
-                <div class="mb-3 d-flex align-items-center">
-                    <label for="address" class="form-label me-2">Address:</label>
-                    <input type="text" class="form-control me-2" name="address" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
-                    <button type="button" class="btn btn-primary btn-sm" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
+                <div class="mb-3 row align-items-center">
+                    <label for="address" class="col-md-2 col-form-label text-md-start">Address:</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="address" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm w-100" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
+
 
 
 

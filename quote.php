@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     <title>Get a Free Quote</title>
     <style>
         body {
@@ -15,6 +16,7 @@
             background-color: #f8f8f8;
             margin: 0;
         }
+
         .container {
             position: relative;
             background: white;
@@ -24,8 +26,9 @@
             display: flex;
             width: 800px;
             gap: 30px;
-            
+
         }
+
         .close-btn {
             position: absolute;
             top: 10px;
@@ -41,13 +44,17 @@
             text-align: center;
             line-height: 30px;
         }
+
         .close-btn:hover {
             background: #b30000;
         }
-        .form-container, .info-container {
+
+        .form-container,
+        .info-container {
             flex: 1;
             padding: 20px;
         }
+
         .info-box {
             background: #fff;
             border: 1px solid #ddd;
@@ -59,15 +66,19 @@
             align-items: center;
             gap: 10px;
         }
+
         .info-box i {
             font-size: 20px;
             color: #d40000;
         }
+
         h2 {
             margin-bottom: 10px;
             font-size: 24px;
         }
-        input, textarea {
+
+        input,
+        textarea {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
@@ -78,10 +89,13 @@
             background: transparent;
             font-size: 16px;
         }
-        input:focus, textarea:focus {
+
+        input:focus,
+        textarea:focus {
             border-bottom: 2px solid #d40000;
             outline: none;
         }
+
         .btn {
             background: #d40000;
             color: white;
@@ -93,40 +107,44 @@
             margin-top: 12px;
             font-size: 16px;
         }
+
         .btn:hover {
             background: #b30000;
         }
+
         .info-container {
             border-left: 1px solid #ddd;
         }
+
         .info-container p {
             font-size: 16px;
         }
+
         .info-box i {
-    font-size: 30px; 
-    color: #d40000;  
-}
+            font-size: 30px;
+            color: #d40000;
+        }
 
-.info-box div {
-    color: #333; 
-    font-size: 16px;
-}
-
+        .info-box div {
+            color: #333;
+            font-size: 16px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <button class="close-btn" onclick="closeForm()">&times;</button>
-        <div class="form-container">
+        <form action="submit_form.php" method="POST" class="form-container">
             <h2>Get a Free Quote</h2>
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="tel" placeholder="Phone">
-            <input type="text" placeholder="Website">
-            <textarea placeholder="Message"></textarea>
-            <button class="btn">GET A QUOTE</button>
-        </div>
+            <input type="text" name="value1" placeholder="Name" required>
+            <input type="email" name="value2" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Phone" required>
+            <input type="text" name="website" placeholder="Website">
+            <textarea name="message" placeholder="Message" required></textarea>
+            <button type="submit" class="btn">GET A QUOTE</button>
+        </form>
         <div class="info-container">
             <h2>What's Next?</h2>
             <p>1</p>
@@ -136,8 +154,10 @@
                 <i class="fas fa-phone-alt"></i>
                 <div>
                     <h3>Give us a call</h3>
-                    <span> <a href="tel:+63289821268">+63 --- ---- ---</a> / <a href="tel:+639985833381">+63 --- ---- ---</a></span>
-
+                    <span>
+                        <a href="tel:+63289821268">+63 --- ---- ---</a> /
+                        <a href="tel:+639985833381">+63 --- ---- ---</a>
+                    </span>
                 </div>
             </div>
             <div class="info-box">
@@ -149,13 +169,12 @@
             </div>
         </div>
     </div>
+
     <script>
         function closeForm() {
-        window.location.href = 'index.php'; 
-    }
+            window.location.href = 'index.php';
+        }
     </script>
 </body>
+
 </html>
-
-
-

@@ -1,140 +1,217 @@
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-        }
+    .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
 
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 80vh; 
-            overflow: hidden; 
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-           
-        }
- 
-        .mySlides {
-            display: none;
-            text-align: center;
-        }
+    .mySlides {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+    }
 
-        .slide-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            margin: 0 auto; 
-        }
+    .mySlides.active {
+        opacity: 1;
+    }
 
-   
+    .slide-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
+    .caption {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .subcaption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        font-size: 1.5rem;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .slide-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 15px 20px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        z-index: 3;
+    }
+
+    .prev {
+        left: 20px;
+        border-radius: 3px;
+    }
+
+    .next {
+        right: 20px;
+        border-radius: 3px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Dots navigation */
+    .dots-container {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 3;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+        background-color: #fff;
+    }
+
+    @media (max-width: 768px) {
         .caption {
-    position: absolute;
-    top: 40%;
-    left: 20%;
-    transform: translateY(-50%);
-    color: black;
-    background-color: rgba(255, 255, 255, 0.5);
-    font-size: 70px;
-    padding: 10px;
-}
-
-.captio {
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    transform: translateY(-50%);
-    color: black;
-    background-color: rgba(255, 255, 255, 0.5);
-    font-size: 20px;
-    padding: 10px;
-}
-
-        @keyframes fade {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
+            font-size: 2rem;
+            width: 90%;
         }
 
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            padding: 16px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            user-select: none;
-            transform: translateY(-50%);
+        .subcaption {
+            font-size: 1rem;
+            width: 90%;
         }
 
-        .prev {
-            left: 100;
-        }
-
+        .prev,
         .next {
-            right: 100;
+            padding: 10px 15px;
+            font-size: 18px;
         }
-    </style>
-</head>
-
-<body>
+    }
+</style>
 
 <div class="slideshow-container">
-
-    <div class="mySlides fade">
-        <img src="img/dezcomm.jpg" class="slide-image">
-        <div class="caption">Dezcom </div>
-        <div class="captio">Dezcom </div>
-    
+    <div class="mySlides">
+        <div class="slide-overlay"></div>
+        <img src="assets/img/c1.jpg" class="slide-image" alt="Slide 1">
+        <div class="caption">Dezcom</div>
+        <div class="subcaption">Innovation Through Technology</div>
     </div>
 
-    <div class="mySlides fade">
-        <img src="img/12345.jpg" class="slide-image">
+    <div class="mySlides">
+        <div class="slide-overlay"></div>
+        <img src="assets/img/c2.jpg" class="slide-image" alt="Slide 2">
+        <div class="caption">Solutions</div>
+        <div class="subcaption">Building Tomorrow's Technology Today</div>
     </div>
 
- 
+    <button class="prev" aria-label="Previous slide">&#10094;</button>
+    <button class="next" aria-label="Next slide">&#10095;</button>
 
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-
+    <div class="dots-container"></div>
 </div>
 
 <script>
-let slideIndex = 0;
-
-function showSlides() {
+    let slideIndex = 0;
     let slides = document.getElementsByClassName("mySlides");
+    const dotsContainer = document.querySelector('.dots-container');
+
     for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.addEventListener('click', () => {
+            slideIndex = i;
+            showSlides();
+        });
+        dotsContainer.appendChild(dot);
     }
-    if (slideIndex >= slides.length) {
-        slideIndex = 0;
-    } 
-    slides[slideIndex].style.display = "block";
-}
 
-document.querySelector('.prev').addEventListener('click', () => {
-    slideIndex--; 
-    if (slideIndex < 0) {
-        slideIndex = document.getElementsByClassName("mySlides").length - 1; 
+    function showSlides() {
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+            document.querySelectorAll('.dot')[i].classList.remove("active");
+        }
+
+        if (slideIndex >= slides.length) slideIndex = 0;
+        if (slideIndex < 0) slideIndex = slides.length - 1;
+
+        slides[slideIndex].classList.add("active");
+        document.querySelectorAll('.dot')[slideIndex].classList.add("active");
     }
-    showSlides();
-});
 
-document.querySelector('.next').addEventListener('click', () => {
-    slideIndex++;
-    showSlides();
-});
+    document.querySelector('.prev').addEventListener('click', () => {
+        slideIndex--;
+        showSlides();
+    });
 
-showSlides();
+    document.querySelector('.next').addEventListener('click', () => {
+        slideIndex++;
+        showSlides();
+    });
+
+    function autoAdvance() {
+        slideIndex++;
+        showSlides();
+    }
+
+    showSlides();
+
+    let slideTimer = setInterval(autoAdvance, 5000);
+
+    document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
+        clearInterval(slideTimer);
+    });
+
+    document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
+        slideTimer = setInterval(autoAdvance, 4000);
+    });
 </script>
