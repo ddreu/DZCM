@@ -16,4 +16,3 @@ if (!$conn) {
 
 // Close the connection (optional, if needed later in the script)
 // mysqli_close($conn);
-?>

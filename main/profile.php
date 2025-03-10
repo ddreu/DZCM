@@ -1,18 +1,18 @@
 <div class="profile-separator">
-    <span>Why Choose Us</span>
+    <h1>Why Choose Us</h1>
 
 </div>
 
 <div class="content-wrapper">
-  
+
     <div class="left-content">
         <h2>Our Mission</h2>
         <p>MISSION
 
-At Dezcom System Development & I.T. Solutions, our mission is to pioneer innovative solutions in system development and hardware integration, empowering businesses and individuals to thrive in the digital age. We are committed to delivering cutting-edge technologies and unparalleled support, ensuring seamless integration and optimal performance for our clients.
+            At Dezcom System Development & I.T. Solutions, our mission is to pioneer innovative solutions in system development and hardware integration, empowering businesses and individuals to thrive in the digital age. We are committed to delivering cutting-edge technologies and unparalleled support, ensuring seamless integration and optimal performance for our clients.
 
 
-</p>
+        </p>
         <p></p>
         <p></p>
 
@@ -22,9 +22,9 @@ At Dezcom System Development & I.T. Solutions, our mission is to pioneer innovat
 
 
     <div class="right-form">
-     
+
         <form class="quote-form">
-        <h2>Get a Free Quote</h2>
+            <h2>Get a Free Quote</h2>
             <div class="input-group">
                 <input type="text" placeholder="Name" required>
             </div>

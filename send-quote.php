@@ -10,37 +10,37 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $value1 = $_POST['value1'];
-    $value2 = $_POST['value2'];
-    $phone = $_POST['phone'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'] ?? '';
     $website = $_POST['website'];
     $message = $_POST['message'];
 
-    $stmt = $conn->prepare("INSERT INTO quotes (name, email, phone, website, message) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $value1, $value2, $phone, $website, $message);
+    $stmt = $conn->prepare("INSERT INTO quote (name, email, phone, website, message) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $name, $email, $phone, $website, $message);
 
     if ($stmt->execute()) {
         $mail = new PHPMailer(true);
 
         try {
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'email@gmail.com';
-            $mail->Password = 'password';
+            $mail->Username = 'posemail@posdzcm.shop';
+            $mail->Password = 'Codez1984@';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->CharSet = 'UTF-8';
 
-            $mail->setFrom('');
+            $mail->setFrom("posemail@posdzcm.shop", "DZCM IT Services");
             $mail->addAddress('andrewbucedeguzman@gmail.com');
 
             $mail->isHTML(true);
-            $mail->Subject = "New Quote Request from $value1";
+            $mail->Subject = "New Quote Request from $name";
             $mail->Body = "
                 <h2>New Quote Request</h2>
-                <p><strong>Name:</strong> $value1</p>
-                <p><strong>Email:</strong> $value2</p>
+                <p><strong>Name:</strong> $name</p>
+                <p><strong>Email:</strong> $email</p>
                 <p><strong>Phone:</strong> $phone</p>
                 <p><strong>Website:</strong> $website</p>
                 <p><strong>Message:</strong> $message</p>
@@ -50,19 +50,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $mail->clearAddresses();
             $mail->clearAttachments();
-            $mail->addAddress($value2);
+            $mail->addAddress($email);
             $mail->Subject = "Thank you for requesting a quote!";
             $mail->Body = "
-                <h2>Thank you for reaching out, $value1!</h2>
+                <h2>Thank you for reaching out, $name!</h2>
                 <p>We have received your request and will get back to you shortly.</p>
                 <p><strong>Details you submitted:</strong></p>
-                <p>Name: $value1</p>
-                <p>Email: $value2</p>
+                <p>Name: $name</p>
+                <p>Email: $email</p>
                 <p>Phone: $phone</p>
                 <p>Website: $website</p>
                 <p>Message: $message</p>
                 <br>
-                <p>Best regards,<br>Your Company</p>
+                <p>Best regards,<br>DZCM IT Services</p>
             ";
 
             $mail->send();

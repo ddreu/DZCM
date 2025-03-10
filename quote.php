@@ -136,10 +136,10 @@
 <body>
     <div class="container">
         <button class="close-btn" onclick="closeForm()">&times;</button>
-        <form action="submit_form.php" method="POST" class="form-container">
+        <form action="send-quote.php" method="POST" class="form-container">
             <h2>Get a Free Quote</h2>
-            <input type="text" name="value1" placeholder="Name" required>
-            <input type="email" name="value2" placeholder="Email" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
             <input type="tel" name="phone" placeholder="Phone" required>
             <input type="text" name="website" placeholder="Website">
             <textarea name="message" placeholder="Message" required></textarea>

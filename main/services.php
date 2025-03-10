@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 ?>
 
 <div class="services-separator">
-    <span>Services</span>
+    <h1>Services</h1>
 </div>
 
 <div class="services">
