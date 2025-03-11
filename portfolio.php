@@ -14,12 +14,12 @@
     <div class="portfolio-separator mt-2"></div>
 
     <div class="portfolio-filter">
-        <button class="filter-btn
-    active" data-category="all">All</button>
+        <button class="filter-btn active" data-category="all">All</button>
         <button class="filter-btn" data-category="web">Web</button>
         <button class="filter-btn" data-category="mobile">Mobile</button>
         <button class="filter-btn" data-category="desktop">Desktop</button>
     </div>
+
 
     <?php include 'main/services.php'; ?>
     <!-- <div class="portfolio-container">
