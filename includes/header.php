@@ -17,5 +17,6 @@
     <link rel="stylesheet" href="cs/index.css">
     <link rel="stylesheet" href="cs/contact.css">
     <link rel="stylesheet" href="cs/about.css">
+    <link rel="stylesheet" href="cs/portfolio.css">
 
 </head>

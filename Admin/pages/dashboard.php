@@ -104,36 +104,41 @@
 
 
     <?php
-    /*$sql = "SELECT * FROM emails ORDER BY email_id DESC LIMIT 4";
+    $sql = "SELECT * FROM quote ORDER BY quote_id DESC LIMIT 4";
     $result = con()->query($sql);
-    $emails = $result->fetch_all(MYSQLI_ASSOC);*/
+    $emails = $result->fetch_all(MYSQLI_ASSOC);
+    date_default_timezone_set('Asia/Manila');
+    function timeAgo($timestamp)
+    {
+        $time = strtotime($timestamp);
+        $diff = time() - $time;
+
+        if ($diff < 60) {
+            return $diff . " seconds ago";
+        } elseif ($diff < 3600) {
+            return floor($diff / 60) . " mins ago";
+        } elseif ($diff < 86400) {
+            return floor($diff / 3600) . " hrs ago";
+        } elseif ($diff < 604800) {
+            return floor($diff / 86400) . " days ago";
+        } elseif ($diff < 2592000) {
+            return floor($diff / 604800) . " weeks ago";
+        } else {
+            return floor($diff / 2592000) . " months ago";
+        }
+    }
     ?>
     <div class="col-md-4">
         <div class="card p-3 shadow quick-actions">
             <h5>Recent Emails</h5>
             <ul class="list-group">
-                <li class="list-group-item">Email sent to client1@gmail.com
-                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
-                </li>
-                <li class="list-group-item">Email sent to client2@gmail.com
-                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
-                </li>
-                <li class="list-group-item">Email sent to client3@gmail.com
-                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
-                </li>
-                <li class="list-group-item">Email sent to client4@gmail.com
-                    <span class="float-end"><i class="fas fa-check text-success"></i></span>
-                </li>
+                <?php foreach ($emails as $email): ?>
+                    <li class="list-group-item">
+                        <?= htmlspecialchars($email['email']) ?> requested a quote
+                        <span class="float-end text-muted"><?= timeAgo($email['date']) ?></span>
+                    </li>
+                <?php endforeach; ?>
             </ul>
-            <!--<button class="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                <i class="fas fa-plus"></i> Add New Service
-            </button>
-            <button class="btn btn-success w-100 mb-2" data-bs-toggle="modal" data-bs-target="#serviceFeaturesModal">
-                <i class="fas fa-list"></i> Company Profile
-            </button>
-             <button class="btn btn-success w-100">
-                <i class="fas fa-briefcase"></i> View Portfolio
-            </button> -->
         </div>
     </div>
 </div>

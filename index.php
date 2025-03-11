@@ -27,6 +27,10 @@
     </div>
   </section>
 
+  <h1>Services</h1>
+  <div class=" services-separator mt-0">
+  </div>
+
   <?php include 'main/services.php'; ?>
 
   <!-- success in numbers -->
@@ -63,7 +67,7 @@
 <div>
   <?php include 'main/profile.php'; ?>
 </div>
-
+<!-- <?php include 'quote.php'; ?> -->
 <?php include 'includes/footer.php'; ?>
 <script src="includes/script.js"></script>
 <script>

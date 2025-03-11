@@ -164,7 +164,7 @@
     <div class="mySlides">
         <div class="slide-overlay"></div>
         <img src="assets/img/c9.png" class="slide-image" alt="Slide 2">
-        <div class="caption">Intelligent Tech Solutions</div>
+        <div class="caption">Tech Solutions</div>
         <div class="subcaption">Empowering Progress with Next-Gen Software</div>
     </div>
 

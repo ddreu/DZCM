@@ -36,10 +36,12 @@ $conn->close();
         <li><a href="about.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active' : ''; ?>">About</a></li>
         <li><a href="product-services.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'product-services.php' ? 'active' : ''; ?>">Products and Services</a></li>
         <li><a href="portfolio.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'portfolio.php' ? 'active' : ''; ?>">Portfolio</a></li>
-        <li><a href="careers.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'careers.php' ? 'active' : ''; ?>">Careers</a></li>
+        <!-- <li><a href="careers.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'careers.php' ? 'active' : ''; ?>">Careers</a></li> -->
         <li><a href="contact.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
     </ul>
 
 
-    <a href="quote.php" class="quote-btn">GET A QUOTE <i class="fas fa-chevron-right"></i></a>
+    <a href="#" class="quote-btn" onclick="openModal()">GET A QUOTE <i class="fas fa-chevron-right"></i></a>
 </div>
+
+<?php include 'quote.php'; ?>

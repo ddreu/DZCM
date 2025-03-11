@@ -4,8 +4,8 @@
     font-weight: bold;
     position: relative;
     padding-bottom: 10px;
-    margin-top: 100px; /* Adjust the margin to suit your layout */
-    margin-bottom: 60px; /* Adjust as needed */
+    margin-top: 100px; 
+    margin-bottom: 60px; 
 }
 
 .portfolio-separator::after {
@@ -13,26 +13,25 @@
     display: block;
     width: 50%;
     margin: 5px auto 0;
-    margin-top: 10px;
     border-bottom: 2px solid black;
 }
 
 .portfolio-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive layout */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
     gap: 40px;
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    max-width: 1200px; /* Set max width to prevent stretching */
-    width: 100%; /* Make container fill available space */
-    margin: 0 auto; /* Center container */
+    max-width: 1200px; 
+    width: 100%; 
+    margin: 0 auto; 
 }
 /* Portfolio Box Styling */
 .portfolio-box {
     position: relative;
-    width: 100%; /* Ensure it takes full width */
-    max-width: 350px; /* Prevent it from stretching beyond max size */
+    width: 100%; 
+    max-width: 350px; 
     height: 286px;
     background: white;
     overflow: hidden;
@@ -155,14 +154,14 @@
 /* Responsive adjustments */
 @media (max-width: 1024px) {
     .portfolio-container {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive layout */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
     }
 
     .portfolio-box {
-        max-width: 100%; /* Full width */
-        height: auto; /* Adjust height based on content */
-        padding: 15px; /* Add padding for smaller screens */
+        max-width: 100%;
+        height: auto;
+        padding: 15px;
     }
 
     .portfolio-label {
@@ -180,14 +179,14 @@
 
 @media (max-width: 768px) {
     .portfolio-container {
-        grid-template-columns: 1fr; /* Stack items in a single column */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
 
     .portfolio-box {
-        width: 100%; /* Full width */
-        height: auto; /* Allow height to adjust */
-        padding: 15px; /* More padding for smaller screens */
+        width: 100%; 
+        height: auto; 
+        padding: 15px; 
     }
 
     .portfolio-label {

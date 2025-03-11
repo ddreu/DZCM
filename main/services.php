@@ -7,9 +7,9 @@ $sql = "SELECT service_id, service_name, description, image FROM services";
 $result = $conn->query($sql);
 ?>
 
-<div class="services-separator">
+<!-- <div class="services-separator">
     <h1>Services</h1>
-</div>
+</div> -->
 
 <div class="services">
     <?php

@@ -26,7 +26,7 @@ $result_features = $conn->query($sql_features);
 $features = [];
 if ($result_features->num_rows > 0) {
     while ($row = $result_features->fetch_assoc()) {
-        $features[] = $row; // Store each feature in an array
+        $features[] = $row;
     }
 }
 
