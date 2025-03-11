@@ -1,53 +1,107 @@
-.profile-separator {
+
+
+.about-profile-separator {
     text-align: center;
     font-size: 24px;
-    font-weight: bold;
     position: relative;
     padding-bottom: 10px;
     margin-bottom: 40px;
     margin-top: 40px;
 }
 
-.profile-separator::after {
+.about-profile-separator::after {
     content: "";
-    display: block;
+    display: inline-block;
     width: 50%;
     margin: 10px auto 0;
     border-bottom: 2px solid black;
 }
 
-.content-wrapper {
-    display: flex;
-    justify-content: center; /* Centers the content */
-    align-items: flex-start;
-    max-width: 900px; /* Adjust width for better readability */
-    margin: 0 auto;
-    padding: 20px;
+.header-about {
+    padding: 20px 0;
+    margin-bottom: 20px;
+    margin-top: 70px;
 }
 
-.left-content {
-    width: 100%; /* Take full width */
-    text-align: left;
-}
-.left-content h2 {
-    font-size: 22px;
+.header-about h1 {
+    font-size: 1.5em;
     font-weight: bold;
-    color: #d40000; /* Changed to red */
+    color: #333;
+    text-align: center;
+}
+
+.header-about p {
+    margin: 50px 0;
+    font-size: .9em;
+}
+
+.about-content-wrapper {
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+}
+
+.left-content-about {
+    width: 100%; 
+    text-align: left;
+    margin-left: 10%;    
+}
+.left-content-about h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #d40000; 
     margin-bottom: 10px;
 }
 
-/* Add spacing after Mission and Vision sections */
-.left-content h2::after {
+.left-content-about h2::after {
     content: "";
-    display: block;
+    display: inline-block;
     width: 100%;
-    margin: 10px 0 20px; /* Increased bottom margin for better spacing */
-    border-bottom: 2px solid #ccc; /* Light gray line under headings */
+    margin: 10px 0 20px;
+    border-bottom: 2px solid #ccc;
 }
 
-.left-content p {
-    font-size: 16px;
+.left-content-about p {
+    font-size: 1.2rem;
     line-height: 1.6;
     color: #333;
-    margin-bottom: 30px; /* Adds space between mission and vision text */
+    margin-bottom: 30px;
+}
+
+.about-content{
+    width: 90%;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.about-content h2 {
+   margin-bottom: 30px;
+    font-size: 1.7rem;
+
+}
+
+.about-content p{
+    text-align: justify;
+    font-size: 1.1rem;
+}
+
+@media (width: 768px) {
+    .header-about span {
+        font-size: 32px;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .left-content-about h2 {
+        font-size: 20px;
+    }
+
+    .left-content-about p {
+        font-size: 16px;
+    }
 }

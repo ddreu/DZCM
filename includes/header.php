@@ -16,5 +16,6 @@
     <link rel="stylesheet" href="cs/footer.css">
     <link rel="stylesheet" href="cs/index.css">
     <link rel="stylesheet" href="cs/contact.css">
+    <link rel="stylesheet" href="cs/about.css">
 
 </head>
