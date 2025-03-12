@@ -31,9 +31,10 @@
 
     <div class="footer-column">
       <h4>Get in Touch</h4>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-skype"></i></a>
+      <div class="social-links ms-4">
+        <a href="https://www.facebook.com/DezcomShop" target="_blank">
+          <i class="fab fa-facebook-f"></i></a>
+        <!-- <a href="#"><i class="fab fa-skype"></i></a> -->
       </div>
     </div>
   </div>

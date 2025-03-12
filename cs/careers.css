@@ -1,0 +1,18 @@
+.career-subsection {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.career-subsection h2 {
+    margin-bottom: 20px;
+}
+
+.career-subsection p {
+text-align: justify;
+}
+
+.contact-section h2 {
+    text-align: left;
+    margin-bottom: 30px;
+}

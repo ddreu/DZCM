@@ -3,35 +3,36 @@
   <?php include 'includes/navbar.php'; ?>
   <?php include 'main/imgslider.php'; ?>
   <!-- Services We Provide Section -->
-  <section class="services-section">
-    <h2 class="services-title">Services We Provide</h2>
+  <div class="container">
+    <section class="services-section mt-5 mb-5 pb-5">
+      <h2 class="services-title">Services We Provide</h2>
+      <div class="services-container">
+        <div class="service-box">
+          <span class="material-icons service-icon">devices</span>
+          <h3>Software Design and Development</h3>
+          <p>We offer full-service software development services for web, mobile and desktop applications that are visually appealing and functional to meet your business system requirements.</p>
+        </div>
 
-    <div class="services-container">
-      <div class="service-box">
-        <span class="material-icons service-icon">devices</span>
-        <h3>Software Design and Development</h3>
-        <p>We offer full-service software development services for web, mobile and desktop applications that are visually appealing and functional to meet your business system requirements.</p>
-      </div>
+        <div class="service-box">
+          <span class="material-icons service-icon">cloud_sync</span>
+          <h3>Support and Maintenance</h3>
+          <p>We specialize in providing software and application support services to achieve maximum availability, performance, and security.</p>
+        </div>
 
-      <div class="service-box">
-        <span class="material-icons service-icon">cloud_sync</span>
-        <h3>Support and Maintenance</h3>
-        <p>We specialize in providing software and application support services to achieve maximum availability, performance, and security.</p>
+        <div class="service-box">
+          <span class="material-icons service-icon">qr_code</span>
+          <h3>Products and Services</h3>
+          <p>We provide top-of-the-line products and services at competitive rates to meet all your software and hardware needs.</p>
+        </div>
       </div>
+    </section>
 
-      <div class="service-box">
-        <span class="material-icons service-icon">qr_code</span>
-        <h3>Products and Services</h3>
-        <p>We provide top-of-the-line products and services at competitive rates to meet all your software and hardware needs.</p>
-      </div>
+    <h1 class="mt-5">Services</h1>
+    <div class=" services-separator mt-0">
     </div>
-  </section>
 
-  <h1>Services</h1>
-  <div class=" services-separator mt-0">
+    <?php include 'main/services.php'; ?>
   </div>
-
-  <?php include 'main/services.php'; ?>
 
   <!-- success in numbers -->
   <section class="success-numbers">
@@ -67,7 +68,6 @@
 <div>
   <?php include 'main/profile.php'; ?>
 </div>
-<!-- <?php include 'quote.php'; ?> -->
 <?php include 'includes/footer.php'; ?>
 <script src="includes/script.js"></script>
 <script>

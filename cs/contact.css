@@ -41,8 +41,10 @@ body {
     width: 100%;
     height: 3px;
     color: #007bff;
-    margin: 60px;
+    /* margin: 60px; */
 }
+
+
 
 /* Form Styling */
 .contact-form {
@@ -203,7 +205,8 @@ body {
 /* Style for the map container */
 .map-responsive {
     overflow: hidden;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    /* padding-bottom: 56.25%; */
+    padding-bottom: 56.25%;
     position: relative;
     height: 0;
 }
@@ -211,7 +214,7 @@ body {
 .map-responsive iframe {
     left: 0;
     top: 0;
-    height: 100%;
+    height: 80%;
     width: 100%;
     position: absolute;
 }

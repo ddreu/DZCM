@@ -2,27 +2,27 @@
 
 <body>
     <?php include 'includes/navbar.php'; ?>
-    <header>
-        <div class="header-container">
-            <div class="portfolio-header">
-                <h1>Our Portfolio</h1>
-                <p>Explore our portfolio of successful projects and applications.</p>
+    <div class="about-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2 class="section-title">Our Portfolio</h2>
+                <p class="section-subtitle">Explore our portfolio of successful projects and applications.</p>
+
             </div>
+            <hr class="section-divider" />
         </div>
-    </header>
-
-    <div class="portfolio-separator mt-2"></div>
-
-    <div class="portfolio-filter">
-        <button class="filter-btn active" data-category="all">All</button>
-        <button class="filter-btn" data-category="web">Web</button>
-        <button class="filter-btn" data-category="mobile">Mobile</button>
-        <button class="filter-btn" data-category="desktop">Desktop</button>
-    </div>
 
 
-    <?php include 'main/services.php'; ?>
-    <!-- <div class="portfolio-container">
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="web">Web</button>
+            <button class="filter-btn" data-category="mobile">Mobile</button>
+            <button class="filter-btn" data-category="desktop">Desktop</button>
+        </div>
+
+
+        <?php include 'main/services.php'; ?>
+        <!-- <div class="portfolio-container">
         <div class="portfolio-box">
             <div class="portfolio-label">PORTFOLIO</div>
             <div class="image-container">
@@ -95,5 +95,6 @@
             </div>
         </div>
     </div> -->
+    </div>
     <?php include 'includes/footer.php'; ?>
 </body>

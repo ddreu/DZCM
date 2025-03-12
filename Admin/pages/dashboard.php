@@ -134,7 +134,9 @@
             <ul class="list-group">
                 <?php foreach ($emails as $email): ?>
                     <li class="list-group-item">
-                        <?= htmlspecialchars($email['email']) ?> requested a quote
+                        <strong>
+                            <?= htmlspecialchars($email['email']) ?>
+                        </strong> requested a quote
                         <span class="float-end text-muted"><?= timeAgo($email['date']) ?></span>
                     </li>
                 <?php endforeach; ?>

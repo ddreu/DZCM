@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="cs/profile.css">
     <link rel="stylesheet" href="cs/footer.css">
     <link rel="stylesheet" href="cs/contact.css">
+    <link rel="stylesheet" href="cs/index.css">
+    <link rel="stylesheet" href="cs/about.css">
+    <link rel="stylesheet" href="cs/portfolio.css">
+</head> -->
+<?php include 'includes/header.php'; ?>
 
 <body>
     <?php include('includes/navbar.php'); ?>
@@ -140,7 +145,7 @@
             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 mb-5">
                 <div class="map-responsive">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.1441758774345!2d120.98120667458674!3d15.368676157812182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339727afec5ea617%3A0x4cfe554ed30fab6b!2sDEZCOM%20SHOP%20(DZCM)!5e0!3m2!1sen!2sph!4v1740990027667!5m2!1sen!2sph"
-                        width="100%" height="450" frameborder="0" style="border:0" allowfullscreen loading="lazy"
+                        width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
