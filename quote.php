@@ -1,21 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get a Free Quote</title> -->
 <style>
-    /* body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
-
     /* MODAL STYLES */
     .modal-overlay {
         position: fixed;
@@ -23,7 +6,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        /* background: rgba(0, 0, 0, 0.6); */
         background: rgb(255, 255, 255);
         z-index: 999;
         display: none;
@@ -202,27 +184,7 @@
     .notification-content p {
         margin: 4px 0 0;
     }
-
-    /* Fade-in animation */
-    /* @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-    } */
 </style>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body> -->
-
-<!-- OPEN BUTTON -->
-<!-- <button class="open-btn" onclick="openModal()">Get a Quote</button> -->
 
 <!-- MODAL OVERLAY -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
@@ -230,7 +192,7 @@
 <!-- MODAL -->
 <div class="modal" id="modal">
     <button class="close-btn" onclick="closeModal()">&times;</button>
-    <form id="quoteForm" action="send-quote.php" method="POST" class="form-container">
+    <form id="quoteFormModal" action="send-quote.php" method="POST" class="form-container">
         <h2>Get a Free Quote</h2>
         <input type="text" name="name" placeholder="Name" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -273,7 +235,3 @@
         <p id="notificationMessage"></p>
     </div>
 </div>
-
-
-<!-- </body> -->
-<!-- </html> -->

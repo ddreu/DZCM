@@ -97,4 +97,8 @@
     </div> -->
     </div>
     <?php include 'includes/footer.php'; ?>
+    <script src="includes/script.js"></script>
+
 </body>
+
+</html>

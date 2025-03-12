@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #d0021b;
+    --secondary-color: #515457;
+    --tertiary-color: #dc3545;
+    --text-color: #333333;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -44,9 +51,10 @@ h1 {
     margin: 90px 0;
 }
 
-.header-content {
-    
+.services-subtitle p {
+    color: var(--text-color);
 }
+
 
 /* AFTER HEADER */
 

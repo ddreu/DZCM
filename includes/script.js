@@ -39,45 +39,48 @@ function closeModal() {
     document.getElementById('modalOverlay').style.display = 'none';
 }
 
-// QUOTE SUBMIT
 
-// QUOTE SUBMIT
+
+// quote submit
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("quoteForm");
+    const forms = document.querySelectorAll("form[id^='quoteForm']");
 
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+    forms.forEach(form => {
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-        const formData = new FormData(form);
+            const formData = new FormData(form);
 
-        try {
-            const response = await fetch("send-quote.php", {
-                method: "POST",
-                body: formData,
-            });
+            try {
+                const response = await fetch("send-quote.php", {
+                    method: "POST",
+                    body: formData,
+                });
 
-            const result = await response.text();
+                const result = await response.text();
 
-            if (response.ok) {
-                showNotificationModal("Success", result, true);
-                form.reset();
-                closeModal();
-            } else {
-                showNotificationModal("Error", `Error: ${result}`, false);
+                if (response.ok) {
+                    showNotificationModal("Success", result, true);
+                    form.reset();
+                    closeModal(); 
+                } else {
+                    showNotificationModal("Error", `Error: ${result}`, false);
+                }
+            } catch (error) {
+                showNotificationModal("Error", `Failed to submit form: ${error.message}`, false);
             }
-        } catch (error) {
-            showNotificationModal("Error", `Failed to submit form: ${error.message}`, false);
-        }
+        });
     });
 });
 
 function closeModal() {
     const modal = document.getElementById("modal");
-    modal.style.display = "none";
-    document.getElementById('modalOverlay').style.display = 'none';
+    if (modal) {
+        modal.style.display = "none";
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
 }
 
-// Show notification modal
 function showNotificationModal(title, message, isSuccess) {
     const notificationModal = document.getElementById("notificationModal");
     const notificationTitle = document.getElementById("notificationTitle");
@@ -100,4 +103,3 @@ function showNotificationModal(title, message, isSuccess) {
         notificationModal.style.display = "none";
     }, 3000);
 }
-

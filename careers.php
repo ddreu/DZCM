@@ -14,9 +14,9 @@
             <hr class="section-divider" />
 
             <div class="career-subsection">
-                <h2>We Want You!
+                <h2><strong>We Want You!</strong>
                 </h2>
-                <p>Here at MicroSource Inc., we treat all employees as part of our family. We work as a team and realize all possibilities together. With this, the success of our projects also becomes the success of our people.
+                <p>Here at DZCM, we treat all employees as part of our family. We work as a team and realize all possibilities together. With this, the success of our projects also becomes the success of our people.
                     And because we value our family, we provide competitive and rewarding benefits to each talent in our company. We also ensure to practice our core values to achieve a healthy working environment for everyone.
                     Come and begin your journey with MicroSource Inc. Experience a true career diversity and collaborative working environment, servicing both our clients and the community.
                 </p>
@@ -24,7 +24,9 @@
             </div>
 
             <section class="contact-section">
-                <h2>Join Our Team</h2>
+                <div class="career-subsection mt-0">
+                    <h2><strong>Join Our Team</strong></h2>
+                </div>
                 <div class="row">
                     <!-- Contact Form -->
                     <div class="col-lg-8">
@@ -114,6 +116,8 @@
         </div>
     </div>
     <?php include 'includes/footer.php'; ?>
+    <script src="includes/script.js"></script>
+
 </body>
 
 </html>

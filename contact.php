@@ -39,11 +39,11 @@
                 <div class="col-lg-8">
                     <div class="contact-form">
                         <h3 class="form-title">Send Us a Message</h3>
-                        <form method="post">
+                        <form id="quoteFormNonModal" action="send-quote.php" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="full_name" class="form-control" placeholder="Name" required>
+                                        <input type="text" name="name" class="form-control" placeholder="Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Phone" required>
+                                        <input type="tel" name="phone" class="form-control" placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -157,6 +157,7 @@
     <!-- ++++ footer ++++ -->
     <?php include 'includes/footer.php'; ?>
 
+    <script src="includes/script.js"></script>
 
 </body>
 

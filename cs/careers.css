@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #d0021b;
+    --secondary-color: #515457;
+    --tertiary-color: #dc3545;
+    --text-color: #333333;
+}
+
 .career-subsection {
     margin-top: 50px;
     margin-bottom: 20px;
@@ -6,13 +13,13 @@
 
 .career-subsection h2 {
     margin-bottom: 20px;
+    color: var(--primary-color);
 }
 
 .career-subsection p {
 text-align: justify;
+font-size: 1.1rem;
+margin-top: 50px;
+color: var(--text-color);
 }
 
-.contact-section h2 {
-    text-align: left;
-    margin-bottom: 30px;
-}
