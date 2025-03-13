@@ -114,7 +114,7 @@ body {
     width: 130px;
 }
 
-.service-row, .service-feature-row, .clients-row {
+.service-row, .service-feature-row, .clients-row, .hardware-row, .user-row {
     cursor: pointer;
 }
 
