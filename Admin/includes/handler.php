@@ -76,6 +76,21 @@ try {
             echo $result;
             break;
 
+        case 'add_hardware':
+            $result = $process->addHardware();
+            echo $result;
+            break;
+
+        case 'edit_hardware':
+            $result = $process->editHardware();
+            echo $result;
+            break;
+
+        case 'delete_hardware':
+            $result = $process->deleteHardware();
+            echo $result;
+            break;
+
         default:
             echo json_encode([
                 'status' => 'error',

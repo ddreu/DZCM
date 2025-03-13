@@ -14,8 +14,14 @@
             </li>
             <li class="nav-item">
                 <a href="index.php?page=services" class="nav-link">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-desktop"></i>
                     <span>Services</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.php?page=hardware" class="nav-link">
+                    <i class="fas fa-wrench"></i>
+                    <span>Hardware</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -31,17 +37,29 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="index.php?page=users" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="index.php?page=company-profile" class="nav-link">
                     <i class="fas fa-building"></i>
                     <span>Company Profile</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="index.php?page=user-settings" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>User Settings</span>
+                </a>
+            </li>
         </ul>
     </nav>
     <div class="sidebar-footer">
-        <a id="logout-link" href="#" class="logout-link">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
+        <a id="logout-link" href="#" class="logout-link nav-link">
+            <i class="fas fa-power-off"></i>
+            <span> Logout</span>
         </a>
     </div>
 </div>

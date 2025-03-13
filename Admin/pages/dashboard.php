@@ -49,99 +49,140 @@
     </div>
 </div>
 
+<div class="container mt-4">
+    <div class="row g-4">
+        <div class="col-md-4 col-sm-6">
+            <div class="card overview-card">
+                <h5>Hardwares</h5>
+                <h2 id="totalHardwares">
+                    <?php
+                    $sqlHardware = "SELECT COUNT(*) AS total_hardwares FROM hardware";
+                    $resultHardware = con()->query($sqlHardware);
+                    $totalHardware = $resultHardware->fetch_assoc()['total_hardwares'];
+                    echo $totalHardware;
+                    ?>
+                </h2>
 
-<div class="row mt-4">
-    <?php
-    $sql = "SELECT email, phone, address, company_id FROM company_info WHERE company_id = 1";
-    $result = con()->query($sql);
-    $company = $result->fetch_assoc();
-
-    $email = $company['email'] ?? 'N/A';
-    $phone = $company['phone'] ?? 'N/A';
-    $address = $company['address'] ?? 'N/A';
-    ?>
-
-    <div class="col-md-8">
-        <div class="card p-3 shadow">
-            <h5 class="mb-3"><strong>Company Profile</strong></h5>
-            <form id="companyForm">
-                <input type="hidden" name="company_id" value="<?= $company['company_id']; ?>">
-
-                <div class="mb-3 row align-items-center">
-                    <label for="email" class="col-md-2 col-form-label text-md-start">Email:</label>
-                    <div class="col-md-8">
-                        <input type="email" class="form-control" name="email" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary btn-sm w-100" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
-                    </div>
-                </div>
-
-                <div class="mb-3 row align-items-center">
-                    <label for="phone" class="col-md-2 col-form-label text-md-start">Phone:</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="phone" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary btn-sm w-100" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
-                    </div>
-                </div>
-
-                <div class="mb-3 row align-items-center">
-                    <label for="address" class="col-md-2 col-form-label text-md-start">Address:</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="address" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary btn-sm w-100" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card overview-card">
+                <h5>Users</h5>
+                <h2 id="totalUsers">
+                    <?php
+                    $sqlUsers = "SELECT COUNT(*) AS total_users FROM users";
+                    $resultUsers = con()->query($sqlUsers);
+                    $totalUsers = $resultUsers->fetch_assoc()['total_users'];
+                    echo $totalUsers;
+                    ?>
+                </h2>
+            </div>
+        </div>
 
+        <div class="col-md-4 col-sm-6">
+            <div class="card overview-card">
+                <h5>Emails</h5>
+                <h2 id="totalQuotes">
+                    <?php
+                    $sqlQuotes = "SELECT COUNT(*) AS total_quotes FROM quote";
+                    $resultQuotes = con()->query($sqlQuotes);
+                    $totalQuotes = $resultQuotes->fetch_assoc()['total_quotes'];
+                    echo $totalQuotes;
+                    ?>
+                </h2>
+            </div>
+        </div>
 
+        <?php
+        $sql = "SELECT email, phone, address, company_id FROM company_info WHERE company_id = 1";
+        $result = con()->query($sql);
+        $company = $result->fetch_assoc();
 
+        $email = $company['email'] ?? 'N/A';
+        $phone = $company['phone'] ?? 'N/A';
+        $address = $company['address'] ?? 'N/A';
+        ?>
 
-    <?php
-    $sql = "SELECT * FROM quote ORDER BY quote_id DESC LIMIT 4";
-    $result = con()->query($sql);
-    $emails = $result->fetch_all(MYSQLI_ASSOC);
-    date_default_timezone_set('Asia/Manila');
-    function timeAgo($timestamp)
-    {
-        $time = strtotime($timestamp);
-        $diff = time() - $time;
+        <div class="col-md-8">
+            <div class="card p-3 shadow">
+                <h5 class="mb-3"><strong>Company Profile</strong></h5>
+                <form id="companyForm">
+                    <input type="hidden" name="company_id" value="<?= $company['company_id']; ?>">
 
-        if ($diff < 60) {
-            return $diff . " seconds ago";
-        } elseif ($diff < 3600) {
-            return floor($diff / 60) . " mins ago";
-        } elseif ($diff < 86400) {
-            return floor($diff / 3600) . " hrs ago";
-        } elseif ($diff < 604800) {
-            return floor($diff / 86400) . " days ago";
-        } elseif ($diff < 2592000) {
-            return floor($diff / 604800) . " weeks ago";
-        } else {
-            return floor($diff / 2592000) . " months ago";
+                    <div class="mb-3 row align-items-center">
+                        <label for="email" class="col-md-2 col-form-label text-md-start">Email:</label>
+                        <div class="col-md-8">
+                            <input type="email" class="form-control" name="email" id="email" value="<?= htmlspecialchars($email); ?>" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary btn-sm w-100" id="editEmailBtn" onclick="toggleEdit('email', 'editEmailBtn')">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row align-items-center">
+                        <label for="phone" class="col-md-2 col-form-label text-md-start">Phone:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="phone" id="phone" value="<?= htmlspecialchars($phone); ?>" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary btn-sm w-100" id="editPhoneBtn" onclick="toggleEdit('phone', 'editPhoneBtn')">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row align-items-center">
+                        <label for="address" class="col-md-2 col-form-label text-md-start">Address:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="address" id="address" value="<?= htmlspecialchars($address); ?>" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary btn-sm w-100" id="editAddressBtn" onclick="toggleEdit('address', 'editAddressBtn')">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <?php
+        $sql = "SELECT * FROM quote ORDER BY quote_id DESC LIMIT 4";
+        $result = con()->query($sql);
+        $emails = $result->fetch_all(MYSQLI_ASSOC);
+        date_default_timezone_set('Asia/Manila');
+        function timeAgo($timestamp)
+        {
+            $time = strtotime($timestamp);
+            $diff = time() - $time;
+
+            if ($diff < 60) {
+                return $diff . " seconds ago";
+            } elseif ($diff < 3600) {
+                return floor($diff / 60) . " mins ago";
+            } elseif ($diff < 86400) {
+                return floor($diff / 3600) . " hrs ago";
+            } elseif ($diff < 604800) {
+                return floor($diff / 86400) . " days ago";
+            } elseif ($diff < 2592000) {
+                return floor($diff / 604800) . " weeks ago";
+            } else {
+                return floor($diff / 2592000) . " months ago";
+            }
         }
-    }
-    ?>
-    <div class="col-md-4">
-        <div class="card p-3 shadow quick-actions">
-            <h5>Recent Emails</h5>
-            <ul class="list-group">
-                <?php foreach ($emails as $email): ?>
-                    <li class="list-group-item">
-                        <strong>
-                            <?= htmlspecialchars($email['email']) ?>
-                        </strong> requested a quote
-                        <span class="float-end text-muted"><?= timeAgo($email['date']) ?></span>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+        ?>
+        <div class="col-md-4">
+            <div class="card p-3 shadow quick-actions">
+                <h5><strong>Recent Emails: </strong></h5>
+                <ul class="list-group">
+                    <?php foreach ($emails as $email): ?>
+                        <li class="list-group-item">
+                            <strong>
+                                <?= htmlspecialchars($email['email']) ?>
+                            </strong> requested a quote
+                            <span class="float-end text-muted"><?= timeAgo($email['date']) ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
         </div>
+
     </div>
-</div>
 </div>

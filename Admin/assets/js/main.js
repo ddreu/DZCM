@@ -313,6 +313,84 @@ $(document).ready(function() {
             }
         });
     });
+
+    /* HARDWARE ADD */
+
+$('#addHardwareForm').submit(function (e) {
+    e.preventDefault();
+    const formData = new FormData(this); 
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to add this hardware?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, add it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'includes/handler.php?action=add_hardware',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    const result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        Swal.fire("Success!", "Hardware added successfully.", "success").then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Error!", result.message, "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Error!", "An error occurred while adding the hardware.", "error");
+                }
+            });
+        }
+    });
+});
+
+$('#editHardwareForm').submit(function (e) {
+    e.preventDefault();
+    const formData = new FormData(this); 
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to update this hardware?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, add it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'includes/handler.php?action=update_hardware',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    const result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        Swal.fire("Success!", "Hardware updated successfully.", "success").then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Error!", result.message, "error");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Error!", "An error occurred while updating the hardware.", "error");
+                }
+            });
+        }
+    });
+});
  
 });
 
@@ -391,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* DELETE SERVICE */
+         /* DELETE SERVICE */
         let deleteServiceBtns = document.querySelectorAll(".delete-service");
     
         deleteServiceBtns.forEach((btn) => {
@@ -562,7 +640,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* DROPDOWN CLIENTS TABLE */
-
     document.addEventListener("DOMContentLoaded", function () {
         let contextMenu = document.getElementById("contextMenu");
     
@@ -587,7 +664,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     imagePreview.style.display = "none";
                 }
             });
-    
     
             row.addEventListener("contextmenu", function (event) {
                 event.preventDefault();

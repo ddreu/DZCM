@@ -567,7 +567,6 @@ class Process
             exit;
         }
 
-        // If logo upload, skip field and value check
         if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/company/';
             if (!file_exists($uploadDir)) {
@@ -579,7 +578,7 @@ class Process
 
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadPath)) {
                 $value = $fileName;
-                $field = 'logo'; // Set field as logo
+                $field = 'logo';
             } else {
                 echo json_encode([
                     'status' => 'error',
@@ -588,7 +587,6 @@ class Process
                 exit;
             }
         } else {
-            // Normal update (email, phone, address)
             if (!isset($_POST['field']) || !isset($_POST['value'])) {
                 echo json_encode([
                     'status' => 'error',
@@ -610,7 +608,6 @@ class Process
             }
         }
 
-        // Check if company info exists
         $checkStmt = mysqli_prepare($this->conn, "SELECT COUNT(*) FROM company_info WHERE company_id = 1");
         mysqli_stmt_execute($checkStmt);
         mysqli_stmt_bind_result($checkStmt, $count);
@@ -638,6 +635,153 @@ class Process
         }
 
         mysqli_stmt_close($stmt);
+    }
+    function addHardware()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $hardware_name = $_POST['hardware_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/hardware/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO hardware (name, description, image) VALUES (?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "sss", $hardware_name, $description, $image);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Service added successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to add service'
+            ]);
+        }
+    }
+
+    function editHardware()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+            exit;
+        }
+
+        $hardware_id = $_POST['hardware_id'] ?? null;
+        if (!$hardware_id) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Hardware ID is required'
+            ]);
+            exit;
+        }
+
+        $hardware_name = $_POST['hardware_name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/hardware/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        if ($image) {
+            $stmt = mysqli_prepare($this->conn, "UPDATE hardware SET name = ?, description = ?, image = ? WHERE hardware_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssi", $hardware_name, $description, $image, $hardware_id);
+        } else {
+            $stmt = mysqli_prepare($this->conn, "UPDATE hardware SET name = ?, description = ? WHERE hardware_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssi", $hardware_name, $description, $hardware_id);
+        }
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Hardware updated successfully'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Failed to update hardware'
+            ]);
+        }
+    }
+
+    function deleteHardware()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        if (!isset($_POST['hardware_id'])) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Hardware ID is required'
+            ]);
+        }
+
+        $hardware_id = $_POST['hardware_id'];
+
+        $stmt = mysqli_prepare($this->conn, "SELECT image FROM hardware WHERE hardware_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $hardware_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $hardware = mysqli_fetch_assoc($result);
+
+        if ($hardware && !empty($hardware['image'])) {
+            $imagePath = "uploads/hardware/" . $hardware['image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM hardware WHERE hardware_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $hardware_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Hardware deleted successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to delete Hardware'
+            ]);
+        }
     }
 }
 
