@@ -103,3 +103,29 @@ function showNotificationModal(title, message, isSuccess) {
         notificationModal.style.display = "none";
     }, 3000);
 }
+
+
+// CAREER FORM
+
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('send-career-application.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('form-message').innerHTML = '<p style="color: green;">' + data.message + '</p>';
+            document.getElementById('contactForm').reset(); 
+        } else {
+            document.getElementById('form-message').innerHTML = '<p style="color: red;">' + data.message + '</p>';
+        }
+    })
+    .catch(error => {
+        document.getElementById('form-message').innerHTML = '<p style="color: red;">Something went wrong. Please try again!</p>';
+    });
+});

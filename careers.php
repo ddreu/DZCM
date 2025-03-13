@@ -9,7 +9,6 @@
                 <p class="section-subtitle">Do you have what it takes to be part of our growing family?
                     </br>Join us today!
                 </p>
-
             </div>
             <hr class="section-divider" />
 
@@ -25,49 +24,62 @@
 
             <section class="contact-section">
                 <div class="career-subsection mt-0">
-                    <h2><strong>Join Our Team</strong></h2>
+                    <h2><strong>Join Our Team!</strong></h2>
                 </div>
-                <div class="row">
+                <div class="row mt-5">
                     <!-- Contact Form -->
                     <div class="col-lg-8">
-                        <div class="contact-form">
-                            <h3 class="form-title">Send Us a Message</h3>
-                            <form method="post">
+                        <div>
+                            <h4 class="form-title"><strong>Personal Information</strong></h4>
+                            <form id="contactForm" method="post" enctype="multipart/form-data">
                                 <div class="row">
+                                    <div id="form-message"></div>
+
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="full_name" class="form-control" placeholder="Name" required>
+                                        <div class="form-group input-icon">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group input-icon">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group input-icon">
+                                            <i class="fas fa-envelope"></i>
                                             <input type="email" name="email" class="form-control" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="phone" class="form-control" placeholder="Phone" required>
+                                        <div class="form-group input-icon">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="text" name="phone" class="form-control" placeholder="Contact Number" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="website" class="form-control" placeholder="Website">
+                                    <div class="col-md-12">
+                                        <div class="form-group input-icon">
+                                            <i class="fas fa-comment message-icon"></i>
+                                            <textarea name="message" class="form-control" placeholder="Your Message Here" rows="4" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="message" class="form-control" placeholder="Message" rows="4" required></textarea>
+                                            <label for="cv">CV/Resume:</label>
+                                            <input type="file" name="cv" id="cv" class="form-control-file" required>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn-submit">Contact us now!</button>
+                                <button type="submit" class="btn-submit">APPLY NOW!</button>
                             </form>
                         </div>
                     </div>
 
                     <!-- Contact Info -->
                     <div class="col-lg-4">
-                        <div class="contact-info">
+                        <div>
                             <div class="info-item">
                                 <div class="contact-card">
                                     <i class="fas fa-phone"></i>

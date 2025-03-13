@@ -23,3 +23,39 @@ margin-top: 50px;
 color: var(--text-color);
 }
 
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.message-icon{
+ margin-top: -35px;
+}
+
+.input-icon .form-control {
+    padding-left: 40px;
+}
+
+.btn-submit {
+    background-color: #d00;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #b00;
+}
+
