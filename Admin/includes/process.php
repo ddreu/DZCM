@@ -783,6 +783,292 @@ class Process
             ]);
         }
     }
+    function addUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $image = null;
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/users/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+            }
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO users (username, password, profile_image) VALUES (?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "sss", $username, $hashedPassword, $image);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'User added successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to add user'
+            ]);
+        }
+    }
+
+    function updateUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        $userId = $_POST['user_id'] ?? '';
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $image = null;
+
+        if (!$userId || !$username) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'User ID and username are required'
+            ]);
+        }
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'uploads/users/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                $image = $fileName;
+
+                $stmt = mysqli_prepare($this->conn, "SELECT profile_image FROM users WHERE user_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $userId);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $row = mysqli_fetch_assoc($result);
+
+                if ($row && $row['profile_image']) {
+                    $oldImagePath = $uploadDir . $row['profile_image'];
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+            }
+        }
+
+        $updateFields = [];
+        $params = [];
+        $types = '';
+
+        $updateFields[] = "username = ?";
+        $params[] = $username;
+        $types .= 's';
+
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $updateFields[] = "password = ?";
+            $params[] = $hashedPassword;
+            $types .= 's';
+        }
+
+        if ($image) {
+            $updateFields[] = "profile_image = ?";
+            $params[] = $image;
+            $types .= 's';
+        }
+
+        $params[] = $userId;
+        $types .= 'i';
+
+        $query = "UPDATE users SET " . implode(', ', $updateFields) . " WHERE user_id = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'User updated successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to update user'
+            ]);
+        }
+    }
+    function deleteUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+        }
+
+        if (!isset($_POST['user_id'])) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'User ID is required'
+            ]);
+        }
+
+        $user_id = $_POST['user_id'];
+
+        $stmt = mysqli_prepare($this->conn, "SELECT profile_image FROM users WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+
+        if ($user && !empty($users['profile_image'])) {
+            $imagePath = "uploads/users/" . $user['profile_image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM users WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'User deleted successfully'
+            ]);
+        } else {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Failed to delete User'
+            ]);
+        }
+    }
+    public function updateUserProfile()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid request method'
+            ]);
+            exit;
+        }
+
+        $userId = $_POST['user_id'] ?? null;
+
+        if (!$userId) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'User ID is required'
+            ]);
+            exit;
+        }
+
+        if (isset($_FILES['userProfile']) && $_FILES['userProfile']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'includes/uploads/users/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = uniqid() . '_' . basename($_FILES['userProfile']['name']);
+            $uploadPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['userProfile']['tmp_name'], $uploadPath)) {
+                $stmt = mysqli_prepare($this->conn, "UPDATE users SET user_profile = ? WHERE user_id = ?");
+                mysqli_stmt_bind_param($stmt, "si", $fileName, $userId);
+                if (!mysqli_stmt_execute($stmt)) {
+                    echo json_encode([
+                        'status' => 'error',
+                        'message' => 'Failed to update profile picture'
+                    ]);
+                    exit;
+                }
+                mysqli_stmt_close($stmt);
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Failed to upload profile picture'
+                ]);
+                exit;
+            }
+        }
+
+        if (!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmPassword'])) {
+            $oldPassword = $_POST['oldPassword'];
+            $newPassword = $_POST['newPassword'];
+            $confirmPassword = $_POST['confirmPassword'];
+
+            $stmt = mysqli_prepare($this->conn, "SELECT password FROM users WHERE user_id = ?");
+            mysqli_stmt_bind_param($stmt, "i", $userId);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $storedPassword);
+            mysqli_stmt_fetch($stmt);
+            mysqli_stmt_close($stmt);
+
+            if (!password_verify($oldPassword, $storedPassword)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Incorrect current password'
+                ]);
+                exit;
+            }
+
+            // if (strlen($newPassword) < 6) {
+            //     echo json_encode([
+            //         'status' => 'error',
+            //         'message' => 'New password must be at least 6 characters long'
+            //     ]);
+            //     exit;
+            // }
+
+            if ($newPassword !== $confirmPassword) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'New passwords do not match'
+                ]);
+                exit;
+            }
+
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = mysqli_prepare($this->conn, "UPDATE users SET password = ? WHERE user_id = ?");
+            mysqli_stmt_bind_param($stmt, "si", $hashedPassword, $userId);
+
+            if (!mysqli_stmt_execute($stmt)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Failed to update password'
+                ]);
+                exit;
+            }
+
+            mysqli_stmt_close($stmt);
+        }
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Profile updated successfully'
+        ]);
+        exit;
+    }
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'login') {

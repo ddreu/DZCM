@@ -1,17 +1,15 @@
 <?php
-include 'includes/conn.php'; // Replace with your actual connection file
+include 'includes/conn.php';
 
-$conn = con(); // Use the con() function to connect
+$conn = con();
 
 if (!$conn) {
     die("Database connection failed!");
 }
 
-// Hash the password
 $plainPassword = "1";
 $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
-// Insert user data (adjusted for your table structure)
 $sql = "INSERT INTO users (username, password, profile_image) 
         VALUES ('admin', ?, NULL)";
 
@@ -24,7 +22,5 @@ if ($stmt->execute()) {
     echo "Error: " . $stmt->error;
 }
 
-// Close connection
 $stmt->close();
 $conn->close();
-?>

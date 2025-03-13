@@ -50,6 +50,8 @@ if (!isset($_SESSION['user_id'])) {
     <script src="assets/js/service-feature.js"></script>
     <script src="assets/js/services.js"></script>
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/users.js"></script>
+    <script src="assets/js/user-settings.js"></script>
 
     <?php if (!empty($_SESSION['login_success'])): ?>
         <script>

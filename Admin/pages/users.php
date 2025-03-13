@@ -39,27 +39,46 @@ $result = mysqli_query(con(), $query);
                 <th>ID</th>
                 <th>Profile</th>
                 <th>Username</th>
-                <!-- <th>Features</th> -->
-                <!--    <th>Actions</th> -->
+
             </tr>
         </thead>
         <tbody>
             <?php while ($users = mysqli_fetch_assoc($result)): ?>
-                <tr class="user-row" data-service-id="<?php echo $users['user_id']; ?>"
-                    data-service-name="<?php echo htmlspecialchars($users['username']); ?>"
-                    data-description="<?php echo htmlspecialchars($users['password']); ?>"
+                <tr class="user-row"
+                    data-user-id="<?php echo $users['user_id']; ?>"
+                    data-username="<?php echo htmlspecialchars($users['username']); ?>"
                     data-image="<?php echo htmlspecialchars($users['profile_image']); ?>"
                     data-bs-toggle="modal" data-bs-target="#editUserModal">
 
                     <td><?php echo htmlspecialchars($users['user_id']); ?></td>
+
                     <td>
                         <?php if ($users['profile_image']): ?>
-                            <img src="includes/uploads/user-profile/<?php echo htmlspecialchars($users['profile_image']); ?>"
-                                alt="Service Image" class="img-thumbnail" style="width: 100px;">
+                            <img src="includes/uploads/users/<?php echo htmlspecialchars($users['profile_image']); ?>"
+                                alt="User Profile Image"
+                                class="profile-image"
+                                style="
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%; 
+                            object-fit: cover;
+                            border: 2px solid #ddd;
+                        ">
                         <?php else: ?>
-                            No Image
+                            <img src="includes/uploads/users/default-profile.png ?>"
+                                alt="User Profile Image"
+                                class="profile-image"
+                                style="
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%; 
+                            object-fit: cover;
+                            border: 2px solid #ddd;
+                        ">
                         <?php endif; ?>
                     </td>
+
+                    <!-- Username -->
                     <td><?php echo htmlspecialchars($users['username']); ?></td>
                 </tr>
             <?php endwhile; ?>
@@ -89,11 +108,11 @@ $result = mysqli_query(con(), $query);
 </nav>
 
 <div id="contextMenu" class="dropdown-menu" style="display: none; position: absolute;">
-    <!-- <button class="dropdown-item add-feature">Add User</button> -->
-    <button class="dropdown-item edit-service">Edit User</button>
-    <button class="dropdown-item delete-service">Delete User</button>
+    <button class="dropdown-item edit-user">Edit User</button>
+    <button class="dropdown-item delete-user">Delete User</button>
 </div>
 
+<!-- EDIT USER MODAL -->
 
 <div id="editUserModal" class="modal fade" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -103,25 +122,48 @@ $result = mysqli_query(con(), $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editUserForm">
+                <form id="editUserForm" enctype="multipart/form-data">
                     <input type="hidden" id="editUserId" name="user_id">
 
+                    <div class="mb-3 text-center">
+                        <label class="form-label">Current Profile</label><br>
+                        <div style="
+                            width: 120px;
+                            height: 120px;
+                            border-radius: 50%;
+                            overflow: hidden;
+                            /* border: 3px solid #007bff; */
+                            border: 3px solid #ddd;
+                            margin: 0 auto;
+                        ">
+                            <img id="editUserProfilePreview"
+                                src=""
+                                alt="Profile"
+                                style="
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    display: none;
+                                ">
+                        </div>
+                    </div>
+
                     <div class="mb-3">
-                        <label for="editUserName" class="form-label">User Name</label>
+                        <label for="editUserImage" class="form-label">Upload New Image</label>
+                        <input type="file" id="editUserImage" name="image" class="form-control" accept="image/*" onchange="previewEditImage(event)">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editUserName" class="form-label">Username</label>
                         <input type="text" id="editUserName" name="username" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Current Profile</label><br>
-                        <img id="editUserProfilePreview" class="img-thumbnail" style="width: 150px; display: none;">
+                        <label for="editUserPassword" class="form-label">Change Password</label>
+                        <input type="password" id="editUserPassword" name="password" class="form-control" placeholder="Leave blank to keep current password">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="editUserProfileImage" class="form-label">Upload New Image</label>
-                        <input type="file" id="editUserProfile" name="user_profile" class="form-control" accept="image/*">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
                 </form>
             </div>
         </div>
@@ -138,15 +180,48 @@ $result = mysqli_query(con(), $query);
             </div>
             <div class="modal-body">
                 <form id="addUserForm" enctype="multipart/form-data">
+                    <div class="mb-3 d-flex justify-content-center">
+                        <div
+                            style="
+                                width: 120px;
+                                height: 120px;
+                                border: 2px solid #ddd;
+                                border-radius: 50%;
+                                overflow: hidden;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background-color: #f9f9f9;
+                            ">
+                            <img id="imagePreview" src=""
+                                alt="Preview"
+                                style="
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    display: none;
+                                ">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userImage" class="form-label">Profile Picture</label>
+                        <input type="file" id="userImage" name="image" class="form-control" accept="image/*" onchange="previewImage(event)">
+                    </div>
+
                     <div class="mb-3">
                         <label for="userName" class="form-label">Username</label>
                         <input type="text" id="userName" name="username" class="form-control" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="userProfile" class="form-label">User Profile</label>
-                        <input type="file" id="userProfile" name="user_profile" class="form-control" accept="image/*">
+                        <label for="userPassword" class="form-label">Password</label>
+                        <input type="password" id="userPassword" name="password" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add User</button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
                 </form>
             </div>
         </div>

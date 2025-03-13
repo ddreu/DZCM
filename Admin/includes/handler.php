@@ -91,6 +91,25 @@ try {
             echo $result;
             break;
 
+        case 'add_user':
+            $result = $process->addUser();
+            echo $result;
+            break;
+
+        case 'update_user':
+            $result = $process->updateUser();
+            echo $result;
+            break;
+
+        case 'delete_user':
+            $result = $process->deleteUser();
+            echo $result;
+            break;
+        case 'update_user_profile':
+            $result = $process->updateUserProfile();
+            echo $result;
+            break;
+
         default:
             echo json_encode([
                 'status' => 'error',
