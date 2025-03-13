@@ -81,7 +81,7 @@ try {
             echo $result;
             break;
 
-        case 'edit_hardware':
+        case 'update_hardware':
             $result = $process->editHardware();
             echo $result;
             break;

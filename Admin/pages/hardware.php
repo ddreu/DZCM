@@ -48,7 +48,7 @@ $result = mysqli_query(con(), $query);
             <?php while ($hardware = mysqli_fetch_assoc($result)): ?>
                 <tr class="hardware-row" data-hardware-id="<?php echo $hardware['hardware_id']; ?>"
                     data-hardware-name="<?php echo htmlspecialchars($hardware['name']); ?>"
-                    data-description="<?php echo htmlspecialchars($hardware['description']); ?>"
+                    data-hardware-description="<?php echo htmlspecialchars($hardware['description']); ?>"
                     data-image="<?php echo htmlspecialchars($hardware['image']); ?>"
                     data-bs-toggle="modal" data-bs-target="#editHardwareModal">
                     <td><?php echo htmlspecialchars($hardware['hardware_id']); ?></td>
@@ -91,8 +91,8 @@ $result = mysqli_query(con(), $query);
 </nav>
 
 <div id="contextMenu" class="dropdown-menu" style="display: none; position: absolute;">
-    <button class="dropdown-item edit-service">Edit Hardware</button>
-    <button class="dropdown-item delete-service">Delete Hardware</button>
+    <button class="dropdown-item edit-hardware">Edit Hardware</button>
+    <button class="dropdown-item delete-hardware">Delete Hardware</button>
 </div>
 
 
