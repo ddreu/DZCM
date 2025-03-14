@@ -36,25 +36,31 @@
             </div>
 
             <section class="services-section">
-                <h2 class="services-title">Core Values</h2>
+                <h2 class="services-title"><strong> Core Values</strong></h2>
 
-                <div class="services-container">
+                <div class="services-grid">
                     <div class="service-box">
-                        <span class="material-icons service-icon">devices</span>
-                        <h3>Software Design and Development</h3>
-                        <p>We offer full-service software development services for web, mobile and desktop applications that are visually appealing and functional to meet your business system requirements.</p>
+                        <span class="material-icons service-icon">diversity_3 </span>
+                        <h3>Respect</h3>
+                        <p>We treat our customers and employees with honesty and respect at all times.</p>
                     </div>
 
                     <div class="service-box">
-                        <span class="material-icons service-icon">cloud_sync</span>
-                        <h3>Support and Maintenance</h3>
-                        <p>We specialize in providing software and application support services to achieve maximum availability, performance, and security.</p>
+                        <span class="material-icons service-icon">verified</span>
+                        <h3>Integrity</h3>
+                        <p>We are trustworthy and we do not compromise on matters of principle. We take ownership of our actions and understand that results are critical to customer satisfaction.</p>
                     </div>
 
                     <div class="service-box">
-                        <span class="material-icons service-icon">qr_code</span>
-                        <h3>Products and Services</h3>
-                        <p>We provide top-of-the-line products and services at competitive rates to meet all your software and hardware needs.</p>
+                        <span class="material-icons service-icon">task_alt</span>
+                        <h3>Responsibility</h3>
+                        <p>We are accountable for everything we do and everything we fail to do.</p>
+                    </div>
+
+                    <div class="service-box">
+                        <span class="material-icons service-icon">group</span>
+                        <h3>Teamwork</h3>
+                        <p>We practice a collaborative working style.</p>
                     </div>
                 </div>
             </section>

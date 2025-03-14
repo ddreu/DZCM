@@ -87,7 +87,70 @@
     font-size: 1.1rem;
 }
 
+
+    /* General Styling */
+/* .services-section {
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+.services-title {
+    font-size: 24px;
+    color: #1a4ba4;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+} */
+
+/* Grid Layout */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.service-box {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    min-height: 300px;
+}
+
+.service-box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+ /* .service-icon {
+    font-size: 40px;
+    color: #1a4ba4;
+    margin-bottom: 10px;
+} */
+
+
+
+/* .service-box h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a4ba4;
+    margin-bottom: 8px;
+}  */
+
+.service-box p {
+    font-size: 14px;
+    color: #4f4f4f;
+}
+
+
+
+
 @media (width: 768px) {
+
+    .services-grid {
+        grid-template-columns: 1fr; 
+    }
     .header-about span {
         font-size: 32px;
     }
