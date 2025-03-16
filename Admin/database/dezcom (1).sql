@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2025 at 01:35 PM
+-- Generation Time: Mar 16, 2025 at 01:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,8 +40,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_id`, `service_id`, `client_name`, `description`, `image`) VALUES
-(5, 4, 'andrew', 'sta rosa', NULL),
-(6, 5, 'drew', 'sta rosa', NULL);
+(7, 5, 'andrew', 'santa rosa', NULL);
 
 -- --------------------------------------------------------
 
@@ -54,10 +53,65 @@ CREATE TABLE `company_info` (
   `name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `contact_email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `company_info`
+--
+
+INSERT INTO `company_info` (`company_id`, `name`, `description`, `logo`, `email`, `phone`, `address`) VALUES
+(1, 'DZCM', NULL, '67cdef9c9d62a_DZCM.png', 'dzcm@gmail.com', '09123456789', 'San Leonardo, Nueva Ecija');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hardware`
+--
+
+CREATE TABLE `hardware` (
+  `hardware_id` int(11) NOT NULL,
+  `name` varchar(155) DEFAULT NULL,
+  `description` varchar(155) DEFAULT NULL,
+  `image` varchar(155) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hardware`
+--
+
+INSERT INTO `hardware` (`hardware_id`, `name`, `description`, `image`) VALUES
+(1, 'UPS', 'Uninterruptable Power Supply', '67d3dd909b541_ups.jpg'),
+(2, 'Computers', 'Computer tools', '67d3dd86cfaec_h.jfif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quote`
+--
+
+CREATE TABLE `quote` (
+  `name` varchar(155) DEFAULT NULL,
+  `email` varchar(155) DEFAULT NULL,
+  `phone` varchar(55) DEFAULT NULL,
+  `website` varchar(155) DEFAULT NULL,
+  `message` varchar(155) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `quote_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quote`
+--
+
+INSERT INTO `quote` (`name`, `email`, `phone`, `website`, `message`, `date`, `quote_id`) VALUES
+('jane', 'andrewbucedeguzman@gmail.com', '09754136497', 'testing', 'HI!', '2025-03-10 07:50:30', 7),
+('jane', 'andrewbucedeguzman@gmail.com', '09754136497', 'testing', 'HI!', '2025-03-10 07:52:11', 8),
+('john doe', '3922017@holycross.edu.ph', '09754136497', 'test', 'Hello!', '2025-03-10 07:57:20', 9),
+('john doe', '3922017@holycross.edu.ph', '09123456789', 'test', 'Greetings!', '2025-03-10 07:59:20', 10),
+('john doe', '3922017@holycross.edu.ph', '09123456789', 'test', 'test', '2025-03-10 08:15:22', 11);
 
 -- --------------------------------------------------------
 
@@ -143,6 +197,18 @@ ALTER TABLE `company_info`
   ADD PRIMARY KEY (`company_id`);
 
 --
+-- Indexes for table `hardware`
+--
+ALTER TABLE `hardware`
+  ADD PRIMARY KEY (`hardware_id`);
+
+--
+-- Indexes for table `quote`
+--
+ALTER TABLE `quote`
+  ADD PRIMARY KEY (`quote_id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -170,13 +236,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `company_info`
 --
 ALTER TABLE `company_info`
-  MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `hardware`
+--
+ALTER TABLE `hardware`
+  MODIFY `hardware_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `quote`
+--
+ALTER TABLE `quote`
+  MODIFY `quote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `services`
