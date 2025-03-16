@@ -7,98 +7,80 @@
             <div class="contact-header">
                 <h2 class="section-title">Our Portfolio</h2>
                 <p class="section-subtitle">Explore our portfolio of successful projects and applications.</p>
-
             </div>
             <hr class="section-divider" />
         </div>
 
-
         <div class="portfolio-filter">
             <button class="filter-btn active" data-category="all">All</button>
-            <button class="filter-btn" data-category="web">Web</button>
-            <button class="filter-btn" data-category="mobile">Mobile</button>
-            <button class="filter-btn" data-category="desktop">Desktop</button>
+            <button class="filter-btn" data-category="web-app">Web Development</button>
+            <button class="filter-btn" data-category="desktop-app">Desktop</button>
+            <button class="filter-btn" data-category="mobile-app">Mobile</button>
+
         </div>
 
+        <!-- Services Section -->
+        <div class="services">
+            <?php
+            include 'includes/connect.php';
 
-        <?php include 'main/services.php'; ?>
-        <!-- <div class="portfolio-container">
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="img/pos.jpg" alt="Point Of Sales">
-                <a href="/dezcomm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Point Of Sales</h3>
-                <p>Description of the project or application.</p>
-            </div>
-        </div>
+            $conn->select_db("dezcom");
 
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="img/23456.jpg" alt="Inventory Management System">
-                <a href="/dezcomm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Inventory Management System</h3>
-                <p>Track business assets and investments with a custom inventory system.</p>
-            </div>
-        </div>
+            $sql = "SELECT service_id, service_name, description, image, category FROM services";
+            $result = $conn->query($sql);
 
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="your-image.jpg" alt="Mobile Application">
-                <a href="/dezcomm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Mobile Application</h3>
-                <p>We create interactive mobile apps for Android and iOS to attract clients.</p>
-            </div>
-        </div>
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                        <div class="services-box" data-category="' . htmlspecialchars($row["category"]) . '">
+                            <div class="image-container">
+                                <img src="admin/includes/uploads/services/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["service_name"]) . '">
+                                <a href="pos1.php?id=' . htmlspecialchars($row["service_id"]) . '" class="discover-btn">Discover More</a>
+                            </div>
+                            <div class="services-content">
+                                <h3>' . htmlspecialchars($row["service_name"]) . '</h3>
+                                <p>' . htmlspecialchars($row["description"]) . '</p>
+                            </div>
+                        </div>';
+                }
+            } else {
+                echo "<p>No services found.</p>";
+            }
 
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="your-image.jpg" alt="Mobile Application">
-                <a href="/dezcomm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Mobile Application</h3>
-                <p>We create interactive mobile apps for Android and iOS to attract clients.</p>
-            </div>
+            ?>
         </div>
-
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="your-image.jpg" alt="Mobile Application">
-                <a href="/dezcomm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Mobile Application</h3>
-                <p>We create interactive mobile apps for Android and iOS to attract clients.</p>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="portfolio-label">PORTFOLIO</div>
-            <div class="image-container">
-                <img src="your-image.jpg" alt="Mobile Application">
-                <a href="/dezcommm/pos.php" class="discover-btn">DISCOVER</a>
-            </div>
-            <div class="portfolio-content">
-                <h3>Mobile Application</h3>
-                <p>We create interactive mobile apps for Android and iOS to attract clients.</p>
-            </div>
-        </div>
-    </div> -->
     </div>
+
     <?php include 'includes/footer.php'; ?>
     <script src="includes/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const serviceBoxes = document.querySelectorAll(".services-box");
 
+            filterButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    filterButtons.forEach((btn) => btn.classList.remove("active"));
+                    button.classList.add("active");
+
+                    const category = button.getAttribute("data-category");
+
+                    serviceBoxes.forEach((box) => {
+                        if (
+                            category === "all" ||
+                            box.getAttribute("data-category") === category
+                        ) {
+                            box.style.display = "block";
+                        } else {
+                            box.style.display = "none";
+                        }
+                    });
+                });
+            });
+
+            document.querySelector('.filter-btn[data-category="all"]').click();
+        });
+    </script>
 </body>
 
 </html>

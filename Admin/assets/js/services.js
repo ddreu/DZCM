@@ -104,11 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".service-row").forEach((row) => {
     row.addEventListener("click", function () {
       let serviceId = this.getAttribute("data-service-id");
+      let serviceCategory = this.getAttribute("data-service-category");
       let serviceName = this.getAttribute("data-service-name");
       let description = this.getAttribute("data-description");
       let image = this.getAttribute("data-image");
 
       document.getElementById("editServiceId").value = serviceId;
+      document.getElementById("editServiceCategory").value = serviceCategory;
       document.getElementById("editServiceName").value = serviceName;
       document.getElementById("editServiceDescription").value = description;
 

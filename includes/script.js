@@ -132,4 +132,35 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
     });
 });
 
-/* SERVICES MODAL */
+/* FILTER ON PORTFOLIO PAGE */
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const filterButtons = document.querySelectorAll(".filter-btn");
+//   const serviceBoxes = document.querySelectorAll(".services-box");
+
+//   // Add click event to each filter button
+//   filterButtons.forEach((button) => {
+//     button.addEventListener("click", () => {
+//       // Remove 'active' class from all buttons and add to the clicked one
+//       filterButtons.forEach((btn) => btn.classList.remove("active"));
+//       button.classList.add("active");
+
+//       const category = button.getAttribute("data-category");
+
+//       // Filter services based on category
+//       serviceBoxes.forEach((box) => {
+//         if (
+//           category === "all" ||
+//           box.getAttribute("data-category") === category
+//         ) {
+//           box.style.display = "block";
+//         } else {
+//           box.style.display = "none";
+//         }
+//       });
+//     });
+//   });
+
+//   // Auto-select the "All" button on load
+//   document.querySelector('.filter-btn[data-category="all"]').click();
+// });

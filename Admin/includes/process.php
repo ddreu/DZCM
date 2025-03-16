@@ -101,6 +101,7 @@ class Process
 
         $service_name = $_POST['service_name'] ?? '';
         $description = $_POST['description'] ?? '';
+        $category = strtolower($_POST['category'] ?? '');
         $image = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -117,8 +118,8 @@ class Process
             }
         }
 
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO services (service_name, description, image) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "sss", $service_name, $description, $image);
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO services (service_name, description, category, image) VALUES (?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "ssss", $service_name, $description, $category, $image);
 
         if (mysqli_stmt_execute($stmt)) {
             return json_encode([
@@ -154,6 +155,7 @@ class Process
 
         $service_name = $_POST['service_name'] ?? '';
         $description = $_POST['description'] ?? '';
+        $category = strtolower($_POST['category'] ?? '');
         $image = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -171,11 +173,11 @@ class Process
         }
 
         if ($image) {
-            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ?, image = ? WHERE service_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssi", $service_name, $description, $image, $service_id);
+            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ?, category = ?, image = ? WHERE service_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssssi", $service_name, $description, $category, $image, $service_id);
         } else {
-            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ? WHERE service_id = ?");
-            mysqli_stmt_bind_param($stmt, "ssi", $service_name, $description, $service_id);
+            $stmt = mysqli_prepare($this->conn, "UPDATE services SET service_name = ?, description = ?, category = ? WHERE service_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssi", $service_name, $description, $category, $service_id);
         }
 
         if (mysqli_stmt_execute($stmt)) {

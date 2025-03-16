@@ -9,7 +9,7 @@ $totalServices = mysqli_fetch_assoc($totalQuery)['count'];
 $totalPages = ceil($totalServices / $recordsPerPage);
 
 $query = "
-    SELECT s.service_id, s.service_name, s.description, s.image, 
+    SELECT s.service_id, s.service_name, s.description, s.image, s.category, 
            COUNT(sf.service_feature_id) as feature_count
     FROM services s
     LEFT JOIN service_features sf ON s.service_id = sf.service_id
@@ -48,6 +48,7 @@ $result = mysqli_query(con(), $query);
         <tbody>
             <?php while ($service = mysqli_fetch_assoc($result)): ?>
                 <tr class="service-row" data-service-id="<?php echo $service['service_id']; ?>"
+                    data-service-category="<?php echo $service['category']; ?>"
                     data-service-name="<?php echo htmlspecialchars($service['service_name']); ?>"
                     data-description="<?php echo htmlspecialchars($service['description']); ?>"
                     data-image="<?php echo htmlspecialchars($service['image']); ?>"
@@ -144,7 +145,15 @@ $result = mysqli_query(con(), $query);
                         <label for="editServiceDescription" class="form-label">Description</label>
                         <textarea id="editServiceDescription" name="description" class="form-control" required></textarea>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="editServiceCategory" class="form-label">Category</label>
+                        <select id="editServiceCategory" name="category" class="form-control" required>
+                            <option value="" selected disabled>-- Select Category --</option>
+                            <option value="web-app">Web App</option>
+                            <option value="mobile-app">Mobile App</option>
+                            <option value="desktop-app">Desktop App</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Current Image</label><br>
                         <img id="editServiceImagePreview" class="img-thumbnail" style="width: 150px; display: none;">
@@ -181,6 +190,15 @@ $result = mysqli_query(con(), $query);
                         <textarea id="serviceDescription" name="description" class="form-control" required></textarea>
                     </div>
                     <div class="mb-3">
+                        <label for="serviceCategory" class="form-label">Category</label>
+                        <select id="serviceCategory" name="category" class="form-control" required>
+                            <option value="" selected disabled>-- Select Category --</option>
+                            <option value="web-app">Web App</option>
+                            <option value="mobile-app">Mobile App</option>
+                            <option value="desktop-app">Desktop App</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="serviceImage" class="form-label">Service Image</label>
                         <input type="file" id="serviceImage" name="image" class="form-control" accept="image/*">
                     </div>
@@ -190,6 +208,7 @@ $result = mysqli_query(con(), $query);
         </div>
     </div>
 </div>
+
 
 <div id="serviceFeaturesModal" class="modal fade" tabindex="-1" aria-labelledby="serviceFeaturesModalLabel" aria-hidden="true">
     <div class="modal-dialog">
