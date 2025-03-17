@@ -1,7 +1,3 @@
-<?php include 'includes/header.php'; ?>
-
-<body>
-    <?php include 'includes/navbar.php'; ?>
     <div class="about-section">
         <div class="container">
             <div class="contact-header">
@@ -66,14 +62,3 @@
             </section>
         </div>
     </div>
-
-
-
-    <?php include 'includes/footer.php'; ?>
-
-
-    <script src="includes/script.js"></script>
-
-</body>
-
-</html>

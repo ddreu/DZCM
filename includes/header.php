@@ -19,4 +19,6 @@
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/portfolio.css">
     <link rel="stylesheet" href="css/careers.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/carousel.css">
 </head>

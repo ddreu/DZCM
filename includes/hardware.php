@@ -3,7 +3,7 @@ include 'includes/connect.php';
 
 $conn->select_db("dezcom");
 
-$sql = "SELECT service_id, service_name, description, image FROM services";
+$sql = "SELECT hardware_id, name, description, image FROM hardware";
 $result = $conn->query($sql);
 ?>
 
@@ -13,13 +13,13 @@ $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo '
-            <div class="services-box" data-category="' . htmlspecialchars($row["service_name"]) . '">
+            <div class="services-box" data-category="' . htmlspecialchars($row["name"]) . '">
                 <div class="image-container">
-                    <img src="admin/includes/uploads/services/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["service_name"]) . '">
-                    <a href="pos1.php?id=' . htmlspecialchars($row["service_id"]) . '" class="discover-btn">Discover More</a>
+                    <img src="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["name"]) . '">
+                    <a href="#" class="discover-btn" data-id="' . htmlspecialchars($row["hardware_id"]) . '">Discover More</a>
                 </div>
                 <div class="services-content">
-                    <h3>' . htmlspecialchars($row["service_name"]) . '</h3>
+                    <h3>' . htmlspecialchars($row["name"]) . '</h3>
                     <p>' . htmlspecialchars($row["description"]) . '</p>
                 </div>
             </div>';
