@@ -1,6 +1,6 @@
 Sidebar Variables
 :root {
-    --sidebar-width: 280px;
+    --sidebar-width: 270px;
     --primary-color: #4e73df;
     --primary-hover: #3a5ecc;
     --text-color: #575f6e;
@@ -50,8 +50,9 @@ Sidebar Variables
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right, #8b1e10, #b33624); 
-    /* border-radius: 0 30px 0 0;  */
+    /* background: linear-gradient(to left, #8b1e10, #b33624);  */
+    background:#8b1e10; 
+    border-radius: 0 0 30px 0; 
     margin-bottom: 1rem;
 }
 
@@ -119,7 +120,6 @@ Sidebar Variables
     align-items: center;
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
 }
 
 .user-avatar {

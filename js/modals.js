@@ -30,10 +30,12 @@ function closeServiceModal() {
   document.body.style.overflow = "auto";
 }
 
-// SERVICES MODAL //
+/* SERVICE MODAL */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const discoverButtons = document.querySelectorAll(".discover-btn");
+  const discoverButtons = document.querySelectorAll(
+    '.discover-btn[data-type="service"]'
+  );
 
   discoverButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -49,29 +51,47 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("serviceDescription").innerHTML =
               data.service.description;
 
-            document.getElementById("carousel").innerHTML = "";
-            document.getElementById("featuresList").innerHTML = "";
+            const carousel = document.getElementById("carousel");
+            carousel.innerHTML = "";
 
+            // MAIN IMAGE
             if (data.service.image) {
               const mainImage = document.createElement("div");
-              mainImage.classList.add("carousel-item");
+              mainImage.classList.add("service-carousel-main");
               mainImage.innerHTML = `<img src="admin/includes/uploads/services/${data.service.image}" alt="Service Image">`;
-              document.getElementById("carousel").appendChild(mainImage);
+              carousel.appendChild(mainImage);
             }
 
+            // FEATURE IMAGES (as carousel)
+            if (data.features && data.features.length > 0) {
+              const featureContainer = document.createElement("div");
+              featureContainer.classList.add("service-carousel-features");
+
+              data.features.forEach((feature) => {
+                if (feature.image) {
+                  const featureImage = document.createElement("div");
+                  featureImage.classList.add("service-carousel-item");
+                  featureImage.innerHTML = `
+                    <img src="admin/includes/uploads/service-feature/${feature.image}" alt="${feature.name}">
+                  `;
+                  featureContainer.appendChild(featureImage);
+                }
+              });
+
+              carousel.appendChild(featureContainer);
+            }
+
+            // FEATURES LIST
+            const featuresList = document.getElementById("featuresList");
+            featuresList.innerHTML = "";
+
             data.features.forEach((feature) => {
-              if (feature.image) {
-                const featureImage = document.createElement("div");
-                featureImage.classList.add("carousel-item");
-                featureImage.innerHTML = `<img src="admin/includes/uploads/service-feature/${feature.image}" alt="${feature.name}">`;
-                document.getElementById("carousel").appendChild(featureImage);
-              }
               const featureItem = document.createElement("li");
               featureItem.innerHTML = `
-                            <h4>${feature.name}</h4>
-                            <p>${feature.description}</p>
-                        `;
-              document.getElementById("featuresList").appendChild(featureItem);
+                <h4>${feature.name}</h4>
+                <p>${feature.description}</p>
+              `;
+              featuresList.appendChild(featureItem);
             });
 
             document.getElementById("serviceModal").style.display = "flex";
@@ -89,6 +109,44 @@ function closeServiceModal() {
 }
 
 // HARDWARE MODAL //
+
+document.addEventListener("DOMContentLoaded", () => {
+  const discoverBtns = document.querySelectorAll(
+    '.discover-btn[data-type="hardware"]'
+  );
+  const hardwareModal = document.getElementById("hardwareModal");
+  const hardwareName = document.getElementById("hardwareName");
+  const hardwareDescription = document.getElementById("hardwareDescription");
+  const hardwareImage = document.getElementById("hardwareImage");
+
+  discoverBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const name = btn.getAttribute("data-name");
+      const description = btn.getAttribute("data-description");
+      const image = btn.getAttribute("data-image");
+
+      hardwareName.textContent = name;
+      hardwareDescription.textContent = description;
+      hardwareImage.src = image;
+      hardwareImage.style.display = "block";
+
+      hardwareModal.style.display = "flex";
+    });
+  });
+
+  window.closeHardwareModal = () => {
+    hardwareModal.style.display = "none";
+    hardwareImage.style.display = "none";
+  };
+
+  window.addEventListener("click", (e) => {
+    if (e.target === hardwareModal) {
+      closeHardwareModal();
+    }
+  });
+});
 
 // GET A QUOTE MODAL //
 

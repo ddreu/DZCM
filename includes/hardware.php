@@ -16,7 +16,15 @@ $result = $conn->query($sql);
             <div class="services-box" data-category="' . htmlspecialchars($row["name"]) . '">
                 <div class="image-container">
                     <img src="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["name"]) . '">
-                    <a href="#" class="discover-btn" data-id="' . htmlspecialchars($row["hardware_id"]) . '">Discover More</a>
+                    <a href="#" 
+                    data-type="hardware"
+                        class="discover-btn" 
+                        data-id="' . htmlspecialchars($row["hardware_id"]) . '"
+                        data-name="' . htmlspecialchars($row["name"]) . '"
+                        data-description="' . htmlspecialchars($row["description"]) . '"
+                        data-image="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '">
+                        Discover More
+                    </a>
                 </div>
                 <div class="services-content">
                     <h3>' . htmlspecialchars($row["name"]) . '</h3>

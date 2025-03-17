@@ -257,7 +257,7 @@
                         </ul>
                     </div>
                     <div class="card-footer bg-white text-center border-0 py-3">
-                        <a href="#" class="text-decoration-none">View all emails <i class="bi bi-chevron-right small"></i></a>
+                        <a href="index.php?page=email" class="text-decoration-none">View all emails <i class="bi bi-chevron-right small"></i></a>
                     </div>
                 </div>
             </div>

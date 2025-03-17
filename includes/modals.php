@@ -45,9 +45,9 @@
     <div class="service-modal">
         <button class="close-btn" onclick="closeServiceModal()">&times;</button>
 
-        <div class="carousel-container">
-            <div class="carousel" id="carousel">
-            </div>
+        <div class="service-carousel-container">
+            <!-- Main Image -->
+            <div class="service-carousel" id="carousel"></div>
         </div>
 
         <div class="text-container">
@@ -69,13 +69,19 @@
     <div class="service-modal">
         <button class="close-btn" onclick="closeHardwareModal()">&times;</button>
 
+        <img id="hardwareImage" alt="Hardware Image" />
+        <!-- <div class="carousel-container">
+            <div class="carousel" id="carousel">
+            </div>
+        </div> -->
+
         <div class="text-container">
             <h2 id="hardwareName"></h2>
             <p id="hardwareDescription"></p>
-
         </div>
     </div>
 </div>
+
 
 <!-- QUOTE MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
