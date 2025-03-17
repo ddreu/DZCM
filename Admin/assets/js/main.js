@@ -119,3 +119,29 @@
 //     }
 //   });
 // });
+
+/* sidebar */
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPage = window.location.href.split("page=")[1];
+
+  if (currentPage) {
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      if (link.getAttribute("href").includes(currentPage)) {
+        link.classList.add("active");
+      }
+    });
+  } else {
+    document
+      .querySelector('a[href="index.php?page=dashboard"]')
+      .classList.add("active");
+  }
+
+  // Add code for sidebar toggle if needed
+  // Example:
+  // const toggleBtn = document.getElementById('sidebar-toggle');
+  // const sidebar = document.querySelector('.sidebar');
+  //
+  // toggleBtn.addEventListener('click', function() {
+  //     sidebar.classList.toggle('collapsed');
+  // });
+});
