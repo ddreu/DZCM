@@ -4,6 +4,8 @@
             <img src="assets/img/DZCM.png" alt="Dashboard Logo">
             <!-- <span class="brand-text">DZCM</span> -->
         </a>
+        <!-- <div class="curved-cutout"></div> -->
+
     </div>
 
     <div class="user-profile">

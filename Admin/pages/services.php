@@ -19,7 +19,7 @@ $query = "
 $result = mysqli_query(con(), $query);
 ?>
 
-<header class="dashboard-header">
+<header class="dashboard-header-page">
     <div class="container">
         <h1 class="mb-0">Services</h1>
     </div>

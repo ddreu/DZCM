@@ -130,29 +130,68 @@ body {
 
 }
 
+/* Dashboard Header with Overflow Effect */
 .dashboard-header {
-    margin-bottom: 30px;
+    background: linear-gradient(to right, #8b1e10, #b33624);
+    color: white;
+    padding: 30px 0 60px;
+    margin-bottom: -60px; 
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px 15px 0 0; 
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-header h1 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+.container.mt-4 {
+    margin-top: 0 !important; 
+    padding-top: 20px;
+}
+
+.card.overview-card {
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-wrapper {
+    overflow: hidden;
+    padding: 0 0;
+}
+
+/* header of other pages */
+
+.dashboard-header-page {
+    margin-bottom: 20px;
+    padding: 15px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
+    border-bottom: 1px solid #eaeaea;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    display: inline;
-}
-/* Dashboard Header */
-.dashboard-header {
-   /* background: linear-gradient(135deg, #007bff, #0056b3); */
-   background: linear-gradient(to right, #8b1e10, #b33624);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
+.dashboard-header-page h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
 }
 
 /* Overview Metrics */
