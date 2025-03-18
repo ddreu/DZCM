@@ -1,7 +1,6 @@
-<div>
     <?php include 'includes/imgslider.php'; ?>
     <!-- Services We Provide Section -->
-    <div class="container">
+    <div class="container mb-0">
         <section class="services-section mt-5 mb-5 pb-5">
             <h2 class="services-title pt-5"><strong> Services We Provide </strong></h2>
             <div class="services-container">
@@ -25,12 +24,18 @@
             </div>
         </section>
 
-        <h1 class="mt-5"><strong>Services</strong></h1>
-        <div class=" services-separator mt-0">
-        </div>
-
+        <h1 class="mt-5 ms-4" style="text-align: left;"><strong>Services</strong></h1>
+        <hr class="blackdivider">
         <?php include 'includes/services.php'; ?>
+
+        <h1 class="mt-5 ms-4 " style="text-align: left;"><strong>Hardware Products</strong></h1>
+        <hr class="blackdivider">
+        <?php include 'includes/hardware.php'; ?>
+        <a href="index.php?page=products-services"
+            class="hardware-btn mt-5 mb-0 pb-3 pt-3 ms-4 me-4">View All Products</a>
     </div>
+
+
 
     <!-- success in numbers -->
     <section class="success-numbers">
@@ -56,73 +61,72 @@
             </div>
         </div>
     </section>
-</div>
 
-<div class="profile-separator">
-    <h1><strong>Why Choose Us</strong></h1>
+    <div class="profile-separator">
+        <h1><strong>Why Choose Us</strong></h1>
 
-</div>
-
-<div class="content-wrapper">
-
-    <div class="left-content">
-        <h2>Our Mission</h2>
-        <p>Misson at Dezcom System Development & I.T. Solutions, our mission is to pioneer innovative solutions in system development and hardware integration, empowering businesses and individuals to thrive in the digital age. We are committed to delivering cutting-edge technologies and unparalleled support, ensuring seamless integration and optimal performance for our clients.
-        </p>
-
-        <h2>Our Vision</h2>
-        <p>Our vision at Dezcom System Development & I.T. Solutions is to be the forefront leader in revolutionizing system development and hardware solutions globally. We aspire to continuously push the boundaries of technology, fostering a world where connectivity, efficiency, and innovation converge to unlock limitless possibilities for our clients and communities.</p>
     </div>
 
+    <div class="content-wrapper">
 
-    <div class="right-form">
-        <form id="quoteFormNonModal" action="send-quote.php" method="POST" class="form-container">
-            <h2><strong>Get a Free Quote</strong></h2>
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="tel" name="phone" placeholder="Phone" required>
-            <input type="text" name="website" placeholder="Website">
-            <textarea name="message" placeholder="Message" required></textarea>
-            <button type="submit" class="btn">GET A QUOTE</button>
-        </form>
+        <div class="left-content">
+            <h2>Our Mission</h2>
+            <p>Misson at Dezcom System Development & I.T. Solutions, our mission is to pioneer innovative solutions in system development and hardware integration, empowering businesses and individuals to thrive in the digital age. We are committed to delivering cutting-edge technologies and unparalleled support, ensuring seamless integration and optimal performance for our clients.
+            </p>
+
+            <h2>Our Vision</h2>
+            <p>Our vision at Dezcom System Development & I.T. Solutions is to be the forefront leader in revolutionizing system development and hardware solutions globally. We aspire to continuously push the boundaries of technology, fostering a world where connectivity, efficiency, and innovation converge to unlock limitless possibilities for our clients and communities.</p>
+        </div>
+
+
+        <div class="right-form">
+            <form id="quoteFormNonModal" action="send-quote.php" method="POST" class="form-container">
+                <h2><strong>Get a Free Quote</strong></h2>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone" placeholder="Phone" required>
+                <input type="text" name="website" placeholder="Website">
+                <textarea name="message" placeholder="Message" required></textarea>
+                <button type="submit" class="btn">GET A QUOTE</button>
+            </form>
+        </div>
     </div>
-</div>
-<script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const counters = document.querySelectorAll('.counter');
-    //     let started = false;
+    <script>
+        // document.addEventListener(' DOMContentLoaded', function() {
+        // const counters=document.querySelectorAll('.counter');
+        // let started=false;
 
-    //     function startCount(entries, observer) {
-    //         entries.forEach(entry => {
-    //             if (entry.isIntersecting && !started) {
-    //                 started = true;
-    //                 counters.forEach(counter => {
-    //                     const target = +counter.getAttribute('data-target');
-    //                     const duration = 2000;
-    //                     const increment = target / (duration / 16);
-    //                     let current = 0;
+        // function startCount(entries, observer) {
+        // entries.forEach(entry=> {
+        // if (entry.isIntersecting && !started) {
+        // started = true;
+        // counters.forEach(counter => {
+        // const target = +counter.getAttribute('data-target');
+        // const duration = 2000;
+        // const increment = target / (duration / 16);
+        // let current = 0;
 
-    //                     const updateCounter = () => {
-    //                         current += increment;
-    //                         if (current < target) {
-    //                             counter.textContent = Math.ceil(current);
-    //                             requestAnimationFrame(updateCounter);
-    //                         } else {
-    //                             counter.textContent = target;
-    //                         }
-    //                     };
+        // const updateCounter = () => {
+        // current += increment;
+        // if (current < target) {
+        // counter.textContent=Math.ceil(current);
+        // requestAnimationFrame(updateCounter);
+        // } else {
+        // counter.textContent=target;
+        // }
+        // };
 
-    //                     updateCounter();
-    //                 });
-    //                 observer.unobserve(entry.target);
-    //             }
-    //         });
-    //     }
+        // updateCounter();
+        // });
+        // observer.unobserve(entry.target);
+        // }
+        // });
+        // }
 
-    //     const observer = new IntersectionObserver(startCount, {
-    //         threshold: 0.3
-    //     });
+        // const observer=new IntersectionObserver(startCount, {
+        // threshold: 0.3
+        // });
 
-    //     observer.observe(document.querySelector('.success-numbers'));
-    // });
-</script>
+        // observer.observe(document.querySelector('.success-numbers'));
+        // });
+    </script>

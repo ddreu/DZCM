@@ -64,7 +64,6 @@ h1 {
 }
 
 /* Services Section */
-/* Services Section */
 .services {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

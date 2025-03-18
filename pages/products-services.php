@@ -69,13 +69,13 @@
             </div>
         </section>
         <section>
-            <h1 class="mt-5 ms-4" style="text-align: left;">Services</h1>
+            <h1 class="mt-5 ms-4" style="text-align: left;"><strong>Services</strong></h1>
             <hr class="blackdivider">
             <?php include 'includes/services.php'; ?>
             <!-- <hr class="section-divider" /> -->
         </section>
         <section>
-            <h1 class="mt-5 ms-4" style="text-align: left;">Hardware Products</h1>
+            <h1 class="mt-5 ms-4" style="text-align: left;"><strong>Hardware Products</strong></h1>
             <hr class="blackdivider">
 
             <!-- <div class=" services-separator mt-0"> -->

@@ -70,6 +70,22 @@
 
 .info-container {
   border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* .info-text {
+  margin-bottom: 100px;
+} */
+
+.info-container h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.info-container p {
+  text-align: left;
 }
 
 input,
@@ -107,8 +123,11 @@ textarea:focus {
 }
 
 .info-box {
+  margin-top: 10px;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
   gap: 10px;
   padding: 15px;
   border: 1px solid #ddd;
@@ -117,10 +136,25 @@ textarea:focus {
   border-radius: 5px;
 }
 
+.gray {
+  background-color: #c8c8c8;
+}
+
 .info-box i {
-  font-size: 24px;
+  font-size: 35px;
   color: #d40000;
 }
+
+.info-box div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .info-box h3 {
+  text-align: center;
+} */
 
 h2 {
   margin-bottom: 10px;

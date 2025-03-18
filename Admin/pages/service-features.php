@@ -24,93 +24,94 @@ $service_name = $services['service_name'];
 
 <header class="dashboard-header">
     <div class="container">
-        <h1 class="mb-0">Service Features</h1>
+        <h1 class="mb-5">Service Features</h1>
     </div>
 </header>
 <div class="container">
     <div class="d-flex justify-content-between mb-3">
-        <h2>Service Name: <?php echo $services['service_name']; ?></h2>
+        <h2 class="text-white">Service Name: <?php echo $services['service_name']; ?></h2>
         <button id="addFeatureBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFeatureModal">
             <i class="fas fa-plus"></i> Add New Service Feature
         </button>
     </div>
-</div>
 
 
-<div class="services-table-container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Service ID</th>
-                <th>Feature Name</th>
-                <th>Description</th>
-                <th>Image</th>
-                <!-- <th>Features</th> -->
-                <!--    <th>Actions</th> -->
-            </tr>
-        </thead>
-        <tbody>
+    <div class="services-table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service ID</th>
+                    <th>Feature Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <!-- <th>Features</th> -->
+                    <!--    <th>Actions</th> -->
+                </tr>
+            </thead>
+            <tbody>
 
-            <?php while ($service = mysqli_fetch_assoc($result)):
-            ?>
-                <tr class="service-feature-row" data-service-id="<?php echo $service['service_id']; ?>"
-                    data-service-feature-id="<?php echo $service['service_feature_id']; ?>"
-                    data-feature-name="<?php echo htmlspecialchars($service['name']); ?>"
-                    data-description="<?php echo htmlspecialchars($service['description']); ?>"
-                    data-image="<?php echo htmlspecialchars($service['image']); ?>"
-                    data-bs-toggle="modal" data-bs-target="#editServiceFeatureModal">
-                    <td><?php echo htmlspecialchars($service['service_id']); ?></td>
-                    <td><?php echo htmlspecialchars($service['service_feature_id']); ?></td>
-                    <td><?php echo htmlspecialchars($service['name']); ?></td>
-                    <td><?php echo htmlspecialchars($service['description']); ?></td>
-                    <td>
-                        <?php if ($service['image']): ?>
-                            <img src="includes/uploads/seervice-features/<?php echo htmlspecialchars($service['image']); ?>"
-                                alt="Service Feature Image" class="img-thumbnail" style="width: 100px;">
-                        <?php else: ?>
-                            No Image
-                        <?php endif; ?>
-                    </td>
-                    <!--  <td>
+                <?php while ($service = mysqli_fetch_assoc($result)):
+                ?>
+                    <tr class="service-feature-row" data-service-id="<?php echo $service['service_id']; ?>"
+                        data-service-feature-id="<?php echo $service['service_feature_id']; ?>"
+                        data-feature-name="<?php echo htmlspecialchars($service['name']); ?>"
+                        data-description="<?php echo htmlspecialchars($service['description']); ?>"
+                        data-image="<?php echo htmlspecialchars($service['image']); ?>"
+                        data-bs-toggle="modal" data-bs-target="#editServiceFeatureModal">
+                        <td><?php echo htmlspecialchars($service['service_id']); ?></td>
+                        <td><?php echo htmlspecialchars($service['service_feature_id']); ?></td>
+                        <td><?php echo htmlspecialchars($service['name']); ?></td>
+                        <td><?php echo htmlspecialchars($service['description']); ?></td>
+                        <td>
+                            <?php if ($service['image']): ?>
+                                <img src="includes/uploads/seervice-features/<?php echo htmlspecialchars($service['image']); ?>"
+                                    alt="Service Feature Image" class="img-thumbnail" style="width: 100px;">
+                            <?php else: ?>
+                                No Image
+                            <?php endif; ?>
+                        </td>
+                        <!--  <td>
                         <button class="btn btn-info"
                             data-service-id="<?php echo $service['service_id']; ?>" data-bs-toggle="modal" data-bs-target="#serviceFeaturesModal">
                             <?php //echo $service['feature_count']; 
                             ?> Features
                         </button> 
                     </td> -->
-                    <!-- <td>
+                        <!-- <td>
                         <button class="btn btn-danger delete-service-btn"
                             data-service-id="<?php echo $service['service_id']; ?>" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td> -->
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
 
-    </table>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a href="?page=<?php echo $page - 1; ?>" class="page-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <li class="page-item">
+                    <a href="?page=<?php echo $page + 1; ?>" class="page-link">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </div>
 
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <?php if ($page > 1): ?>
-            <li class="page-item">
-                <a href="?page=<?php echo $page - 1; ?>" class="page-link">
-                    <i class="fas fa-chevron-left"></i> Previous
-                </a>
-            </li>
-        <?php endif; ?>
-
-        <?php if ($page < $totalPages): ?>
-            <li class="page-item">
-                <a href="?page=<?php echo $page + 1; ?>" class="page-link">
-                    Next <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
-        <?php endif; ?>
-    </ul>
-</nav>
 
 <div id="contextMenu" class="dropdown-menu" style="display: none; position: absolute;">
     <!--<button class="dropdown-item add-feature">Add Feature</button>-->

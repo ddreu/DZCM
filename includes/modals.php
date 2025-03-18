@@ -1,44 +1,3 @@
-<!-- <div class="modal-overlay" id="serviceModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeModal()">&times;</button>
-
-        <div class="carousel-container">
-            <div class="carousel">
-                <div class="carousel-item">
-                    <img src="admin/includes/uploads/services/<?php echo htmlspecialchars($service['image']); ?>" alt="Service Image">
-                </div>
-                <?php if (!empty($features)): ?>
-                    <?php foreach ($features as $feature): ?>
-                        <?php if (!empty($feature['image'])): ?>
-                            <div class="carousel-item">
-                                <img src="admin/includes/uploads/service-feature/<?php echo htmlspecialchars($feature['image']); ?>" alt="<?php echo htmlspecialchars($feature['name']); ?>">
-                            </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <div class="text-container">
-            <h2><?php echo htmlspecialchars($service['service_name']); ?></h2>
-            <p><?php echo nl2br(htmlspecialchars($service['description'])); ?></p>
-
-            <div class="features">
-                <h3>Features:</h3>
-                <ul class="advantages-list">
-                    <?php foreach ($features as $feature): ?>
-                        <li>
-                            <h4><?php echo htmlspecialchars($feature['name']); ?></h4>
-                            <p><?php echo nl2br(htmlspecialchars($feature['description'])); ?></p>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <!-- SERVICES MODAL -->
 
 <div class="service-modal-overlay" id="serviceModal">
@@ -98,32 +57,43 @@
         <textarea name="message" placeholder="Message" required></textarea>
         <button type="submit" class="btn">GET A QUOTE</button>
     </form>
+
     <div class="info-container">
-        <h2>What's Next?</h2>
-        <p>An email and phone call from one of our representatives.</p>
-        <p>A time and cost estimation.
-        </p>
-        <p>An in-person meeting.
-        </p>
-        <div class="info-box">
-            <i class="fas fa-phone-alt"></i>
-            <div>
-                <h3>Give us a call</h3>
-                <span>
-                    <a href="tel:+63289821268">+63 --- ---- ---</a> /
-                    <a href="tel:+639985833381">+63 --- ---- ---</a>
-                </span>
-            </div>
+        <div class="info-text">
+            <h2>What's Next?</h2>
+            <p>An email and phone call from one of our representatives.</p>
+            <p>A time and cost estimation.</p>
+            <p>An in-person meeting.</p>
         </div>
-        <div class="info-box">
-            <i class="fas fa-envelope"></i>
-            <div>
-                <h3>Send an email</h3>
-                <p>dezcom@gmail.com</p>
+        <div class="info-boxes">
+            <div class="info-box">
+                <i class="fas fa-phone-alt"></i>
+                <div class="divider gray"></div>
+
+                <div>
+                    <h3>Give us a call</h3>
+                    <span>
+                        <a href="tel:<?php echo $row ? $row['phone'] : $phone; ?>">
+                            <?php echo $row ? $row['phone'] : $phone; ?>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-envelope"></i>
+                <div class="divider gray"></div>
+                <div>
+                    <h3>Send an email</h3>
+                    <a href="mailto:<?php echo $row ? $row['email'] : $email; ?>">
+                        <?php echo $row ? $row['email'] : $email; ?>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Notification Modal -->
 <div id="notificationModal" class="notification-modal">

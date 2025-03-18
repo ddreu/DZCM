@@ -7,7 +7,7 @@ $sql = "SELECT hardware_id, name, description, image FROM hardware";
 $result = $conn->query($sql);
 ?>
 
-<div class="hardware-container">
+<div class="services">
     <?php
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

@@ -22,7 +22,7 @@ $conn->close();
 
 <div class="top-bar">
     <span><i class="fas fa-phone"></i><a href="tel:<?php echo $row ? $row['phone'] : $phone; ?>"> <?php echo $row ? $row['phone'] : $phone; ?></a></span>
-
+    <div class="nav-divider gray"></div>
     <span><i class="fas fa-envelope"></i> <a href="mailto:<?php echo $row ? $row['email'] : $email; ?>"><?php echo $row ? $row['email'] : $email; ?></a></span>
 </div>
 <div class="navbar-container">
