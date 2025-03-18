@@ -24,6 +24,26 @@
     <script src="js/modals.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/carousel.js"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const navWrapper = document.querySelector('.nav-wrapper');
+
+            if (window.scrollY > lastScrollY) {
+                navWrapper.classList.add('hide');
+            } else {
+                navWrapper.classList.remove('hide');
+            }
+
+            lastScrollY = window.scrollY;
+        });
+    </script>
 </body>
 
 </html>

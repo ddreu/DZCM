@@ -31,7 +31,7 @@
                         <div class="services-box" data-category="' . htmlspecialchars($row["category"]) . '">
                             <div class="image-container">
                                 <img src="admin/includes/uploads/services/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["service_name"]) . '">
-                                <a href="#" class="discover-btn" data-id="' . htmlspecialchars($row["service_id"]) . '">Discover More</a>
+                                <a href="#" class="discover-btn" data-type="service" data-id="' . htmlspecialchars($row["service_id"]) . '">Discover More</a>
 
                             </div>
                             <div class="services-content">

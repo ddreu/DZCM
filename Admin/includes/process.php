@@ -46,7 +46,7 @@ class Process
             return false;
         }
 
-        $stmt = mysqli_prepare($this->conn, "SELECT user_id, username, password FROM users WHERE username = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT user_id, username, password, profile_image FROM users WHERE username = ?");
         mysqli_stmt_bind_param($stmt, "s", $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -57,6 +57,7 @@ class Process
             if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['profile_image'] = $user['profile_image'];
                 $_SESSION['login_success'] = true;
 
                 echo json_encode([
@@ -798,6 +799,20 @@ class Process
         $password = $_POST['password'] ?? '';
         $image = null;
 
+        $stmt = mysqli_prepare($this->conn, "SELECT id FROM users WHERE username = ?");
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Username already exists'
+            ]);
+        }
+
+        mysqli_stmt_close($stmt);
+
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'uploads/users/';
             if (!file_exists($uploadDir)) {
@@ -828,7 +843,10 @@ class Process
                 'message' => 'Failed to add user'
             ]);
         }
+
+        mysqli_stmt_close($stmt);
     }
+
 
     function updateUser()
     {
@@ -986,7 +1004,7 @@ class Process
         }
 
         if (isset($_FILES['userProfile']) && $_FILES['userProfile']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'includes/uploads/users/';
+            $uploadDir = 'uploads/users/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
@@ -995,7 +1013,7 @@ class Process
             $uploadPath = $uploadDir . $fileName;
 
             if (move_uploaded_file($_FILES['userProfile']['tmp_name'], $uploadPath)) {
-                $stmt = mysqli_prepare($this->conn, "UPDATE users SET user_profile = ? WHERE user_id = ?");
+                $stmt = mysqli_prepare($this->conn, "UPDATE users SET profile_image = ? WHERE user_id = ?");
                 mysqli_stmt_bind_param($stmt, "si", $fileName, $userId);
                 if (!mysqli_stmt_execute($stmt)) {
                     echo json_encode([

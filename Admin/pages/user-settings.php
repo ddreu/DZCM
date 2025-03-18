@@ -4,6 +4,11 @@
         </div>
     </header>
 
+    <?php
+    $sqlProfile = "SELECT profile_image FROM users WHERE user_id = $_SESSION[user_id]";
+    $resultProfile = con()->query($sqlProfile);
+    $user = $resultProfile->fetch_assoc();
+    ?>
     <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -23,7 +28,7 @@
                             background-color: #f8f9fa;
                         ">
                                 <img id="profilePreview"
-                                    src="<?= isset($user['user_profile']) && $user['user_profile'] ? 'includes/uploads/users/' . $user['user_profile'] : 'includes/uploads/users/default-profile.png'; ?>"
+                                    src="<?= isset($user['profile_image']) ? 'includes/uploads/users/' . $user['profile_image'] : 'includes/uploads/users/default-profile.png'; ?>"
                                     alt="Profile Picture"
                                     class="img-thumbnail rounded-circle border"
                                     style="

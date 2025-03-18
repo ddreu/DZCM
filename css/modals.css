@@ -122,12 +122,17 @@ textarea:focus {
   background: #b30000;
 }
 
+.info-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
 .info-box {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
   gap: 10px;
   padding: 15px;
   border: 1px solid #ddd;
@@ -152,9 +157,9 @@ textarea:focus {
   align-items: center;
 }
 
-/* .info-box h3 {
-  text-align: center;
-} */
+.info-box h3 {
+  font-size: 1.1rem;
+}
 
 h2 {
   margin-bottom: 10px;

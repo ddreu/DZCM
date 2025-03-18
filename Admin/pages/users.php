@@ -12,7 +12,7 @@
     $recordsPerPage = 10;
     $offset = ($page - 1) * $recordsPerPage;
 
-    $totalQuery = mysqli_query(con(), "SELECT COUNT(*) as count FROM services");
+    $totalQuery = mysqli_query(con(), "SELECT COUNT(*) as count FROM users");
     $totalServices = mysqli_fetch_assoc($totalQuery)['count'];
     $totalPages = ceil($totalServices / $recordsPerPage);
 
@@ -30,9 +30,6 @@
                 <i class="fas fa-plus"></i> Add New User
             </button>
         </div>
-
-
-
         <div class="hardware-table-container">
             <table class="table table-striped">
                 <thead>

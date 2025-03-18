@@ -1,102 +1,162 @@
 .profile-separator {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 60px; 
-    margin-top: 60px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 60px;
+  margin-top: 60px;
 }
 
 .profile-separator::after {
-    content: "";
-    display: block;
-    width: 50%;
-    margin: 5px auto 0;
-    margin-top: 10px;
-    border-bottom: 2px solid black;
+  content: "";
+  display: block;
+  width: 50%;
+  margin: 5px auto 0;
+  margin-top: 10px;
+  border-bottom: 2px solid black;
 }
 
 .content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 20px;
-    gap: 50px;
-    position: relative;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px;
+  gap: 50px;
+  position: relative;
+  margin-top: 20px;
 }
 
 .left-content {
-    flex: 1;
-    max-width: 600px;
-    text-align: left;
+  flex: 1;
+  max-width: 600px;
+  text-align: left;
+  box-sizing: border-box;
 }
 
 .left-content h2 {
-    font-size: 22px;
-    font-weight: bold;
-    color: #cf0000;
-    margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #cf0000;
+  margin-bottom: 15px;
 }
 
 .left-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    text-align: justify;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
 }
 
 .right-form {
-    flex: 1;
-    max-width: 400px;
-    display: flex;
-    justify-content: flex-end;
-    border-top:#333 solid 3px;
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  border-top: #333 solid 3px;
+}
+
+/* .quote-form {
+  background: white;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.quote-form input,
+.quote-form textarea {
+  width: 100%;
+  padding: 14px;
+  margin: 9px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  transition: border-bottom 0.3s ease-in-out;
+  background: transparent;
+  font-size: 17px;
+}
+
+.quote-form input:focus,
+.quote-form textarea:focus {
+  border-bottom: 2px solid #d40000;
+  outline: none;
+}
+
+.quote-form .quote-btn {
+  background: #d40000;
+  color: white;
+  padding: 15px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.quote-form .quote-btn:hover {
+  background: #b30000;
+} */
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .left-content,
+  .right-form {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 .right-form .quote-form {
-    background: white;
-    padding: 28px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+  background: white;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .right-form .quote-form input,
 .right-form .quote-form textarea {
-    width: 100%;
-    padding: 14px;
-    margin: 9px 0;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    border-radius: 0;
-    transition: border-bottom 0.3s ease-in-out;
-    background: transparent;
-    font-size: 17px;
+  width: 100%;
+  padding: 14px;
+  margin: 9px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  transition: border-bottom 0.3s ease-in-out;
+  background: transparent;
+  font-size: 17px;
 }
 
 .right-form .quote-form input:focus,
 .right-form .quote-form textarea:focus {
-    border-bottom: 2px solid #d40000;
-    outline: none;
+  border-bottom: 2px solid #d40000;
+  outline: none;
 }
 
 .right-form .quote-form .quote-btn {
-    background: #d40000;
-    color: white;
-    padding: 15px;
-    border: none;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: bold;
+  background: #d40000;
+  color: white;
+  padding: 15px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .right-form .quote-form .quote-btn:hover {
-    background: #b30000;
+  background: #b30000;
 }

@@ -38,6 +38,21 @@
 
 
     <!-- success in numbers -->
+    <?php
+    include 'includes/connect.php';
+    $conn->select_db("dezcom");
+
+    $sqlClients = "SELECT COUNT(*) AS total_clients FROM clients";
+    $resultClients = $conn->query($sqlClients);
+    $totalClients = $resultClients->fetch_assoc()['total_clients'];
+
+    $sqlServices = "SELECT COUNT(*) AS total_services FROM services";
+    $resultServices = $conn->query($sqlServices);
+    $totalServices = $resultServices->fetch_assoc()['total_services'];
+
+    $conn->close();
+    ?>
+
     <section class="success-numbers">
         <div class="success-overlay"></div>
         <div class="success-content">
@@ -45,12 +60,12 @@
             <div class="numbers-container">
                 <div class="number-box">
                     <i class="fas fa-users"></i>
-                    <span class="counter" data-target="98">0</span>
+                    <span class="counter" data-target="<?php echo (int) $totalClients; ?>">0</span>
                     <p>HAPPY CLIENTS</p>
                 </div>
                 <div class="number-box">
                     <i class="fas fa-check-square"></i>
-                    <span class="counter" data-target="90">0</span>
+                    <span class="counter" data-target="<?php echo $totalServices; ?>">0</span>
                     <p>PROJECTS COMPLETED</p>
                 </div>
                 <div class="number-box">

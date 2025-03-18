@@ -69,14 +69,11 @@
             <div class="info-box">
                 <i class="fas fa-phone-alt"></i>
                 <div class="divider gray"></div>
-
                 <div>
                     <h3>Give us a call</h3>
-                    <span>
-                        <a href="tel:<?php echo $row ? $row['phone'] : $phone; ?>">
-                            <?php echo $row ? $row['phone'] : $phone; ?>
-                        </a>
-                    </span>
+                    <a href="tel:<?php echo $row ? $row['phone'] : $phone; ?>">
+                        <?php echo $row ? $row['phone'] : $phone; ?>
+                    </a>
                 </div>
             </div>
 
