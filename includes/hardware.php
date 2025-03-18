@@ -7,33 +7,32 @@ $sql = "SELECT hardware_id, name, description, image FROM hardware";
 $result = $conn->query($sql);
 ?>
 
-
-<div class="services">
+<div class="hardware-container">
     <?php
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo '
-            <div class="services-box" data-category="' . htmlspecialchars($row["name"]) . '">
-                <div class="image-container">
+            <div class="hardware-card" data-category="' . htmlspecialchars($row["name"]) . '">
+                <div class="hardware-img-wrapper">
                     <img src="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["name"]) . '">
+                </div>
+                <div class="hardware-info">
+                    <h3 class="hardware-title">' . htmlspecialchars($row["name"]) . '</h3>
+                    <p class="hardware-description">' . htmlspecialchars($row["description"]) . '</p>
                     <a href="#" 
-                    data-type="hardware"
-                        class="discover-btn" 
+                        class="hardware-btn" 
+                        data-type="hardware"
                         data-id="' . htmlspecialchars($row["hardware_id"]) . '"
                         data-name="' . htmlspecialchars($row["name"]) . '"
                         data-description="' . htmlspecialchars($row["description"]) . '"
                         data-image="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '">
-                        Discover More
+                        VIEW DETAILS
                     </a>
-                </div>
-                <div class="services-content">
-                    <h3>' . htmlspecialchars($row["name"]) . '</h3>
-                    <p>' . htmlspecialchars($row["description"]) . '</p>
                 </div>
             </div>';
         }
     } else {
-        echo "<p>No services found.</p>";
+        echo "<p>No hardware found.</p>";
     }
     $conn->close();
     ?>

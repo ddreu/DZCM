@@ -112,7 +112,7 @@ function closeServiceModal() {
 
 document.addEventListener("DOMContentLoaded", () => {
   const discoverBtns = document.querySelectorAll(
-    '.discover-btn[data-type="hardware"]'
+    '.hardware-btn[data-type="hardware"]'
   );
   const hardwareModal = document.getElementById("hardwareModal");
   const hardwareName = document.getElementById("hardwareName");
