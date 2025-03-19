@@ -32,7 +32,7 @@
         <hr class="blackdivider">
         <?php include 'includes/hardware.php'; ?>
         <a href="index.php?page=products-services"
-            class="hardware-btn mt-5 mb-0 pb-3 pt-3 ms-4 me-4">View All Products</a>
+            class="hardware-btn mt-5 mb-0 pb-3 pt-3 ms-4 me-4"><strong>VIEW ALL PRODUCTS</strong></a>
     </div>
 
 

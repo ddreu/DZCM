@@ -35,8 +35,8 @@
         </div> -->
 
         <div class="text-container">
-            <h2 id="hardwareName"></h2>
-            <p id="hardwareDescription"></p>
+            <h2 id="hardwareName" class="mb-5 mt-3 pb-2"></h2>
+            <p id="hardwareDescription" class="mt-3"></p>
         </div>
     </div>
 </div>

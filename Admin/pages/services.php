@@ -1,12 +1,13 @@
 <?php
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['current_page']) ? (int)$_GET['current_page'] : 1;
 $page = max($page, 1);
 $recordsPerPage = 10;
 $offset = ($page - 1) * $recordsPerPage;
 
 $totalQuery = mysqli_query(con(), "SELECT COUNT(*) as count FROM services");
-$totalServices = mysqli_fetch_assoc($totalQuery)['count'];
-$totalPages = ceil($totalServices / $recordsPerPage);
+$totalQuotes = mysqli_fetch_assoc($totalQuery)['count'];
+$totalPages = ceil($totalQuotes / $recordsPerPage);
+
 
 $query = "
     SELECT s.service_id, s.service_name, s.description, s.image, s.category, 
@@ -14,6 +15,7 @@ $query = "
     FROM services s
     LEFT JOIN service_features sf ON s.service_id = sf.service_id
     GROUP BY s.service_id
+    ORDER BY s.service_id DESC
     LIMIT $offset, $recordsPerPage  
 ";
 $result = mysqli_query(con(), $query);
@@ -99,19 +101,25 @@ $result = mysqli_query(con(), $query);
     </div>
 
     <nav aria-label="Page navigation">
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
             <?php if ($page > 1): ?>
                 <li class="page-item">
-                    <a href="?page=<?php echo $page - 1; ?>" class="page-link">
-                        <i class="fas fa-chevron-left"></i> Previous
+                    <a class="page-link" href="?page=services&current_page=<?php echo $page - 1; ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
             <?php endif; ?>
 
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?php echo ($i === $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=services&current_page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
             <?php if ($page < $totalPages): ?>
                 <li class="page-item">
-                    <a href="?page=<?php echo $page + 1; ?>" class="page-link">
-                        Next <i class="fas fa-chevron-right"></i>
+                    <a class="page-link" href="?page=services&current_page=<?php echo $page + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             <?php endif; ?>

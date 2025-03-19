@@ -75,19 +75,6 @@
   justify-content: space-between;
 }
 
-/* .info-text {
-  margin-bottom: 100px;
-} */
-
-.info-container h2 {
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.info-container p {
-  text-align: left;
-}
-
 input,
 textarea {
   width: 100%;
@@ -122,16 +109,8 @@ textarea:focus {
   background: #b30000;
 }
 
-.info-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-
 .info-box {
-  margin-top: 10px;
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 10px;
   padding: 15px;
@@ -141,24 +120,9 @@ textarea:focus {
   border-radius: 5px;
 }
 
-.gray {
-  background-color: #c8c8c8;
-}
-
 .info-box i {
-  font-size: 35px;
+  font-size: 24px;
   color: #d40000;
-}
-
-.info-box div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.info-box h3 {
-  font-size: 1.1rem;
 }
 
 h2 {

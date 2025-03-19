@@ -26,7 +26,7 @@ $result = $conn->query($sql);
                         data-name="' . htmlspecialchars($row["name"]) . '"
                         data-description="' . htmlspecialchars($row["description"]) . '"
                         data-image="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '">
-                        VIEW DETAILS
+                        View Details
                     </a>
                 </div>
             </div>';
