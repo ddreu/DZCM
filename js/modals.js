@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const serviceId = button.getAttribute("data-id");
 
-      fetch(`includes/fetch/get_services.php?id=${serviceId}`)
+      fetch(`includes/fetch/get_service-features.php?id=${serviceId}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {

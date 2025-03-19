@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const category = button.getAttribute("data-category");
 
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "includes/get_services.php", true);
+      xhr.open("POST", "includes/fetch/fetch_services.php", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
       xhr.onload = () => {
