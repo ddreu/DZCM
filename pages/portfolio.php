@@ -12,7 +12,6 @@
         <button class="filter-btn" data-category="web-app">Web Development</button>
         <button class="filter-btn" data-category="desktop-app">Desktop</button>
         <button class="filter-btn" data-category="mobile-app">Mobile</button>
-
     </div>
 
     <!-- Services Section -->
