@@ -3,36 +3,40 @@ include '../connect.php';
 
 $conn->select_db("dezcom");
 
-if (isset($_GET['id'])) {
-    $serviceId = intval($_GET['id']);
+$category = $_POST['filter_category'] ?? 'all';
 
-    $stmt = $conn->prepare("SELECT service_id, service_name, description, image FROM services WHERE service_id = ?");
-    $stmt->bind_param("i", $serviceId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $service = $result->fetch_assoc();
+$sql = "SELECT service_id, service_name, description, image, category FROM services";
 
-    if ($service) {
-        $stmt = $conn->prepare("SELECT name, description, image FROM service_features WHERE service_id = ?");
-        $stmt->bind_param("i", $serviceId);
-        $stmt->execute();
-        $featuresResult = $stmt->get_result();
-        $features = $featuresResult->fetch_all(MYSQLI_ASSOC);
+if ($category !== 'all') {
+    $sql .= " WHERE category = ?";
+}
 
-        echo json_encode([
-            'success' => true,
-            'service' => $service,
-            'features' => $features
-        ]);
-    } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Service not found'
-        ]);
+$stmt = $conn->prepare($sql);
+
+if ($category !== 'all') {
+    $stmt->bind_param("s", $category);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '
+            <div class="services-box" data-category="' . htmlspecialchars($row["category"]) . '">
+                <div class="image-container">
+                    <img src="admin/includes/uploads/services/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["service_name"]) . '">
+                    <a href="#" class="discover-btn" data-type="service" data-id="' . htmlspecialchars($row["service_id"]) . '">Discover More</a>
+                </div>
+                <div class="services-content">
+                    <h3>' . htmlspecialchars($row["service_name"]) . '</h3>
+                    <p>' . htmlspecialchars($row["description"]) . '</p>
+                </div>
+            </div>';
     }
 } else {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid request'
-    ]);
+    echo "<p>No services found.</p>";
 }
+
+$stmt->close();
+$conn->close();

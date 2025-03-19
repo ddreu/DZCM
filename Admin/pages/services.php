@@ -142,7 +142,7 @@ $result = mysqli_query(con(), $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editServiceForm">
+                <form id="editServiceForm" enctype="multipart/form-data" method="POST" action="update_service.php">
                     <input type="hidden" id="editServiceId" name="service_id">
 
                     <div class="mb-3">
@@ -154,15 +154,24 @@ $result = mysqli_query(con(), $query);
                         <label for="editServiceDescription" class="form-label">Description</label>
                         <textarea id="editServiceDescription" name="description" class="form-control" required></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="editServiceCategory" class="form-label">Category</label>
-                        <select id="editServiceCategory" name="category" class="form-control" required>
+                        <select id="editServiceCategory" name="category" class="form-control" required onchange="toggleEditCategoryInput(this)">
                             <option value="" selected disabled>-- Select Category --</option>
-                            <option value="web-app">Web App</option>
-                            <option value="mobile-app">Mobile App</option>
-                            <option value="desktop-app">Desktop App</option>
+                            <?php
+                            con();
+                            $query = "SELECT DISTINCT category FROM services WHERE category IS NOT NULL";
+                            $result = con()->query($query);
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<option value="' . htmlspecialchars($row['category']) . '">' . htmlspecialchars($row['category']) . '</option>';
+                            }
+                            ?>
+                            <option value="add-new">Add New</option>
                         </select>
+                        <input type="text" id="editNewCategory" name="new_category" class="form-control mt-2" placeholder="Enter new category" style="display: none;">
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Current Image</label><br>
                         <img id="editServiceImagePreview" class="img-thumbnail" style="width: 150px; display: none;">
@@ -179,9 +188,52 @@ $result = mysqli_query(con(), $query);
         </div>
     </div>
 </div>
-
-
 <div id="addServiceModal" class="modal fade" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addServiceForm" enctype="multipart/form-data" method="POST" action="add_service.php">
+                    <div class="mb-3">
+                        <label for="serviceName" class="form-label">Service Name</label>
+                        <input type="text" id="serviceName" name="service_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serviceDescription" class="form-label">Description</label>
+                        <textarea id="serviceDescription" name="description" class="form-control" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="serviceCategory" class="form-label">Category</label>
+                        <select id="serviceCategory" name="category" class="form-control" required onchange="toggleCategoryInput(this)">
+                            <option value="" selected disabled>-- Select Category --</option>
+                            <?php
+                            con();
+                            $query = "SELECT DISTINCT category FROM services WHERE category IS NOT NULL";
+                            $result = con()->query($query);
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<option value="' . htmlspecialchars($row['category']) . '">' . htmlspecialchars($row['category']) . '</option>';
+                            }
+                            ?>
+                            <option value="add-new">Add New</option>
+                        </select>
+                        <input type="text" id="newCategory" name="new_category" class="form-control mt-2" placeholder="Enter new category" style="display: none;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="serviceImage" class="form-label">Service Image</label>
+                        <input type="file" id="serviceImage" name="image" class="form-control" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Service</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div id="addServiceModal" class="modal fade" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -216,7 +268,7 @@ $result = mysqli_query(con(), $query);
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <div id="serviceFeaturesModal" class="modal fade" tabindex="-1" aria-labelledby="serviceFeaturesModalLabel" aria-hidden="true">
@@ -264,3 +316,27 @@ $result = mysqli_query(con(), $query);
         </div>
     </div>
 </div>
+
+<script>
+    function toggleCategoryInput(select) {
+        const newCategoryInput = document.getElementById('newCategory');
+        if (select.value === 'add-new') {
+            newCategoryInput.style.display = 'block';
+            newCategoryInput.required = true;
+        } else {
+            newCategoryInput.style.display = 'none';
+            newCategoryInput.required = false;
+        }
+    }
+
+    function toggleEditCategoryInput(select) {
+        const newCategoryInput = document.getElementById('editNewCategory');
+        if (select.value === 'add-new') {
+            newCategoryInput.style.display = 'block';
+            newCategoryInput.required = true;
+        } else {
+            newCategoryInput.style.display = 'none';
+            newCategoryInput.required = false;
+        }
+    }
+</script>

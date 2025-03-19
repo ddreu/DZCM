@@ -10,6 +10,10 @@
   display: none;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -214,6 +218,7 @@ h2 {
   gap: 20px;
   overflow: hidden;
   position: relative;
+  overflow-y: auto;
   animation: fadeIn 0.3s ease;
 }
 
@@ -255,12 +260,14 @@ h2 {
   overflow: hidden;
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .service-carousel {
   display: flex;
+  flex-direction: column;
   transition: transform 0.3s ease;
   width: 100%;
   height: 100%;
@@ -281,13 +288,27 @@ h2 {
   gap: 10px;
   margin-top: 10px;
   overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 10px;
+  width: 100%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
 }
+
+/* .service-carousel-item {
+  flex-shrink: 0;
+  width: 100px;
+  height: 90px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+} */
 
 .service-carousel-item {
   flex-shrink: 0;
   width: 100px;
-  height: 100px;
+  height: 90px;
   border: 1px solid #ddd;
   border-radius: 5px;
   overflow: hidden;

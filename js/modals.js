@@ -31,7 +31,6 @@ function closeServiceModal() {
 }
 
 /* SERVICE MODAL */
-
 document.addEventListener("DOMContentLoaded", () => {
   const discoverButtons = document.querySelectorAll(
     '.discover-btn[data-type="service"]'
@@ -54,34 +53,87 @@ document.addEventListener("DOMContentLoaded", () => {
             const carousel = document.getElementById("carousel");
             carousel.innerHTML = "";
 
-            // MAIN IMAGE
+            let mainImageUrl = "";
             if (data.service.image) {
+              mainImageUrl = `admin/includes/uploads/services/${data.service.image}`;
               const mainImage = document.createElement("div");
               mainImage.classList.add("service-carousel-main");
-              mainImage.innerHTML = `<img src="admin/includes/uploads/services/${data.service.image}" alt="Service Image">`;
+              mainImage.innerHTML = `<img src="${mainImageUrl}" alt="Service Image">`;
               carousel.appendChild(mainImage);
             }
 
-            // FEATURE IMAGES (as carousel)
             if (data.features && data.features.length > 0) {
               const featureContainer = document.createElement("div");
               featureContainer.classList.add("service-carousel-features");
+
+              if (mainImageUrl) {
+                const mainFeatureImage = document.createElement("div");
+                mainFeatureImage.classList.add("service-carousel-item");
+                mainFeatureImage.innerHTML = `
+                  <img src="${mainImageUrl}" alt="Main Image">
+                `;
+                mainFeatureImage.addEventListener("click", () => {
+                  document.querySelector(".service-carousel-main img").src =
+                    mainImageUrl;
+                });
+                featureContainer.appendChild(mainFeatureImage);
+              }
 
               data.features.forEach((feature) => {
                 if (feature.image) {
                   const featureImage = document.createElement("div");
                   featureImage.classList.add("service-carousel-item");
                   featureImage.innerHTML = `
-                    <img src="admin/includes/uploads/service-feature/${feature.image}" alt="${feature.name}">
+                    <img src="admin/includes/uploads/service-features/${feature.image}" alt="${feature.name}">
                   `;
+
+                  featureImage.addEventListener("click", () => {
+                    document.querySelector(
+                      ".service-carousel-main img"
+                    ).src = `admin/includes/uploads/service-features/${feature.image}`;
+                  });
+
                   featureContainer.appendChild(featureImage);
                 }
               });
 
               carousel.appendChild(featureContainer);
+
+              let isDown = false;
+              let startX;
+              let scrollLeft;
+
+              featureContainer.addEventListener("mousedown", (e) => {
+                isDown = true;
+                featureContainer.classList.add("active");
+                startX = e.pageX - featureContainer.offsetLeft;
+                scrollLeft = featureContainer.scrollLeft;
+              });
+
+              featureContainer.addEventListener("mouseleave", () => {
+                isDown = false;
+                featureContainer.classList.remove("active");
+              });
+
+              featureContainer.addEventListener("mouseup", () => {
+                isDown = false;
+                featureContainer.classList.remove("active");
+              });
+
+              featureContainer.addEventListener("mousemove", (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - featureContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                featureContainer.scrollLeft = scrollLeft - walk;
+              });
+
+              featureContainer.addEventListener("wheel", (e) => {
+                e.preventDefault();
+                featureContainer.scrollLeft += e.deltaY;
+              });
             }
 
-            // FEATURES LIST
             const featuresList = document.getElementById("featuresList");
             featuresList.innerHTML = "";
 
@@ -95,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             document.getElementById("serviceModal").style.display = "flex";
+            document.body.style.overflow = "hidden";
           } else {
             alert("Failed to load service details.");
           }
@@ -106,7 +159,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function closeServiceModal() {
   document.getElementById("serviceModal").style.display = "none";
+  document.body.style.overflow = "";
 }
+
+/* horizontal scroll on services modal */
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const carousel = document.querySelector(".service-carousel-features");
+
+//   if (carousel) {
+//     let isDown = false;
+//     let startX;
+//     let scrollLeft;
+
+//     carousel.addEventListener("mousedown", (e) => {
+//       isDown = true;
+//       carousel.classList.add("active");
+//       startX = e.pageX - carousel.offsetLeft;
+//       scrollLeft = carousel.scrollLeft;
+//     });
+
+//     carousel.addEventListener("mouseleave", () => {
+//       isDown = false;
+//       carousel.classList.remove("active");
+//     });
+
+//     carousel.addEventListener("mouseup", () => {
+//       isDown = false;
+//       carousel.classList.remove("active");
+//     });
+
+//     carousel.addEventListener("mousemove", (e) => {
+//       if (!isDown) return;
+//       e.preventDefault();
+//       const x = e.pageX - carousel.offsetLeft;
+//       const walk = (x - startX) * 2;
+//       carousel.scrollLeft = scrollLeft - walk;
+//     });
+//   }
+// });
 
 // HARDWARE MODAL //
 

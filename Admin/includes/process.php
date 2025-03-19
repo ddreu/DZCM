@@ -103,6 +103,12 @@ class Process
         $service_name = $_POST['service_name'] ?? '';
         $description = $_POST['description'] ?? '';
         $category = strtolower($_POST['category'] ?? '');
+
+        // If Other is selected
+        if ($category === 'add-new' && !empty($_POST['new_category'])) {
+            $category = strtolower(trim($_POST['new_category']));
+        }
+
         $image = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -135,6 +141,7 @@ class Process
         }
     }
 
+
     function editService()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -157,6 +164,12 @@ class Process
         $service_name = $_POST['service_name'] ?? '';
         $description = $_POST['description'] ?? '';
         $category = strtolower($_POST['category'] ?? '');
+
+        // If "Other" is selected, use the value from 'new_category'
+        if ($category === 'add-new' && !empty($_POST['new_category'])) {
+            $category = strtolower(trim($_POST['new_category']));
+        }
+
         $image = null;
 
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -193,6 +206,7 @@ class Process
             ]);
         }
     }
+
 
 
     function deleteService()

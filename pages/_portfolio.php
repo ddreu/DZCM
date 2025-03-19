@@ -15,6 +15,7 @@
 
         $conn->select_db("dezcom");
 
+        // Fetch unique categories from the database
         $sql = "SELECT DISTINCT category FROM services WHERE category IS NOT NULL";
         $result = $conn->query($sql);
 
@@ -26,7 +27,7 @@
     </div>
 
     <!-- Services Section -->
-    <div class="services" id="servicesContainer">
+    <div class="services">
         <?php
         $sql = "SELECT service_id, service_name, description, image, category FROM services";
         $result = $conn->query($sql);
