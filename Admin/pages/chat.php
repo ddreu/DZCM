@@ -36,7 +36,7 @@ if (mysqli_num_rows($sql) > 0) {
 
 
                     <a href="index.php?page=messages" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                    <img src="php/logo/avatar.png">
+                    <img src="includes/uploads/users/default-profile.png">
                     <div class="details">
                         <span class="fw-bold"><?php echo $row['fname'] ?> <?php echo $row['lname'] ?></span>
                         <p><i id="test"> </i><i id="dot"></i> </p>
@@ -57,7 +57,7 @@ if (mysqli_num_rows($sql) > 0) {
 </main>
 
 <script src="chat-admin/chatJS/chat1.js"></script>
-<script>
+<!-- <script>
     var session = function() {
 
         $.ajax({
@@ -136,4 +136,4 @@ if (mysqli_num_rows($sql) > 0) {
             }
         });
     });
-</script>
+</script> -->

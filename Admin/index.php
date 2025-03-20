@@ -19,6 +19,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
+    <link rel="stylesheet" href="assets/css/chat.css">
 </head>
 
 <body>
@@ -125,6 +126,86 @@ if (!isset($_SESSION['user_id'])) {
             });
         }
         setInterval(session, 1000);
+    </script>
+    <script>
+        var session = function() {
+
+            $.ajax({
+                type: "GET",
+                url: "chat-admin/php/session.php?userid=<?php echo $_GET['user_id'] ?>",
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 404) {
+                        $('#test').addClass('fas fa-circle text-success');
+                        $('#test').html('Active now');
+                    } else {
+                        $('#test').addClass('fas fa-circle');
+                        $('#test').html('Offline');
+                    }
+                }
+            })
+        }
+        setInterval(session, 1000);
+
+
+        //if chat is opened 
+        var openchat = function() {
+
+            $.ajax({
+                type: "GET",
+                url: "chat-admin/php/open-message.php?userid=<?php echo $user_id ?>",
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 100) {
+
+                    } else {
+
+                    }
+                }
+            })
+        }
+        setInterval(openchat, 1000);
+    </script>
+
+    <script>
+        //Delete messages
+        $('.delete').click(function(e) {
+            e.preventDefault();
+            var del = $(this).data('id');
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'chat-admin/php/delete-message.php',
+                        data: {
+                            del: del
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === "success") {
+                                Swal.fire("Deleted!", "Successfuly Deleted.", "success").then(function() {
+                                    location.href = 'messages.php';
+                                })
+                            } else {
+                                Swal.fire("Error!", "An Error occured.", "error");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            Swal.fire("Error!", "An error occurred.", "error");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 

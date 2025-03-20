@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   .section {
     display: flex;
     justify-content: center;
@@ -169,7 +169,7 @@
       border-radius: 0;
     }
   }
-</style>
+</style> -->
 
 <section class="section">
   <div class="wrapper">
