@@ -15,7 +15,7 @@ continueBtn.onclick = () => {
       if (xhr.status === 200) {
         let data = xhr.response;
         if (data === "success") {
-          // window.location.reload();
+          window.location.reload();
         } else {
           continueBtn.removeAttribute("disabled", "false");
           continueBtn.value = "Try Again";
