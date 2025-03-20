@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_SESSION['unique_id'])) {
   include("includes/chat/chat.php");
   echo $_SESSION['unique_id'];

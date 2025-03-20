@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_SESSION['unique_id'])) {
     include_once "config.php";
     $outgoing_id = $_SESSION['unique_id'];
@@ -30,5 +31,5 @@ if (isset($_SESSION['unique_id'])) {
     }
     echo $output;
 } else {
-    header("location: ../../../../index.php");
+    header("location: ../../../index.php");
 }
