@@ -37,12 +37,6 @@
                 <a href="index.php?page=messages" class="nav-link">
                     <i class="fas fa-message"></i>
                     <span>Messages</span>
-                    <span class="menu-badge">
-                        <?php
-
-                        ?>
-                        1
-                    </span>
                 </a>
             </li>
 
