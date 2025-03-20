@@ -3,17 +3,11 @@
     <i class="fa fa-comments py-2"> </i>
   </a>
   <div class="card shadow-lg ">
-    <div class="card-header pb-0 pt-3 ">
-      <div class="float-start">
-        <h5 class="mt-3 mb-0">DZCM LiveChat</h5>
-
-      </div>
-      <div class="float-end mt-4">
-        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-          <i class="fa fa-times"></i>
-        </button>
-      </div>
-      <!-- End Toggle Button -->
+    <div class="card-header pb-0 pt-3 d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">DZCM LiveChat</h5>
+      <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+        <i class="fa fa-times"></i>
+      </button>
     </div>
     <hr class="horizontal dark">
     <div class="card-body">

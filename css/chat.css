@@ -1,21 +1,59 @@
 /* NEW CSS */
+.fixed-plugin-close-button {
+  width: 32px;
+  height: 32px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.fixed-plugin-close-button:hover {
+  background-color: #d32f2f;
+  color: #fff;
+}
+
+.fixed-plugin-close-button i {
+  font-size: 16px;
+  color: #fff;
+}
 
 /* EXISTING CSS */
 
 .fixed-plugin .fixed-plugin-button {
-  background: #fdf5eb;
+  /* background: #fdf5eb; */
+  background: var(--primary-color);
   border-radius: 50%;
   bottom: 30px;
   right: 30px;
   font-size: 1.25rem;
   z-index: 990;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16); */
+  box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .fixed-plugin .fixed-plugin-button i {
-  color: #198754;
+  /* color: #198754; */
+  color: #fff;
   pointer-events: none;
+  font-size: 1.5rem;
+}
+
+/* Hover state */
+.fixed-plugin .fixed-plugin-button:hover {
+  background-color: #fff;
+}
+
+.fixed-plugin .fixed-plugin-button:hover i {
+  color: var(--primary-color);
 }
 
 .fixed-plugin .card {

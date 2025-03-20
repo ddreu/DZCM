@@ -3,8 +3,7 @@ if (isset($_SESSION['unique_id'])) {
   include("includes/chat/chat.php");
   echo $_SESSION['unique_id'];
 } else {
-  echo "Session not initialized";
-
+  // echo "Session not initialized";
 
   // if (isset($_SESSION['unique_id'])) {
   //   include("includes/chat/chat.php");
