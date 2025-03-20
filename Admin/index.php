@@ -31,7 +31,7 @@ if (!isset($_SESSION['user_id'])) {
             <?php
 
             $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-            $allowed_pages = ['dashboard', 'services', 'settings', 'company-profile', 'service-features', 'clients', 'email', 'users', 'hardware', 'settings', 'user-settings'];
+            $allowed_pages = ['dashboard', 'chat', 'messages', 'services', 'settings', 'company-profile', 'service-features', 'clients', 'email', 'users', 'hardware', 'settings', 'user-settings'];
 
             if (in_array($page, $allowed_pages) && file_exists("pages/$page.php")) {
                 include("pages/$page.php");
@@ -77,6 +77,54 @@ if (!isset($_SESSION['user_id'])) {
     <?php unset($_SESSION['login_success']); ?>
 
 
+
+    </script>
+    <script>
+        // delete message        
+
+        $(".delete").click(function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "GET",
+                        url: "chat-admin/php/deletemessage.php?session=" + $(this).val(),
+                        success: function(response) {
+                            var res = jQuery.parseJSON(response);
+                            if (res.status == 'success') {
+                                Swal.fire("Success", res.message, "success").then(function() {
+                                    window.location.reload();
+                                })
+                            } else {
+                                Swal.fire("Error", res.message, "error")
+                            }
+                        }
+                    })
+                }
+            })
+        })
+
+        /* updates the session */
+
+        var session = function() {
+            var action = 'status';
+            $.ajax({
+                url: "includes/session.php",
+                method: "POST",
+                data: {
+                    action: action
+                }
+            });
+        }
+        setInterval(session, 1000);
     </script>
 </body>
 

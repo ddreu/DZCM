@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2025 at 01:58 PM
+-- Generation Time: Mar 20, 2025 at 11:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -123,16 +123,18 @@ CREATE TABLE `services` (
   `service_id` int(11) NOT NULL,
   `service_name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL
+  `image` varchar(255) DEFAULT NULL,
+  `category` varchar(155) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`service_id`, `service_name`, `description`, `image`) VALUES
-(4, 'Pharmacy POS', 'Sales Inventory for Medical Supplies', '67c6a50e57cab_phar.jpg'),
-(5, 'Resto Bar POS', 'Point of Sales for food services', '67c6a682133b1_dingalan.jpg');
+INSERT INTO `services` (`service_id`, `service_name`, `description`, `image`, `category`) VALUES
+(4, 'Pharmacy POS', 'Sales Inventory for Medical Supplies', '67c6a50e57cab_phar.jpg', 'desktop-app'),
+(5, 'Resto Bar POS', 'Point of Sales for food services', '67c6a682133b1_dingalan.jpg', 'desktop-app'),
+(6, 'TEST', 'TEST', NULL, 'web-app');
 
 -- --------------------------------------------------------
 
@@ -162,6 +164,67 @@ INSERT INTO `service_features` (`service_feature_id`, `service_id`, `name`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_end_users`
+--
+
+CREATE TABLE `tbl_end_users` (
+  `userid` int(11) NOT NULL,
+  `user_reciever` int(100) NOT NULL,
+  `unique_id` int(20) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status` datetime DEFAULT NULL,
+  `dateentry` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_end_users`
+--
+
+INSERT INTO `tbl_end_users` (`userid`, `user_reciever`, `unique_id`, `fname`, `lname`, `email`, `status`, `dateentry`) VALUES
+(83, 2, 739814518, 'andrew', 'dg', 'andrew@gmail.com', '2025-03-20 16:08:00', '2025-03-20 16:08:54'),
+(84, 2, 395907016, 'andrew', 'buce', 'andrew@gmail.com', '2025-03-20 16:24:00', '2025-03-20 16:24:54'),
+(85, 2, 1318158941, 'drew', 'dg', 'andrew@gmail.com', '2025-03-20 16:27:00', '2025-03-20 16:27:39'),
+(86, 2, 1178946483, 'andrew', 'dg', 'drew@gmail.com', '2025-03-20 16:34:00', '2025-03-20 16:34:25'),
+(87, 2, 746461719, 'dru', 'dru', 'dru@gmail.com', '2025-03-20 16:36:00', '2025-03-20 16:36:25'),
+(88, 2, 451981810, 'aaa', 'aaaas', 'asas@gmail.com', '2025-03-20 16:36:00', '2025-03-20 16:36:51'),
+(89, 2, 593293286, 'john', 'doe', 'john@gmail.com', '2025-03-20 16:38:00', '2025-03-20 16:38:27'),
+(90, 2, 608911731, 'jane', 'doe', 'jane@gmail.com', '2025-03-20 16:45:00', '2025-03-20 16:45:53'),
+(91, 2, 705313780, 'jan', 'doe', 'jan@gmail.com', '2025-03-20 16:49:00', '2025-03-20 16:49:09'),
+(92, 2, 1268121229, 'jan', 'doe', 'jan@gmail.com', '2025-03-20 16:57:00', '2025-03-20 16:57:35'),
+(93, 2, 1658172887, 'dru', 'dg', 'dru@gmail.com', '2025-03-20 17:02:00', '2025-03-20 17:02:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_messages`
+--
+
+CREATE TABLE `tbl_messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_id` int(11) NOT NULL,
+  `outgoing_msg_id` int(11) NOT NULL,
+  `msg` varchar(1000) NOT NULL,
+  `notification` tinyint(1) NOT NULL,
+  `notification2` tinyint(1) NOT NULL,
+  `open` tinyint(1) NOT NULL,
+  `dateentry` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_messages`
+--
+
+INSERT INTO `tbl_messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `notification`, `notification2`, `open`, `dateentry`) VALUES
+(22, 2, 1658172887, 'ajnfjaendjk', 0, 0, 1, '2025-03-20 17:23:16'),
+(23, 1658172887, 2, 'hello\'', 0, 0, 0, '2025-03-20 17:23:31'),
+(24, 2, 1658172887, 'sajebfdjsefdb', 0, 0, 1, '2025-03-20 17:27:33'),
+(25, 2, 1658172887, 'aedbjaw', 0, 0, 1, '2025-03-20 17:27:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -169,15 +232,16 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `profile_image` varchar(255) DEFAULT NULL
+  `profile_image` varchar(255) DEFAULT NULL,
+  `status` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `profile_image`) VALUES
-(2, 'admin', '$2y$10$UO2.ayKkZhDV7acqfc/6y.MhV.6VnMOj/gjOJYBt8X1zAC.1BiNyu', NULL);
+INSERT INTO `users` (`user_id`, `username`, `password`, `profile_image`, `status`) VALUES
+(2, 'adminn', '$2y$10$UO2.ayKkZhDV7acqfc/6y.MhV.6VnMOj/gjOJYBt8X1zAC.1BiNyu', '67d9136396d7c_da.jpg', '2025-03-20 10:22:00');
 
 --
 -- Indexes for dumped tables
@@ -222,6 +286,18 @@ ALTER TABLE `service_features`
   ADD KEY `service_id` (`service_id`);
 
 --
+-- Indexes for table `tbl_end_users`
+--
+ALTER TABLE `tbl_end_users`
+  ADD PRIMARY KEY (`userid`);
+
+--
+-- Indexes for table `tbl_messages`
+--
+ALTER TABLE `tbl_messages`
+  ADD PRIMARY KEY (`msg_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -260,13 +336,25 @@ ALTER TABLE `quote`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `service_features`
 --
 ALTER TABLE `service_features`
   MODIFY `service_feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_end_users`
+--
+ALTER TABLE `tbl_end_users`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `tbl_messages`
+--
+ALTER TABLE `tbl_messages`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`

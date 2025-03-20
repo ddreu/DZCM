@@ -21,4 +21,5 @@
     <link rel="stylesheet" href="css/careers.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>

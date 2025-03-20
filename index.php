@@ -6,11 +6,13 @@
     <main class="main-content">
         <?php
 
+
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         $allowed_pages = ['home', 'about', 'products-services', 'portfolio', 'careers', 'contact'];
 
         if (in_array($page, $allowed_pages) && file_exists("pages/$page.php")) {
             include("pages/$page.php");
+            include 'pages/chat.php';
         } else {
             echo "<h2>Page not found!</h2>";
         }
@@ -24,6 +26,7 @@
     <script src="js/modals.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/chat-utils.js"></script>
     <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');

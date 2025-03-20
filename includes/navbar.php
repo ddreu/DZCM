@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'includes/connect.php';
 $conn->select_db("dezcom");
 
