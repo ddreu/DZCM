@@ -1,0 +1,47 @@
+/* CAROUSEL */
+.clients-carousel-section {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+#clientsCarousel .carousel-inner {
+  text-align: center;
+}
+
+.client-img {
+  max-height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  color: #fff;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+}
+
+.carousel-item {
+  padding: 10px 0;
+  color: black;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  filter: invert(1);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}

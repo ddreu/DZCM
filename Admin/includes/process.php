@@ -997,7 +997,7 @@ class Process
             ]);
         }
     }
-    public function updateUserProfile()
+    function updateUserProfile()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode([
@@ -1090,6 +1090,24 @@ class Process
                 echo json_encode([
                     'status' => 'error',
                     'message' => 'Failed to update password'
+                ]);
+                exit;
+            }
+
+            mysqli_stmt_close($stmt);
+        }
+
+        // Update username if provided
+        if (!empty($_POST['username'])) {
+            $username = $_POST['username'];
+
+            $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ? WHERE user_id = ?");
+            mysqli_stmt_bind_param($stmt, "si", $username, $userId);
+
+            if (!mysqli_stmt_execute($stmt)) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Failed to update username'
                 ]);
                 exit;
             }

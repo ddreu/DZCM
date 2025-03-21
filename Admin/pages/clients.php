@@ -128,9 +128,9 @@ $result = mysqli_query(con(), $query);
                         </div>
 
                         <div class="mb-3">
-                            <label for="client-Service" class="form-label">Service</label>
+                            <label for="client-Service" class="form-label">Product and Services</label>
                             <select class="form-select" id="editClientServiceId" name="service_id" required>
-                                <option value="">Select a Service</option>
+                                <option value="">Select Product and Services</option>
                                 <?php
                                 $query = "SELECT service_id, service_name FROM services";
                                 $result = mysqli_query(con(), $query);
@@ -183,9 +183,9 @@ $result = mysqli_query(con(), $query);
                             <textarea id="clientDescription" name="description" class="form-control" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="client-Service" class="form-label">Service</label>
+                            <label for="client-Service" class="form-label">Product and Services</label>
                             <select class="form-select" id="client-Service" name="service_id" required>
-                                <option value="">Select a Service</option>
+                                <option value="">Select Product and Services</option>
                                 <?php
                                 $query = "SELECT service_id, service_name FROM services";
                                 $result = mysqli_query(con(), $query);

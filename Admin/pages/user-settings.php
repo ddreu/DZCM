@@ -5,7 +5,7 @@
     </header>
 
     <?php
-    $sqlProfile = "SELECT profile_image FROM users WHERE user_id = $_SESSION[user_id]";
+    $sqlProfile = "SELECT profile_image, username FROM users WHERE user_id = $_SESSION[user_id]";
     $resultProfile = con()->query($sqlProfile);
     $user = $resultProfile->fetch_assoc();
     ?>
@@ -51,8 +51,8 @@
                             <label for="username" class="form-label"><strong>Username:</strong></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="username" id="username"
-                                    value="<?= htmlspecialchars($_SESSION['username']); ?>" disabled>
-                                <button type="button" class="btn btn-outline-primary" onclick="toggleEdit('username')">Edit</button>
+                                    value="<?= htmlspecialchars($user['username']); ?>" disabled>
+                                <button type="button" class="btn btn-outline-primary" onclick="toggleUsernameEdit('username')">Edit</button>
                             </div>
                         </div>
 
@@ -87,3 +87,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleUsernameEdit(fieldId) {
+            const field = document.getElementById(fieldId);
+
+            if (field.hasAttribute("disabled")) {
+                field.removeAttribute("disabled");
+                field.focus();
+            } else {
+                field.setAttribute("disabled", "disabled");
+            }
+        }
+    </script>

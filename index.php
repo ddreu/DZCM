@@ -8,7 +8,7 @@
 
 
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-        $allowed_pages = ['home', 'about', 'products-services', 'portfolio', 'careers', 'contact'];
+        $allowed_pages = ['home', 'about', 'products-services', 'portfolio', 'careers', 'contact', 'clients'];
 
         if (in_array($page, $allowed_pages) && file_exists("pages/$page.php")) {
             include("pages/$page.php");
@@ -22,11 +22,14 @@
 
     <?php include 'includes/footer.php'; ?>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha384-..."></script>
     <script src="js/home.js"></script>
     <script src="js/modals.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/chat-utils.js"></script>
+    <script src="js/clients.js"></script>
     <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');

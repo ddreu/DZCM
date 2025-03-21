@@ -1,4 +1,46 @@
     <?php include 'includes/imgslider.php'; ?>
+
+    <?php
+    $query = "SELECT * FROM clients";
+    $result = $conn->query($query);
+
+    $clients = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $clients[] = $row;
+        }
+    }
+
+    $chunks = array_chunk($clients, 4);
+    ?>
+    <section class="clients-carousel-section">
+        <div id="clientsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php foreach ($chunks as $index => $chunk): ?>
+                    <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                        <div class="row justify-content-center">
+                            <?php foreach ($chunk as $client): ?>
+                                <div class="col-3 d-flex justify-content-center">
+                                    <img src="admin/includes/uploads/clients/<?= htmlspecialchars($client['image']) ?>"
+                                        class="client-img"
+                                        alt="<?= htmlspecialchars($client['client_name']) ?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#clientsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
     <!-- Services We Provide Section -->
     <div class="container mb-0">
         <section class="services-section mt-5 mb-5 pb-5">
@@ -26,11 +68,79 @@
 
         <h1 class="mt-5 ms-4" style="text-align: left;"><strong>Services</strong></h1>
         <hr class="blackdivider">
-        <?php include 'includes/services.php'; ?>
+        <?php
+        include 'includes/connect.php';
 
+        $conn->select_db("dezcom");
+
+        $sql = "SELECT service_id, service_name, description, image FROM services LIMIT 9";
+        $result = $conn->query($sql);
+        ?>
+
+
+        <div class="services">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+            <div class="services-box" data-category="' . htmlspecialchars($row["service_name"]) . '">
+                <div class="image-container">
+                    <img src="admin/includes/uploads/services/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["service_name"]) . '">
+                    <a href="#" class="discover-btn" data-type="service" data-id="' . htmlspecialchars($row["service_id"]) . '">Discover More</a>
+                </div>
+                <div class="services-content">
+                    <h3>' . htmlspecialchars($row["service_name"]) . '</h3>
+                    <p>' . htmlspecialchars($row["description"]) . '</p>
+                </div>
+            </div>';
+                }
+            } else {
+                echo "<p>No services found.</p>";
+            }
+            $conn->close();
+            ?>
+        </div>
         <h1 class="mt-5 ms-4 " style="text-align: left;"><strong>Hardware Products</strong></h1>
         <hr class="blackdivider">
-        <?php include 'includes/hardware.php'; ?>
+        <?php
+        include 'includes/connect.php';
+
+        $conn->select_db("dezcom");
+
+        $sql = "SELECT hardware_id, name, description, image FROM hardware LIMIT 9";
+        $result = $conn->query($sql);
+        ?>
+
+        <div class="services">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+            <div class="hardware-card" data-category="' . htmlspecialchars($row["name"]) . '">
+                <div class="hardware-img-wrapper">
+                    <img src="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '" alt="' . htmlspecialchars($row["name"]) . '">
+                </div>
+                <div class="hardware-info">
+                    <h3 class="hardware-title">' . htmlspecialchars($row["name"]) . '</h3>
+                    <p class="hardware-description">' . htmlspecialchars($row["description"]) . '</p>
+                    <a href="#" 
+                        class="hardware-btn" 
+                        data-type="hardware"
+                        data-id="' . htmlspecialchars($row["hardware_id"]) . '"
+                        data-name="' . htmlspecialchars($row["name"]) . '"
+                        data-description="' . htmlspecialchars($row["description"]) . '"
+                        data-image="admin/includes/uploads/hardware/' . htmlspecialchars($row["image"]) . '">
+                        View Details
+                    </a>
+                </div>
+            </div>';
+                }
+            } else {
+                echo "<p>No hardware found.</p>";
+            }
+            $conn->close();
+            ?>
+        </div>
         <a href="index.php?page=products-services"
             class="hardware-btn mt-5 mb-0 pb-3 pt-3 ms-4 me-4"><strong>VIEW ALL PRODUCTS</strong></a>
     </div>

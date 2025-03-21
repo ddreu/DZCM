@@ -10,13 +10,16 @@ function previewLogo(event) {
 }
 
 // Enable/Disable Editing
-function toggleEdit(fieldId) {
-  const field = document.getElementById(fieldId);
-  field.disabled = !field.disabled;
-  if (!field.disabled) {
-    field.focus();
-  }
-}
+// function toggleUsernameEdit(fieldId) {
+//   const field = document.getElementById(fieldId);
+
+//   if (field.hasAttribute("disabled")) {
+//     field.removeAttribute("disabled");
+//     field.focus();
+//   } else {
+//     field.setAttribute("disabled", "disabled");
+//   }
+// }
 
 // Enable Password Editing (Current + New + Confirm)
 function enablePasswordEdit() {

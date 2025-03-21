@@ -219,6 +219,19 @@
 <script src="chat-admin/chatJS/users.js"></script>
 
 <script>
+  /* updates the session */
+
+  var session = function() {
+    var action = 'status';
+    $.ajax({
+      url: "includes/session.php",
+      method: "POST",
+      data: {
+        action: action
+      }
+    });
+  }
+  setInterval(session, 1000);
   // $(".delete").click(function(e) {
   //   e.preventDefault()
   //   Swal.fire({

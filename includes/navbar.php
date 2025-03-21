@@ -19,7 +19,6 @@ if ($result && $result->num_rows > 0) {
     $logo = "N/A";
 }
 
-$conn->close();
 ?>
 
 <div class="nav-wrapper">
@@ -44,9 +43,10 @@ $conn->close();
             <li><a href="index.php?page=portfolio" class="<?php echo isset($_GET['page']) && $_GET['page'] == 'portfolio' ? 'active' : ''; ?>">Portfolio</a></li>
             <li><a href="index.php?page=careers" class="<?php echo isset($_GET['page']) && $_GET['page'] == 'careers' ? 'active' : ''; ?>">Careers</a></li>
             <li><a href="index.php?page=contact" class="<?php echo isset($_GET['page']) && $_GET['page'] == 'contact' ? 'active' : ''; ?>">Contact</a></li>
+            <li><a href="index.php?page=clients" class="<?php echo isset($_GET['page']) && $_GET['page'] == 'clients' ? 'active' : ''; ?>">Clients</a></li>
         </ul>
 
-        <a href="#" class="quote-btn" onclick="openModal()">GET A QUOTE <i class="fas fa-chevron-right"></i></a>
+        <a href="#" class="quote-btn" onclick="openModal()">INQUIRE NOW <i class="fas fa-chevron-right"></i></a>
     </div>
 </div>
 

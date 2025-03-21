@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
     $query = mysqli_query($conn, $sql);
     if (mysqli_num_rows($query) > 0) {
         while ($row = mysqli_fetch_assoc($query)) {
-            if ($row['outgoing_msg_id'] === $outgoing_id) {
+            if ($row['incoming_msg_id'] === $incoming_id) {
                 $output .= '<div class="chat outgoing">
                                 <div class="details">
                                     <p>' . $row['msg'] . '</p>
